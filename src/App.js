@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import title from './Images/title.svg';
+import bird from './Images//bird.svg';
+import Game from './Game'
 import './App.css';
 
 class App extends Component {
@@ -7,22 +9,11 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            <i>ReactJS create-react-app + docker boilerplate</i> til Forritaverkfrøði
-          </p>
-          <p>
-            Rætta <code>src/App.js</code> og goym fyri at fáa nýggja útgávu.
-          </p>
-          <a
-            className="App-link"
-            href="https://www.setur.fo/fo/utbugving/bachelor/kt-verkfrodi/skeidslysingar/?educationYearId=493"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Skeiðslýsingar KT-verkfrøði - Náttúruvísindadeildin
-          </a>
+          <img src={title} className="App-logo" alt="logo" />        
         </header>
+
+        <img src={bird} className="App-logo" alt="bird" />
+        <Game />
       </div>
     );
   }
