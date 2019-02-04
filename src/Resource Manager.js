@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 
-
-
-
 class ResourceManager extends Component {
     
      gameName;
