@@ -1,9 +1,11 @@
-export enum State {
+import { Component } from "react";
+
+export enum Solid {
   solid,
   walkThrough
 }
 
-export default class GameObject {
+export default class GameObject extends Component {
   position = {
     x: null,
     y: null
@@ -17,6 +19,4 @@ export default class GameObject {
     height: null,
     width: null
   };
-
-  state = State.solid;
 }

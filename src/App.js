@@ -1,15 +1,21 @@
 import React, { Component } from "react";
+import DecInc from "./GameObject/DecInc";
 
-import logo from "./logo.svg";
 import "./App.css";
-import Canvas from "./Canvas";
+import KeyboardObservable from "./InputManager/KeyboardObservable";
 class App extends Component {
+  decInc = new DecInc();
+  constructor() {
+    super();
+    this.keyboardObservable = new KeyboardObservable();
+  }
   render() {
-    return (
-      <>
-        <Canvas />
-      </>
-    );
+    return <DecInc keyboardObservable={this.keyboardObservable} />;
+  }
+  componentDidMount() {
+    console.log("hello");
+    this.keyboardObservable.init();
+    this.keyboardObservable.subscribe(this.decInc, " ", this.decInc);
   }
 }
 
