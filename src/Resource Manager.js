@@ -26,7 +26,6 @@ class ResourceManager extends Component {
             }
         }
     }
-
     render() {
         var test = "test"
 
