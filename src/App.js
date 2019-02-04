@@ -1,24 +1,32 @@
 import React, { Component } from 'react';
-import title from './Images/title.svg';
-import bird from './Images//bird.svg';
-import Game from './Game'
+import title from './Resources/Images/title.svg';
+//import bird from './Resources/Images/bird.svg';
+//import Game from './Game'
 import './App.css';
-import ResourceManager from './Resource Manager'
+import './Resource Manager'
+import ResourceManager from './Resource Manager';
 
 class App extends Component {
-  ResourceManager;
-
+  
   constructor(props){
-    super(props);
+    super(props)
+
+    this.state = {
+      gameName: "Flappy Bird",
+      ResourceManager: new ResourceManager('Flappy Bird')
+    }
+
   }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={title} className="App-logo" alt="logo" />        
-        </header>
+        <div>
+           <img src={this.state.ResourceManager.getImagePath()} className='CharacterSprite' /> 
 
-        <img src={<ResourceManager />} className="App-logo" alt="bird" />
+           <img />
+        </div>
+
       </div>
     );
   }
