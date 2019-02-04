@@ -23,8 +23,6 @@ class App extends Component {
       <div className="App">
         <div>
            <img src={this.state.ResourceManager.getImagePath()} className='CharacterSprite' /> 
-
-           <img />
         </div>
 
       </div>
