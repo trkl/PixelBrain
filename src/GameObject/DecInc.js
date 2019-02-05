@@ -1,5 +1,6 @@
 import React from "react";
 import GameObject from "./GameObjectBase/GameObject";
+import Logo from "./../logo.svg";
 import WithKeyboardSubscribe from "./../InputManager/HOC/WithKeyboardSubscribe";
 
 export class DecInc extends GameObject {
@@ -12,9 +13,18 @@ export class DecInc extends GameObject {
       this.setState({ number: this.state.number - 1 })
     );
   }
+
+  componentDidMount() {
+    this.props.keyboardSubscribe(this, " ", () =>
+      console.log("millumrúm var sligið")
+    );
+  }
   render = () => {
-    console.log("hey");
-    return <div>{this.state.number}</div>;
+    return (
+      <object id="hey" type="image/svg+xml" data={Logo} className="logo">
+        Kiwi Logo
+      </object>
+    );
   };
 }
 
