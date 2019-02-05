@@ -31,6 +31,4 @@ class ResourceManager{
     }
     
 }
-
-
 export default ResourceManager;

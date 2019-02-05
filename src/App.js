@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import bird from './Resources/Images/flappybirdBackground.png';
 //import Game from './Game'
 import './App.css';
-import ResourceManager from './Resource Manager';
+import ResourceManager from './Resource Manager/Resource Manager';
 
 class App extends Component {
   constructor(props) {
@@ -15,18 +15,16 @@ class App extends Component {
   }
 
   findImage = (index) => {
-    return <img src={require(`${ this.state.ResourceManager.getImagePaths(index) }`)} />; // require makes it possible to use local paths
+    return <img src={require(`${ this.state.ResourceManager.getImagePaths(index) }`)} alt="sprite or background"/>; // require makes it possible to use local paths
   }
 
   render() {
     return (
       <div className="App">
-
         <div>
           {
-            this.findImage(3) // get desired image 
+            this.findImage(0) // get desired image 
           }
-
         </div>
 
         <div>
