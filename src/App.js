@@ -21,12 +21,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
         <div>
           {
-            this.findImage(3) // get desired image 
+            this.findImage(2) // get desired image 
           }
-
         </div>
 
         <div>
