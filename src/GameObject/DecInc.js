@@ -1,15 +1,21 @@
 import React from "react";
 import GameObject from "./GameObjectBase/GameObject";
+import WithKeyboardSubscribe from "./../InputManager/HOC/WithKeyboardSubscribe";
 
-export default class DecInc extends GameObject {
+export class DecInc extends GameObject {
   state = { number: 100 };
   componentWillMount() {
-    this.props.keyboardObservable.subscribe(this, "i", () =>
+    this.props.keyboardSubscribe(this, "i", () =>
       this.setState({ number: this.state.number + 1 })
     );
-    this.props.keyboardObservable.subscribe(this, "d", () =>
+    this.props.keyboardSubscribe(this, "d", () =>
       this.setState({ number: this.state.number - 1 })
     );
   }
-  render = () => <div>{this.state.number}</div>;
+  render = () => {
+    console.log("hey");
+    return <div>{this.state.number}</div>;
+  };
 }
+
+export default WithKeyboardSubscribe(DecInc);

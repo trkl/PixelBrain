@@ -3,6 +3,7 @@ import DecInc from "./GameObject/DecInc";
 
 import "./App.css";
 import KeyboardObservable from "./InputManager/KeyboardObservable";
+import KeyboardObservableProvider from "./InputManager/Context/KeyboardObservableContextProvider";
 class App extends Component {
   decInc = new DecInc();
   constructor() {
@@ -10,13 +11,13 @@ class App extends Component {
     this.keyboardObservable = new KeyboardObservable();
   }
   render() {
-    return <DecInc keyboardObservable={this.keyboardObservable} />;
+    return (
+      <KeyboardObservableProvider>
+        <DecInc />
+      </KeyboardObservableProvider>
+    );
   }
-  componentDidMount() {
-    console.log("hello");
-    this.keyboardObservable.init();
-    this.keyboardObservable.subscribe(this.decInc, " ", this.decInc);
-  }
+  componentDidMount() {}
 }
 
 export default App;
