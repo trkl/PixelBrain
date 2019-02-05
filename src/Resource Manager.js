@@ -3,7 +3,7 @@ class ResourceManager {
         this.state = {
             GameInstance: GameName,
             imagesPuffin: [
-                './flappybirdBackground.png',
+                './Resources/Images/flappybirdBackground.png',
                 './Resources/Images/Kalsoy.svg',
                 './Resources/Images/puffone.svg',
                 './Resources/Images/puffthree.svg',

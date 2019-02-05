@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import bird from './Resources/Images/flappybirdBackground.png';
+import bird from './Resources/Images/flappybirdBackground.png';
 //import Game from './Game'
 import './App.css';
 import './Resource Manager'
@@ -14,7 +14,7 @@ class App extends Component {
       ResourceManager: new ResourceManager('Flappy Bird')
     }
   }
-  createImage = (index) =>{
+  createImage = (index) => {
     return this.state.ResourceManager.getImagePath()[index];
   }
 
@@ -23,9 +23,9 @@ class App extends Component {
       <div className="App">
 
         <div>
-          <img src={this.createImage(0)}/>
+          <img src={this.createImage(0)} />
         </div>
-        
+
         <div>
           {/* <img src={bird} className='CharacterSprite' alt='sprite' /> */}
         </div>
