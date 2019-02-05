@@ -1,4 +1,4 @@
-class ResourceManager {
+class ResourceManager{
     constructor(GameName) {
         this.state = {
             GameInstance: GameName,
@@ -9,12 +9,11 @@ class ResourceManager {
                 './Resources/Images/puffthree.svg',
                 './Resources/Images/pufftwo.svg'
             ]
-
         }
     }
-    getImagePath() {
+    getImagePath = (index) => {
         if (this.state.GameInstance === 'Flappy Bird') {
-            return this.state.imagesPuffin
+            return this.state.imagesPuffin[index]
         } //else statement here
     }    
 }
