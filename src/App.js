@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   findImage = (index) => {
-    return <img src={require(`${ this.state.ResourceManager.getImagePath(index) }`)} />; // require makes it possible to use local paths
+    return <img src={require(`${ this.state.ResourceManager.getImagePaths(index) }`)} />; // require makes it possible to use local paths
   }
 
   render() {
