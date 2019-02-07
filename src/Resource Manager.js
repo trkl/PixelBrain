@@ -1,4 +1,12 @@
 class ResourceManager{
+     importAll(r) {
+         console.log('in import all')
+        let images = {};
+        r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+        return images;
+      }
+
+
     constructor(GameName) {
         this.state = {
             GameInstance: GameName,
@@ -9,6 +17,7 @@ class ResourceManager{
                 './Resources/Images/puffthree.svg',
                 './Resources/Images/pufftwo.svg'
             ],
+            images: [],
             audioPuffin: [
                 './Resources/sounds/sfx_die.wav',
                 './Resources/sounds/sfx_hit.wav',
@@ -17,11 +26,23 @@ class ResourceManager{
                 './Resources/sounds/sfx_wing.wav'
             ]
         }
+        console.log('in constructor')
+        const images = this.importAll(require.context('./Resources/Images', false, /\.(png|jpe?g|svg)$/));
+        this.state.images=images;
+        console.log('after import')
+        console.log(images);
+        // this.setState({imagesPuffin: this.state.imagesPuffin.map()})
     }
-    getImagePaths = (index) => {
+    getImagePaths = async (index) => {
         if (this.state.GameInstance === 'Flappy Bird') {
-            return this.state.imagesPuffin[index]
+            return import(this.state.imagesPuffin[index])
         } //else statement here
+    }
+
+    getImage = (name) => { 
+        console.log("in getImage");  
+        console.log(this.state.images )
+        return this.state.images[name];
     }
     
     getAudioPaths = (index) => {
