@@ -1,50 +1,48 @@
 import React, { Component } from 'react';
-import ResourceManagerObservable from './Resource Manager/Resource Manager';
+import puffin from './Resources/Images/puffone.svg';
+import puffin2 from './Resources/Images/pufftwo.svg';
+import puffin3 from './Resources/Images/puffthree.svg'
 
 class Background extends Component {
-
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            width: 100,
-            height: 100,
-            ResourceManagerObservable: new ResourceManagerObservable("Flappy Bird"),
+            speed: props.speed,
+            counter: 0,
+            imagesource: '',
+            styleImg: {
+                height: '100vh',
+                width: '100vw',
+                backgroundPosition: '300px',
+                backgroundImage: 'url('+(props.ResourceManager.getImage(props.imagesource)),
+                backgroundRepeat: "repeat-x",
+                position: 'absolute',
+                zIndex: props.zindex
+            },                
+            ResourceManager: props.ResourceManager  
         }
-        this.animate = this.animate.bind(this)
-    }
-
-    animate() {
-        console.log('hey')
-
-
-        if(this.state.height === 100){
-            this.setState({
-                height: 500,
-                width: 500
-            })
-        }
-        this.frame = requestAnimationFrame(this.animate);
     }
 
     componentDidMount() {
-        this.animate();
+        this.gameLoop();
     }
 
-    componentWillUnmount() {
-        cancelAnimationFrame(this.frame);
+    gameLoop = () => {
+        this.setState({
+            counter: this.state.counter + this.state.speed,
+            styleImg: {...this.state.styleImg,backgroundPosition:this.state.counter}  
+        })
+        requestAnimationFrame(this.gameLoop)
     }
 
-    findImage = (index) => {
-        return this.state.ResourceManagerObservable.getImagePaths(index)
-      }
     render() {
         return (
-            <div id='image'>
-            <img src={require(`${this.state.ResourceManagerObservable.getImagePaths(0) }`)} height={this.state.height} width={this.state.width} alt='background'/>
-                {this.animate()}
+            <div style={this.state.styleImg}>
+        
+                
             </div>
-        );
+        )
+
     }
 }
-
-export default Background
+export default Background;
