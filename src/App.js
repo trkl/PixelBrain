@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import Game from './Game'
 import './App.css';
-import ResourceManager from './Resource Manager';
+import ResourceManager from './Resource Manager/Resource Manager';
 import Background from './Background'
 
 class App extends Component {
