@@ -1,36 +1,38 @@
-import React, { Component } from 'react';
-import bird from './Resources/Images/flappybirdBackground.png';
-//import Game from './Game'
-import './App.css';
-import ResourceManager from './Resource Manager/Resource Manager';
+import React, { Component } from "react";
+import "./App.css";
+import ResourceManager from "./Resource Manager/Resource Manager";
+import Background from "./Background";
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      gameName: "Flappy Bird",
-      ResourceManager: new ResourceManager('Flappy Bird')
-    }
+      ResourceManager: new ResourceManager()
+    };
   }
 
-  findImage = (index) => {
-    return <img src={require(`${ this.state.ResourceManager.getImagePaths(index) }`)} alt="sprite or background"/>; // require makes it possible to use local paths
-  }
+  findImage = index => {
+    return (
+      <img
+        src={require(`${this.state.ResourceManager.getImagePaths(index)}`)}
+        alt="searched"
+      />
+    );
+  };
+
+  findSVG = index => {
+    return this.state.ResourceManager.getSvgs(index);
+  };
 
   render() {
     return (
       <div className="App">
         <div>
-          {
-            this.findImage(0) // get desired image 
-          }
+          <Background />
         </div>
-
-        <div>
-          {/* <img src={bird} className='CharacterSprite' alt='sprite' /> */}
-        </div>
-
+        {}
+        <div>{/* {this.findSVG(0)} */}</div>
       </div>
     );
   }
