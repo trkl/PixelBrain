@@ -1,5 +1,4 @@
 import GameObject from "../GameObject/GameObjectBase/GameObject";
-import React, { PureComponent } from "react";
 
 // data-structure for subscriber
 class KeyboardSubscriber {

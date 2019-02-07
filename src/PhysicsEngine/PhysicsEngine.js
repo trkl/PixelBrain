@@ -6,15 +6,11 @@ const Config = {
 };
 
 class PhysicsEngine {
-  acceleration(gameObject, forceVector) {
-    const acceleration = VectorUtilities.multiplyVector(
-      forceVector,
-      gameObject.weight
-    );
-  }
+  acceleration = (gameObject, forceVector) =>
+    VectorUtilities.multiplyVector(forceVector, gameObject.weight);
 
   forces(gameObject) {
-    const { weight, gravity, forces } = gameObject;
+    const { weight, gravity, forces, acceleration, velocity } = gameObject;
     const downForce = Config.gravity * weight * gravity;
     const totalForce = VectorUtilities.reduceVectorArray([
       ...forces,

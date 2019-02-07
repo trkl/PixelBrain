@@ -14,6 +14,15 @@ export class DecInc extends GameObject {
     );
   }
 
+  state = {
+    style: {
+      height: 150,
+      width: 500,
+      backgroundImage: "url(addressa)",
+      backgroundPosition: 100
+    }
+  };
+
   componentDidMount() {
     this.props.keyboardSubscribe(this, " ", () =>
       console.log("millumrúm var sligið")
