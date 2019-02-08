@@ -6,7 +6,7 @@ export default class ResourceManagerProvider extends React.Component {
   ResourceManager;
   constructor() {
     super();
-    this.ResourceManager = new ResourceManager();
+    this.ResourceManager = new ResourceManager("Flappy Bird");
   }
   render = () => (
     <ResourceManagerContext.Provider value={this.ResourceManager}>

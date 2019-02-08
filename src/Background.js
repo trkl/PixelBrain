@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import WithResources from './Resource Manager/HOC/WithResources'
 class Background extends Component {
     constructor(props) {
         super(props);
@@ -11,7 +11,7 @@ class Background extends Component {
                 height: '100vh',
                 width: '100vw',
                 backgroundPosition: '300px',
-                backgroundImage: 'url('+(props.ResourceManager.getImage(props.imagesource)),
+                backgroundImage: 'url('+(props.resourceManager.getImage(props.imagesource)),
                 backgroundRepeat: "repeat-x",
                 position: 'absolute',
                 zIndex: props.zindex
@@ -42,4 +42,4 @@ class Background extends Component {
 
     }
 }
-export default Background;
+export default WithResources(Background);

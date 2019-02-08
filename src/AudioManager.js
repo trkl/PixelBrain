@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import WithResources from './Resource Manager/HOC/WithResources'
 
 class AudioManager extends React.Component{
     constructor(props) {
@@ -12,4 +13,4 @@ class AudioManager extends React.Component{
       }
     }
 
-export default AudioManager ;
+export default WithResources(AudioManager);

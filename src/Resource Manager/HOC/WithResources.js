@@ -3,7 +3,7 @@ import ResourceManagerContextConsumer from '../ResourceManagerContextConsumer';
 
 const WithResources = WrappedComponent => props =>
     <ResourceManagerContextConsumer>
-        {ResourceManager => <WrappedComponent resourceManager={ResourceManager}>
+        {ResourceManager => <WrappedComponent {...props} resourceManager={ResourceManager}>
             {props.children}
         </WrappedComponent>}
     </ResourceManagerContextConsumer>
