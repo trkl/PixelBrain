@@ -13,13 +13,7 @@ class App extends Component {
       img:null
     }
   }
-
-  findImage = (index) => {
-    return <img src={require(`${ this.state.ResourceManager.getImagePaths(index) }`)} />; // require makes it possible to use local paths
-  }
-  findDick = (index) => {
-    return require(`${ this.state.ResourceManager.getImagePaths(index) }`) // require makes it possible to use local paths
-  }
+    
   render() {
     return (
       <div className="App">
