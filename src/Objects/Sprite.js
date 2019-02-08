@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
-import birdImage from '../Images/bird.svg'
+import birdImage from '../Images/bird.png'
 
 class Sprite extends Component {
-    render() {
-        return (
-            <div style={{backgroundImage: "url(" + birdImage + ")", width:"40px",height:"40px", position: "absolute" }} />
-        )
+    constructor(props) {
+        super(props)
     }
-}
+        render() {
+            return (
+                <div style={{width: this.props.hitBox.width}}>
+                    <img src={birdImage} style={{width: "100%"}}/>
+                </div>
+            )
+        }
+    }
 
-export default Sprite;
+    export default Sprite;

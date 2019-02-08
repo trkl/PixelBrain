@@ -6,8 +6,6 @@ class PipeUp extends Component {
     constructor(props) {
         super(props)
     }
-
-    //style={{backgroundImage: "url(" + pipeUp + ")" , width:"60px",height:"360px", position: "absolute", top: this.props.down}}
     render() {
         return (
             <div className="PipeUp">

@@ -12,10 +12,7 @@ class App extends Component {
     this.timer = 0;
     this.clock = Date.now() * 0.001;
 
-    var birdy = {
-      top: 200,
-      left: 300
-    }
+    var bird = new Bird();
 
     var pipe = {
       top: 0,
@@ -23,7 +20,7 @@ class App extends Component {
     }
 
 
-    this.state = { birdy: birdy, pipe: pipe };
+    this.state = { bird: bird, pipe: pipe };
   }
 
   componentDidMount() {
@@ -33,40 +30,41 @@ class App extends Component {
   tick() {
     this.timer += (Date.now() * 0.001) - this.clock; // delta time = current - prev
     if (this.timer > 1.0 / 15) {
+     
       this.timer = 0; // timer 0
-      var birdCopy = this.state.birdy;
+      var birdCopy = this.state.bird;
       var pipeCopy = this.state.pipe;
-      console.log("tick")
+
+
       if (pipeCopy.left < 0) {
         pipeCopy.left = window.innerWidth;
       } else {
         pipeCopy.left -= 8;
       }
-      if (birdCopy.top > 550) {
-        birdCopy.top = 300;
+      if (birdCopy.position.y > 550) {
+        birdCopy.position.y = 300;
       } else {
-        birdCopy.top += 5.5
+        birdCopy.position.y += 5.5
       }
-      this.setState({ birdy: birdCopy, pipe: pipeCopy });
+      this.setState({ bird: birdCopy, pipe: pipeCopy });
     }
 
     this.clock = Date.now() * 0.001 // prev time
     window.requestAnimationFrame(this.tick);
   }
 
-  move = () => {
-    var birdCopy = this.state.birdy;
+  jump = () => {
+    var birdCopy = this.state.bird;
 
-    birdCopy.top -= 30;
+    birdCopy.position.y -= 30;
 
-    this.setState({ birdy: birdCopy });
+    this.setState({ bird: birdCopy });
   }
 
   render() {
     return (
-      <div className="frame" onClick={this.move.bind(this)} >
-        <Bird top={this.state.birdy.top} left={this.state.birdy.left} />
-        {/* <Pipes top={this.state.pipe.top} left={this.state.pipe.left} /> */}
+      <div className="frame" onClick={this.jump.bind(this)} >
+        <Bird top={this.state.bird.position.y} left={this.state.bird.position.x} style={{height:"100vh"}} />
         <PipesManager />
       </div>
     );
