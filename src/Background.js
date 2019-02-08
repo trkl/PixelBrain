@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import puffin from './Resources/Images/puffone.svg';
-import puffin2 from './Resources/Images/pufftwo.svg';
-import puffin3 from './Resources/Images/puffthree.svg'
 
 class Background extends Component {
     constructor(props) {
