@@ -10,7 +10,7 @@ class AudioManager extends React.Component{
       playSound(sound) 
       {
         console.log(sound)
-        var audio = new Audio(sounda);
+        var audio = new Audio(sound);
         audio.play();
         console.log(audio)
         console.log(this.sounds)
