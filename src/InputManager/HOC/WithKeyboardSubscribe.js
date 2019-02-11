@@ -12,3 +12,8 @@ const WithKeyboardSubscribe = WrappedComponent => props => (
 );
 
 export default WithKeyboardSubscribe;
+
+function randomIntFromInterval(min, max) {
+  // min and max included
+  return Math.random() * (max - min + 1) + min || 0;
+}

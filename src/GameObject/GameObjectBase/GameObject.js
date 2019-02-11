@@ -1,24 +1,18 @@
 import { Component } from "react";
+import Vector from "./../../Vector/Vector";
+// const vector = new Vector();
+// vector.matrix = [2, 5];
+// console.log(vector);
+// console.log(vector.x);
 
 export default class GameObject extends Component {
-  position = {
-    x: null,
-    y: null
-  };
-
-  acceleration = {
-    x: null,
-    y: null
-  };
-
-  velocity = {
-    x: null,
-    y: null
-  };
+  position = new Vector();
+  acceleration = new Vector();
+  velocity = new Vector();
 
   weight = 0;
 
-  forces = [[]];
+  forces = [];
 
   hitBox = {
     height: null,

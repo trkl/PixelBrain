@@ -18,6 +18,9 @@ class PhysicsEngine {
     ]);
     this.acceleration(gameObject, totalForce);
   }
+  processGameObject(gameObject) {
+
+  }
 }
 
 export default PhysicsEngine;

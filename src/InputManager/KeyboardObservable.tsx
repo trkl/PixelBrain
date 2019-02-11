@@ -21,6 +21,7 @@ export default class KeyboardObservable {
     this.subscribers = [];
     document.addEventListener("keydown", this.onNext, false);
   }
+
   // "key" is the letter of the key on the keyboard to listen for
   subscribe = (object: GameObject, key: string, action: () => void) =>
     this.subscribers.push(new KeyboardSubscriber(object, key, action));
