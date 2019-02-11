@@ -3,6 +3,7 @@ import Event from "../Events/Event";
 import EventManager from "../EventManager/EventManager";
 import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
 import CollisionManger from "../CollisionManager/CollisionManager";
+import AudioManager from "../AudioManager/AudioManager";
 
 // data-structure for subscriber
 class KeyboardSubscriber {
@@ -25,15 +26,15 @@ export default class KeyboardObservable {
   constructor(eventManager: EventManager) {
     this.eventManager = new EventManager(
       new PhysicsEngine(),
-      new CollisionManger()
+      new CollisionManger(),
+      new AudioManager()
     );
     this.subscribers = [];
     document.addEventListener("keydown", this.onNext, false);
   }
 
   // "key" is the letter of the key on the keyboard to listen for
-  subscribe = (object: GameObject, key: string, event: Event) =>
-    this.subscribers.push(new KeyboardSubscriber(object, key, event));
+  subscribe = (object: GameObject, key: string, event: Event) =>{ this.subscribers.push(new KeyboardSubscriber(object, key, event));}
 
   unsubscribe = (object: GameObject) => {
     const { length } = this.subscribers;

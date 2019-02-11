@@ -38,30 +38,26 @@ class App extends Component {
     window.requestAnimationFrame(this.tick);
   }
 
-  jump = () => {
 
-    console.log(this.state.bird)
-    // this.state.bird.position.y -= 30;
-
-    this.setState({ bird: { ...this.state.bird, position: { y: this.state.bird.position.y - 30, x: this.state.bird.position.x } } }, () => console.log(this.state.bird)
-    );
-  }
 
   render() {
     return (
-      <KeyboardObservableProvider>
+      <>
         <ResourceManagerProvider>
           <Background imagesource={"GrassForeground.png"} speed={-1} zindex={1} />
           <Background imagesource={"kalsoy.png"} speed={-0.2} zindex={-1} />
           <Background imagesource={"Clouds.png"} speed={-0.6} zindex={-2} />
           <Background imagesource={"Background.png"} speed={-0.2} zindex={-3} />
-        </ResourceManagerProvider>
-        <div className="frame"  >
-        <Bird />
-        <PipesManager />
-        </div>
+        
 
-      </KeyboardObservableProvider>
+        <KeyboardObservableProvider>
+          <div className="frame"  >
+            <Bird />
+            <PipesManager />
+          </div>
+        </KeyboardObservableProvider>
+        </ResourceManagerProvider> 
+      </>
     );
   }
 }
