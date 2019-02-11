@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import birdImage from '../Images/bird.png'
+import birdImage from '../../Images/bird.png'
 
 class Sprite extends Component {
     constructor(props) {

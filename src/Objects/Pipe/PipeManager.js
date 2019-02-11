@@ -5,39 +5,34 @@ import Pipes from './Pipes'
 class PipesManager extends Component {
     constructor(props) {
         super(props)
+        this.counter = 0;
         var pipes = [
-            { top: 0, left: 300, up: -20, down: 500 },
-            { top: 0, left: 600, up: -20, down: 500 },
-            { top: 0, left: 900, up: -20, down: 500 },
-            { top: 0, left: 1200, up: -20, down: 500 },
-            { top: 0, left: 1500, up: -20, down: 500 }
+            { top: 0, left: ((window.innerWidth/5)*1) -4, up: 40, down: 40 },
+            { top: 0, left: ((window.innerWidth/5)*2)   , up: 40, down: 40 },
+            { top: 0, left: ((window.innerWidth/5)*3)   , up: 40, down: 40 },
+            { top: 0, left: ((window.innerWidth/5)*4)   , up: 40, down: 40 },
+            { top: 0, left: ((window.innerWidth/5)*5)   , up: 40, down: 40 }
         ]
         this.counter = 0;
         this.state = { pipes: pipes }
     }
 
-    componentDidMount() {
-        requestAnimationFrame(this.move)
+    componentDidUpdate() {
+        this.move();
     }
 
     move = () => {
-
-        // if (this.counter > 100) {
         var pipesCopy = this.state.pipes.slice();
         for (let i = 0; i < pipesCopy.length; i++) {
             if (pipesCopy[i].left < -60) {
                 pipesCopy[i].left = 1520
-                var newUp = Math.random() * (100 - (-200)) + (-200);
-                pipesCopy[i].up = newUp;
-                pipesCopy[i].down = newUp + 500;
+                var newDown = Math.random() * (65 - 15 + 1) + 15;
+                pipesCopy[i].down = newDown;
+                pipesCopy[i].up = 100-newDown - 20;
             }
             pipesCopy[i].left = pipesCopy[i].left - 4;
         }
-        this.setState({ pipes: pipesCopy });
-        this.counter = 0;
-        // }
-        // this.counter += 10;
-        requestAnimationFrame(this.move);
+        this.state = ({ pipes: pipesCopy });
     }
 
     render() {

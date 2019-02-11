@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import Bird from './Objects/Bird';
-import PipesManager from './Objects/PipeManager';
+import Bird from './Objects/Bird/Bird';
+import PipesManager from './Objects/Pipe/PipeManager'
+import AudioManager from './AudioManager/AudioManager';
+
 
 
 class App extends Component {
@@ -13,14 +15,9 @@ class App extends Component {
     this.clock = Date.now() * 0.001;
 
     var bird = new Bird();
+    var pipes = new PipesManager();
 
-    var pipe = {
-      top: 0,
-      left: 400
-    }
-
-
-    this.state = { bird: bird, pipe: pipe };
+    this.state = { bird: bird, pipes: pipes };
   }
 
   componentDidMount() {
@@ -32,21 +29,8 @@ class App extends Component {
     if (this.timer > 1.0 / 15) {
      
       this.timer = 0; // timer 0
-      var birdCopy = this.state.bird;
-      var pipeCopy = this.state.pipe;
-
-
-      if (pipeCopy.left < 0) {
-        pipeCopy.left = window.innerWidth;
-      } else {
-        pipeCopy.left -= 8;
-      }
-      if (birdCopy.position.y > 550) {
-        birdCopy.position.y = 300;
-      } else {
-        birdCopy.position.y += 5.5
-      }
-      this.setState({ bird: birdCopy, pipe: pipeCopy });
+    
+      this.setState({bird: this.state.bird, pipes: this.state.pipes  });
     }
 
     this.clock = Date.now() * 0.001 // prev time
@@ -54,17 +38,18 @@ class App extends Component {
   }
 
   jump = () => {
-    var birdCopy = this.state.bird;
 
-    birdCopy.position.y -= 30;
+    console.log(this.state.bird)
+    // this.state.bird.position.y -= 30;
 
-    this.setState({ bird: birdCopy });
+    this.setState({ bird: {...this.state.bird,position:{y:this.state.bird.position.y - 30, x:this.state.bird.position.x} }}, ()=> console.log(this.state.bird)
+    );
   }
 
   render() {
     return (
-      <div className="frame" onClick={this.jump.bind(this)} >
-        <Bird top={this.state.bird.position.y} left={this.state.bird.position.x} style={{height:"100vh"}} />
+      <div className="frame" onClick={this.jump} >
+        <Bird />
         <PipesManager />
       </div>
     );

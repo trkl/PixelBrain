@@ -1,11 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PipeDown from './PipeDown'
 import PipeUp from './PipeUp'
+import GameObject from '../../GameObject/GameObjectBase/GameObject';
 
 
-class Pipes extends Component {
+class Pipes extends GameObject {
     constructor(props) {
         super(props)
+
+        this.hitBox.width = 50;
     }
     render() {
         return (

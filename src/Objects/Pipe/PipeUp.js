@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './PipeUp.css'
-import pipeUp from '../Images/pipeUp.png'
+import pipeUp from '../../Images/pipeUp.png'
 
 class PipeUp extends Component {
     constructor(props) {
@@ -9,7 +9,7 @@ class PipeUp extends Component {
     render() {
         return (
             <div className="PipeUp">
-                <img className="pipeupimg" src={pipeUp} />
+                <img className="pipeupimg" src={pipeUp} style={{height: this.props.down + "vh"}}/>
             </div>
         )
     }
