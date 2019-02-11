@@ -6,4 +6,5 @@ export default class Event {
   audio = {
     soundTrack: ""
   };
+  callback = null;
 }
