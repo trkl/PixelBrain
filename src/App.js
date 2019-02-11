@@ -25,7 +25,7 @@ class App extends Component {
               speed={-2.5}
               zindex={3}
             />
-            <Background imagesource={"kalsoy.png"} speed={-0.2} zindex={2} />
+            <Background imagesource={"kalsoy2.png"} speed={-0.2} zindex={2} />
             <Background imagesource={"Clouds.png"} speed={-0.6} zindex={1} />
             <Background
               imagesource={"Background.png"}
