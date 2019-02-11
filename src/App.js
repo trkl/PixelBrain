@@ -48,7 +48,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="frame" onClick={this.jump} >
+      <div className="frame" onClick={this.state.bird.jump.bind(this.state.bird)} >
         <Bird />
         <PipesManager />
       </div>

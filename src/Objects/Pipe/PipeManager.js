@@ -7,13 +7,12 @@ class PipesManager extends Component {
         super(props)
         this.counter = 0;
         var pipes = [
-            { top: 0, left: ((window.innerWidth/5)*1) -4, up: 40, down: 40 },
-            { top: 0, left: ((window.innerWidth/5)*2)   , up: 40, down: 40 },
-            { top: 0, left: ((window.innerWidth/5)*3)   , up: 40, down: 40 },
-            { top: 0, left: ((window.innerWidth/5)*4)   , up: 40, down: 40 },
-            { top: 0, left: ((window.innerWidth/5)*5)   , up: 40, down: 40 }
+            { top: 0, left: ((window.innerWidth/5)*1) -4, up: 15, down: 65 },
+            { top: 0, left: ((window.innerWidth/5)*2)   , up: 25, down: 55 },
+            { top: 0, left: ((window.innerWidth/5)*3)   , up: 35, down: 45 },
+            { top: 0, left: ((window.innerWidth/5)*4)   , up: 45, down: 35 },
+            { top: 0, left: ((window.innerWidth/5)*5)   , up: 55, down: 25 }
         ]
-        this.counter = 0;
         this.state = { pipes: pipes }
     }
 
