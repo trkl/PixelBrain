@@ -1,6 +1,7 @@
 import React from 'react'
 import Sprite from './Sprite'
 import GameObject from '../../GameObject/GameObjectBase/GameObject';
+import WithKeyboardSubscribe from '../../InputManager/HOC/WithKeyboardSubscribe'
 
 class Bird extends GameObject {
     constructor(props) {
@@ -13,11 +14,15 @@ class Bird extends GameObject {
         this.position.x = 300;
     }
 
-    componentWillUpdate() {
-        this.move();
+    componentDidMount() {
+        this.props.keyboardSubscribe(this, " ", {callback:this.jump});
     }
 
-    move = () => {
+    componentWillUpdate() {
+        this.fall();
+    }
+
+    fall = () => {
         if (this.position.y > 550) {
             this.position.y = 300;
           } else {
@@ -39,4 +44,4 @@ class Bird extends GameObject {
     }
 }
 
-export default Bird;
+export default WithKeyboardSubscribe(Bird);

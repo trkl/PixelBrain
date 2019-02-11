@@ -7,11 +7,11 @@ class PipesManager extends Component {
         super(props)
         this.counter = 0;
         var pipes = [
-            { top: 0, left: ((window.innerWidth/5)*1) -4, up: 15, down: 65 },
-            { top: 0, left: ((window.innerWidth/5)*2)   , up: 25, down: 55 },
-            { top: 0, left: ((window.innerWidth/5)*3)   , up: 35, down: 45 },
-            { top: 0, left: ((window.innerWidth/5)*4)   , up: 45, down: 35 },
-            { top: 0, left: ((window.innerWidth/5)*5)   , up: 55, down: 25 }
+            { top: 0, left: ((window.innerWidth/5)*0.8) -4, up: 15, down: 65 },
+            { top: 0, left: ((window.innerWidth/5)*1.8)   , up: 25, down: 55 },
+            { top: 0, left: ((window.innerWidth/5)*2.8)   , up: 35, down: 45 },
+            { top: 0, left: ((window.innerWidth/5)*3.8)   , up: 45, down: 35 },
+            { top: 0, left: ((window.innerWidth/5)*4.8)   , up: 55, down: 25 }
         ]
         this.state = { pipes: pipes }
     }
@@ -24,7 +24,7 @@ class PipesManager extends Component {
         var pipesCopy = this.state.pipes.slice();
         for (let i = 0; i < pipesCopy.length; i++) {
             if (pipesCopy[i].left < -60) {
-                pipesCopy[i].left = 1520
+                pipesCopy[i].left = (window.innerWidth/5)*4.8
                 var newDown = Math.random() * (65 - 15 + 1) + 15;
                 pipesCopy[i].down = newDown;
                 pipesCopy[i].up = 100-newDown - 20;
