@@ -1,6 +1,7 @@
 export default class Event {
   physics = {
-    forces: []
+    forces: [],
+    duration: null
   };
   audio = {
     soundTrack: ""
