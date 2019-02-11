@@ -11,11 +11,13 @@ class ResourceManager {
   constructor(GameName) {
     this.GameInstance = GameName;
 
-    const audio = this.importAll(
-      require.context("./../Resources/sounds", false, /\.(wav)$/)
-    );
-    this.audio = audio;
-console.log(audio)
+    this.audioPuffin = [
+      "./Resources/sounds/sfx_die.wav",
+      "./Resources/sounds/sfx_hit.wav",
+      "./Resources/sounds/sfx_point.wav",
+      "./Resources/sounds/sfx_swooshing.wav",
+      "./Resources/sounds/sfx_wing.wav"
+    ];
     const images = this.importAll(
       require.context("./../Resources/Images", false, /\.(png|jpe?g|svg)$/)
     );
@@ -32,7 +34,9 @@ console.log(audio)
   };
 
   getAudioPaths = index => {
-      return this.audio[index]; 
+    if (this.GameInstance === "Flappy Bird") {
+      return this.audioPuffin[index];
+    } 
   };
 }
 
