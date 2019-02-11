@@ -2,11 +2,13 @@ import React from 'react'
 import Sprite from './Sprite'
 import GameObject from '../../GameObject/GameObjectBase/GameObject';
 import WithKeyboardSubscribe from '../../InputManager/HOC/WithKeyboardSubscribe'
+import AudioManager from '../../AudioManager/AudioManager'
 
 class Bird extends GameObject {
     constructor(props) {
         super(props);
 
+        this.am = new AudioManager();
         this.hitBox.width = 40;
         this.hitBox.height = 40;
 
@@ -33,6 +35,7 @@ class Bird extends GameObject {
 
     jump = () => {
         this.position.y -= 30;
+        this.am.playSound();  
     }
 
     render() {

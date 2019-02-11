@@ -50,17 +50,18 @@ class App extends Component {
   render() {
     return (
       <KeyboardObservableProvider>
-        <ResourceManagerProvider>
-          <Background imagesource={"GrassForeground.png"} speed={-2.5} zindex={3} />
-          <Background imagesource={"kalsoy.png"} speed={-0.2} zindex={2} />
-          <Background imagesource={"Clouds.png"} speed={-0.6} zindex={1} />
-          <Background imagesource={"Background.png"} speed={-0.2} zindex={0} />
-        </ResourceManagerProvider>
 
+        <ResourceManagerProvider>
+          <Background imagesource={"GrassForeground.png"} speed={-1} zindex={1} />
+          <Background imagesource={"kalsoy.png"} speed={-0.2} zindex={-1} />
+          <Background imagesource={"Clouds.png"} speed={-0.6} zindex={-2} />
+          <Background imagesource={"Background.png"} speed={-0.2} zindex={-3} />
+        </ResourceManagerProvider>
         <div className="frame"  >
-          <Bird />
-          <PipesManager />
+        <Bird />
+        <PipesManager />
         </div>
+
       </KeyboardObservableProvider>
     );
   }
