@@ -3,6 +3,8 @@ import './App.css';
 import Bird from './Objects/Bird/Bird';
 import PipesManager from './Objects/Pipe/PipeManager'
 import KeyboardObservableProvider from './InputManager/Context/KeyboardObservableContextProvider'
+import ResourceManagerProvider from './Resource Manager/ResourceManagerContextProvider'
+import Background from './Background.js'
 
 class App extends Component {
   constructor(props) {
@@ -47,14 +49,39 @@ class App extends Component {
 
   render() {
     return (
-       <KeyboardObservableProvider>
+      <KeyboardObservableProvider>
+        <ResourceManagerProvider>
+          <Background imagesource={"GrassForeground.png"} speed={-2.5} zindex={3} />
+          <Background imagesource={"kalsoy.png"} speed={-0.2} zindex={2} />
+          <Background imagesource={"Clouds.png"} speed={-0.6} zindex={1} />
+          <Background imagesource={"Background.png"} speed={-0.2} zindex={0} />
+        </ResourceManagerProvider>
+
         <div className="frame"  >
           <Bird />
           <PipesManager />
         </div>
-       </KeyboardObservableProvider>
+      </KeyboardObservableProvider>
     );
   }
 }
 
 export default App;
+
+// render() {
+//   return (
+//     <div className="App">
+//       <div>
+//         {" "}
+//         <ResourceManagerProvider>
+//           <Background imagesource={"GrassForeground.png"} speed={-2.5} zindex={3} />
+//           <Background imagesource={"kalsoy.png"} speed={-0.2} zindex={2} />
+//           <Background imagesource={"Clouds.png"} speed={-0.6} zindex={1} />
+//           <Background imagesource={"Background.png"} speed={-0.2} zindex={0} />
+//         </ResourceManagerProvider>
+//       </div>
+//     </div>
+//   );
+// }
+// }
+// export default App;
