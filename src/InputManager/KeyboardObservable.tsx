@@ -1,6 +1,8 @@
 import GameObject from "../GameObject/GameObjectBase/GameObject";
 import Event from "../Events/Event";
 import EventManager from "../EventManager/EventManager";
+import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
+import CollisionManger from "../CollisionManager/CollisionManager";
 
 // data-structure for subscriber
 class KeyboardSubscriber {
@@ -21,7 +23,10 @@ export default class KeyboardObservable {
   private eventManager: EventManager;
 
   constructor(eventManager: EventManager) {
-    this.eventManager = eventManager;
+    this.eventManager = new EventManager(
+      new PhysicsEngine(),
+      new CollisionManger()
+    );
     this.subscribers = [];
     document.addEventListener("keydown", this.onNext, false);
   }
@@ -52,7 +57,7 @@ export default class KeyboardObservable {
     if (!this.subscribers.length) return;
     this.subscribers.forEach(gameObject => {
       if (event.key === gameObject.key) {
-       gameObject.event.callback();
+        this.eventManager.registerEvent(gameObject.event);
       }
     });
   };

@@ -28,6 +28,7 @@ class Bird extends GameObject {
 
     fall = () => {
         if (this.position.y > 550) {
+            
             this.position.y = 300;
           } else {
             this.position.y += 5.5
