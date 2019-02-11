@@ -9,17 +9,21 @@ class PhysicsEngine {
   acceleration = (gameObject, forceVector) =>
     VectorUtilities.multiplyVector(forceVector, gameObject.weight);
 
-  forces(gameObject) {
+  forces(gameObject, newForces) {
     const { weight, gravity, forces, acceleration, velocity } = gameObject;
     const downForce = Config.gravity * weight * gravity;
+
     const totalForce = VectorUtilities.reduceVectorArray([
       ...forces,
       downForce
     ]);
     this.acceleration(gameObject, totalForce);
   }
-  processGameObject(gameObject) {
-
+  processGameObject(gameObject, { forces, duration }) {
+    if (duration == null) {
+      console.log("waiting for endEvent");
+      return;
+    }
   }
 }
 

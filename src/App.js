@@ -16,7 +16,7 @@ class App extends Component {
       </KeyboardObservableProvider>
     );
   }
-  componentDidMount() { }
+  componentDidMount() {}
 }
 
 export default App;
