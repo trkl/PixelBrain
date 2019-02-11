@@ -1,30 +1,34 @@
 import GameObject from "../GameObject/GameObjectBase/GameObject";
+import Event from "../Events/Event";
+import EventManager from "../EventManager/EventManager";
 
 // data-structure for subscriber
 class KeyboardSubscriber {
-  constructor(object: GameObject, key: string, action: () => void) {
+  constructor(object: GameObject, key: string, event: Event) {
     this.object = object;
     this.key = key;
-    this.action = action;
+    this.event = event;
   }
 
   object: GameObject;
   key: string;
-  action: () => void;
+  event: Event;
 }
 
 // This class will tie keyboard inputs to their actions
 export default class KeyboardObservable {
   private subscribers: KeyboardSubscriber[];
+  private eventManager: EventManager;
 
-  constructor() {
+  constructor(eventManager: EventManager) {
+    this.eventManager = eventManager;
     this.subscribers = [];
     document.addEventListener("keydown", this.onNext, false);
   }
 
   // "key" is the letter of the key on the keyboard to listen for
-  subscribe = (object: GameObject, key: string, action: () => void) =>
-    this.subscribers.push(new KeyboardSubscriber(object, key, action));
+  subscribe = (object: GameObject, key: string, event: Event) =>
+    this.subscribers.push(new KeyboardSubscriber(object, key, event));
 
   unsubscribe = (object: GameObject) => {
     const { length } = this.subscribers;
@@ -48,7 +52,7 @@ export default class KeyboardObservable {
     if (!this.subscribers.length) return;
     this.subscribers.forEach(gameObject => {
       if (event.key === gameObject.key) {
-        gameObject.action();
+        this.eventManager.registerEvent(gameObject.event);
       }
     });
   };
