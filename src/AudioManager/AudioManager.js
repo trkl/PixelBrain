@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import sounda from './sounds/sfx_wing.wav'
 
 class AudioManager extends React.Component{
     constructor(props) {
         super(props);
+        this.sound = props.sound;
         this.playSound = this.playSound.bind(this);
       }
 
-      playSound(sound) 
+      playSound() 
       {
-        console.log(sound)
-        var audio = new Audio(sounda);
+        console.log(this.sound)
+        var audio = new Audio(this.sound);
         audio.play();
         console.log(audio)
         console.log(this.sounds)

@@ -50,7 +50,6 @@ class App extends Component {
   render() {
     return (
       <KeyboardObservableProvider>
-
         <ResourceManagerProvider>
           <Background imagesource={"GrassForeground.png"} speed={-1} zindex={1} />
           <Background imagesource={"kalsoy.png"} speed={-0.2} zindex={-1} />
