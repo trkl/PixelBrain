@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Bird from './Objects/Bird/Bird';
 import PipesManager from './Objects/Pipe/PipeManager'
-import KeyboardObservableProvider from './InputManager/Context/KeyboardObservableContextProvider'
+import KeyboardObservableContextProvider from './InputManager/Context/KeyboardObservableContextProvider'
 import ResourceManagerContextProvider from './Resource Manager/ResourceManagerContextProvider'
 import Background from './Background.js'
 
@@ -50,12 +50,12 @@ class App extends Component {
           <Background imagesource={"Background.png"} speed={-0.2} zindex={-3} />
 
 
-          <KeyboardObservableProvider>
+          <KeyboardObservableContextProvider>
             <div className="frame"  >
               <Bird />
               <PipesManager />
             </div>
-          </KeyboardObservableProvider>
+          </KeyboardObservableContextProvider>
         </ResourceManagerContextProvider>
       </>
     );
