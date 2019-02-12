@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import birdImage from '../../Images/bird.png'
+import WithResources from '../../Resource Manager/HOC/WithResources'
 
 class Sprite extends Component {
     constructor(props) {
@@ -8,10 +8,11 @@ class Sprite extends Component {
         render() {
             return (
                 <div style={{width: this.props.hitBox.width}}>
-                    <img src={birdImage} style={{width: "100%"}}/>
+                    <img src={this.props.resourceManager.getImage("bird.png")} style={{width: "100%"}}/>
                 </div>
             )
         }
     }
 
-    export default Sprite;
+    export default WithResources(Sprite);
+

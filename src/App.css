@@ -1,5 +1,4 @@
 
-
 .frame {
   height: 100vh;
   width: 100vw;
@@ -7,22 +6,4 @@
   content: initial;
 }
 
-.bird {
-  -webkit-transition-duration: 1s;
-  -moz-transition-duration: 1s;
-  -o-transition-duration: 1s;
-  transition-duration: 1s;
-    -webkit-transition-property: -webkit-transform;
-    -moz-transition-property: -moz-transform;
-    -o-transition-property: -o-transform;
-    transition-property: transform;
-  
-}
-
-.bird:hover {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-
-}
 
