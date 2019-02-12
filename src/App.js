@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Bird from './Objects/Bird/Bird';
 import PipesManager from './Objects/Pipe/PipeManager'
-import KeyboardObservableProvider from './InputManager/Context/KeyboardObservableContextProvider'
-import ResourceManagerProvider from './Resource Manager/ResourceManagerContextProvider'
+import KeyboardObservableContextProvider from './InputManager/Context/KeyboardObservableContextProvider'
+import ResourceManagerContextProvider from './Resource Manager/ResourceManagerContextProvider'
 import Background from './Background.js'
 import ObstacleFactory from './Objects/Pipe/ObstacleFactory';
 
@@ -46,21 +46,21 @@ class App extends Component {
   render() {
     return (
       <>
-        <ResourceManagerProvider>
+        <ResourceManagerContextProvider>
           <Background imagesource={"GrassForeground.png"} speed={-1} zindex={1} />
           <Background imagesource={"kalsoy.png"} speed={-0.2} zindex={-1} />
           <Background imagesource={"Clouds.png"} speed={-0.6} zindex={-2} />
           <Background imagesource={"Background.png"} speed={-0.2} zindex={-3} />
 
 
-          <KeyboardObservableProvider>
+          <KeyboardObservableContextProvider>
             <div className="frame"  >
               <Bird />
               <ObstacleFactory></ObstacleFactory>
               {/* <PipesManager /> */}
             </div>
-          </KeyboardObservableProvider>
-        </ResourceManagerProvider>
+          </KeyboardObservableContextProvider>
+        </ResourceManagerContextProvider>
       </>
     );
   }
