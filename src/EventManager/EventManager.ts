@@ -15,7 +15,7 @@ export default class EventManager {
     physicsEngine: PhysicsEngine,
     collisionManager: CollisionManger // // audioManager: AudioManager
   ) {
-    this.timer = new Timer(1 / 15);
+    this.timer = new Timer(1000); //1 / 15);
     this.timer.subscribe(this.handleTick);
     this.physicsEngine = physicsEngine;
     this.collisionManager = collisionManager;
@@ -26,11 +26,12 @@ export default class EventManager {
     this.eventQueue.push(event);
   };
 
-  handleTick = () => {
+  handleTick = (time: number) => {
     let event;
+
     while ((event = this.eventQueue.pop())) {
       const { callback, physics, sound, gameObject } = event;
-      // this.physicsEngine.processGameObject(gameObject, event);
+      this.physicsEngine.processGameObject(gameObject, event, time);
       callback();
       //  this.collisionManager.processGameObject(
       //    gameObject

@@ -19,11 +19,15 @@ class PhysicsEngine {
     ]);
     this.acceleration(gameObject, totalForce);
   }
-  processGameObject(gameObject, { forces, duration }) {
+  processGameObject(gameObject, { end, forces, duration }, dt) {
+    console.log(gameObject);
+    if (end) {
+      gameObject.forces.vector = [];
+    }
     if (duration == null) {
       console.log("waiting for endEvent");
-      return;
     }
+    console.log(dt);
   }
 }
 

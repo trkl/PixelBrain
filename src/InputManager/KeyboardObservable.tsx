@@ -29,6 +29,7 @@ export default class KeyboardObservable {
     );
     this.subscribers = [];
     document.addEventListener("keydown", this.onNext, false);
+    document.addEventListener("keyup", this.endEvent, false);
   }
 
   // "key" is the letter of the key on the keyboard to listen for
@@ -53,10 +54,23 @@ export default class KeyboardObservable {
   // init = () =>
   //   console.log('document.addEventListener("keydown", this.onNext, false)');
 
-  onNext = (event: KeyboardEvent) => {
+  endEvent = (event: KeyboardEvent) => {
+    console.log("end");
     if (!this.subscribers.length) return;
     this.subscribers.forEach(gameObject => {
       if (event.key === gameObject.key) {
+        this.eventManager.registerEvent({ ...gameObject.event, end: true });
+        console.log(gameObject);
+      }
+    });
+  };
+
+  onNext = (event: KeyboardEvent) => {
+    console.log("begin");
+    if (!this.subscribers.length) return;
+    this.subscribers.forEach(gameObject => {
+      if (event.key === gameObject.key) {
+        console.log(gameObject);
         this.eventManager.registerEvent(gameObject.event);
       }
     });
