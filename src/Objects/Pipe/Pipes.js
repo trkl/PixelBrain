@@ -10,6 +10,11 @@ class Pipes extends GameObject {
 
         this.hitBox.width = 50;
     }
+
+    componentWillUpdate() {
+
+    }
+
     render() {
         return (
             <div className="pipesDiv" style={{position:"absolute", top: this.props.top, left: this.props.left}} >

@@ -5,6 +5,7 @@ import PipesManager from './Objects/Pipe/PipeManager'
 import KeyboardObservableProvider from './InputManager/Context/KeyboardObservableContextProvider'
 import ResourceManagerProvider from './Resource Manager/ResourceManagerContextProvider'
 import Background from './Background.js'
+import ObstacleFactory from './Objects/Pipe/ObstacleFactory';
 
 class App extends Component {
   constructor(props) {
@@ -16,9 +17,10 @@ class App extends Component {
     this.clock = Date.now() * 0.001;
 
     var bird = new Bird();
-    var pipes = new PipesManager();
+    //var pipes = new PipesManager();
 
-    this.state = { bird: bird, pipes: pipes };
+    this.state = { bird: bird};
+    //, pipes: pipes 
   }
 
   componentDidMount() {
@@ -31,7 +33,8 @@ class App extends Component {
 
       this.timer = 0; // timer 0
 
-      this.setState({ bird: this.state.bird, pipes: this.state.pipes });
+      this.setState({ bird: this.state.bird });
+      //, pipes: this.state.pipes
     }
 
     this.clock = Date.now() * 0.001 // prev time
@@ -53,7 +56,8 @@ class App extends Component {
           <KeyboardObservableProvider>
             <div className="frame"  >
               <Bird />
-              <PipesManager />
+              <ObstacleFactory></ObstacleFactory>
+              {/* <PipesManager /> */}
             </div>
           </KeyboardObservableProvider>
         </ResourceManagerProvider>
