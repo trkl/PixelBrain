@@ -1,20 +1,25 @@
 export default class Timer {
   constructor(interval = 1000) {
+    this.now = require("performance-now");
     this.interval = interval; // ms
-    this.expected = Date.now() + this.interval;
     this.callbacks = [];
 
-    setTimeout(this.step, this.interval);
+    this.time = this.now();
+
+    this.step();
   }
 
+  //subscriba til gameLoop
   subscribe = callback => this.callbacks.push(callback);
 
   step = () => {
-    var dt = Date.now() - this.expected; // the drift (positive for overshooting)
+    const nowTime = this.now();
+    const dt = nowTime - this.time;
     if (dt > this.interval) {
+      this.callbacks.forEach(val => val(dt));
+      this.time = nowTime;
     }
-    this.callbacks.forEach(val => val());
-    this.expected += this.interval;
-    setTimeout(this.step, Math.max(0, this.interval - dt)); // take into account drift
+
+    requestAnimationFrame(this.step);
   };
 }

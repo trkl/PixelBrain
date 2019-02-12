@@ -9,16 +9,9 @@ class AudioManager extends React.Component{
         this.resourceManager = new resourceManager();
       }
 
-<<<<<<< HEAD
-      playSound(sound) 
-      {
-        console.log(sound)
-        var audio = new Audio(sound);
-=======
       playSound(sound) {
         var audio = new Audio(this.resourceManager.getAudioPath(sound));
         // var audio = new Audio(this.props.resourceManager.getAudioPath(sound));
->>>>>>> 767b5c90e902d5d662d079ac72b8cbd7ed4621e3
         audio.play();
       }
     }
