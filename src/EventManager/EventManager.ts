@@ -15,8 +15,7 @@ export default class EventManager {
     physicsEngine: PhysicsEngine,
     collisionManager: CollisionManger, // // audioManager: AudioManager
     audioManager: AudioManager
-  ) {
-    console.log("shitty")
+    ) {
     this.timer = new Timer(1 / 15);
     this.timer.subscribe(this.handleTick);
     this.physicsEngine = physicsEngine;

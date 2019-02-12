@@ -15,3 +15,4 @@ class Sprite extends Component {
     }
 
     export default WithResources(Sprite);
+
