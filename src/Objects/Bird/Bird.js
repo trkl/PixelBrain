@@ -2,11 +2,6 @@ import React from 'react'
 import Sprite from './Sprite'
 import GameObject from '../../GameObject/GameObjectBase/GameObject';
 import WithKeyboardSubscribe from '../../InputManager/HOC/WithKeyboardSubscribe'
-<<<<<<< HEAD
-import AudioManager from '../../AudioManager/AudioManager'
-import Sound from '../../AudioManager/sounds/sfx_die.wav';
-=======
->>>>>>> 767b5c90e902d5d662d079ac72b8cbd7ed4621e3
 
 class Bird extends GameObject {
     constructor(props) {
@@ -37,12 +32,7 @@ class Bird extends GameObject {
     }
 
     jump = () => {
-<<<<<<< HEAD
-        this.position.y -= 30;
-        this.am.playSound(Sound);  
-=======
         this.position.y -= 30; 
->>>>>>> 767b5c90e902d5d662d079ac72b8cbd7ed4621e3
     }
 
     render() {

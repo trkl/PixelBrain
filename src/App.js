@@ -3,7 +3,7 @@ import './App.css';
 import Bird from './Objects/Bird/Bird';
 import PipesManager from './Objects/Pipe/PipeManager'
 import KeyboardObservableProvider from './InputManager/Context/KeyboardObservableContextProvider'
-import ResourceManagerProvider from './Resource Manager/ResourceManagerContextProvider'
+import ResourceManagerContextProvider from './Resource Manager/ResourceManagerContextProvider'
 import Background from './Background.js'
 
 class App extends Component {
@@ -43,7 +43,7 @@ class App extends Component {
   render() {
     return (
       <>
-        <ResourceManagerProvider>
+        <ResourceManagerContextProvider>
           <Background imagesource={"GrassForeground.png"} speed={-1} zindex={1} />
           <Background imagesource={"kalsoy.png"} speed={-0.2} zindex={-1} />
           <Background imagesource={"Clouds.png"} speed={-0.6} zindex={-2} />
@@ -56,7 +56,7 @@ class App extends Component {
               <PipesManager />
             </div>
           </KeyboardObservableProvider>
-        </ResourceManagerProvider>
+        </ResourceManagerContextProvider>
       </>
     );
   }
