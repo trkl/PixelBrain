@@ -2,7 +2,7 @@ import ResourceManagerContext from "./ResourceManagerContext";
 import React from "react";
 import ResourceManager from "./Resource Manager";
 
-export default class ResourceManagerProvider extends React.Component {
+export default class ResourceManagerContextProvider extends React.Component {
   ResourceManager;
   constructor() {
     super();
