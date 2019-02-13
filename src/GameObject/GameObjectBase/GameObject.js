@@ -18,4 +18,9 @@ export default class GameObject extends Component {
     height: null,
     width: null
   };
+
+  shouldComponentUpdate = (props, nextState) =>
+    this.state.position.vector.every(
+      (val, idx) => nextState.position.vector[idx] === val
+    );
 }

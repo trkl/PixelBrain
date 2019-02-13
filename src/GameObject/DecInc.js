@@ -8,9 +8,9 @@ export class DecInc extends GameObject {
   componentWillMount() {}
 
   componentDidMount() {
-    this.props.keyboardSubscribe(this, " ", {
-      callback: () => console.log("millumrúm var sligið")
-    });
+    // this.props.keyboardSubscribe(this, " ", {
+    //   callback: () => console.log("millumrúm var sligið")
+    // });
   }
 
   render = () => {

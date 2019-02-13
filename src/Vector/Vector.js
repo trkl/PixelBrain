@@ -15,4 +15,17 @@ export default class Vector {
   set y(val) {
     this.vector[1] = val;
   }
+
+  plus = ({ vector }) =>
+    new Vector(this.vector.map((val, idx) => val + vector[idx]));
+
+  minus = ({ vector }) =>
+    new Vector(this.vector.map((val, idx) => val - vector[idx]));
+
+  // OBS!: returns number not vector
+  dot = ({ vector }) =>
+    this.vector
+      .map((val, idx) => val * vector[idx])
+      .reduce((prev, curr) => prev + curr, 0);
+  multiply = scaler => new Vector(this.vector.map(val => val * scaler));
 }
