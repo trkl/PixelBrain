@@ -11,7 +11,7 @@ class PipeUp extends Component {
     render() {
         return (
             <div className="PipeUp">
-                <img className="pipeupimg" src={this.rm.getImage("pipeUp.png")} style={{height: this.props.down + "vh", width: "50px"}}/>
+                <img className="pipeupimg" src={this.rm.getImage("pipeUp.png")} style={{transition: "left 100ms linear", height: this.props.down + "vh", width: "50px"}}/>
             </div>
         )
     }

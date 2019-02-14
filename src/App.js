@@ -45,7 +45,7 @@ class App extends Component {
 
   render() {
     return (
-      <>
+      <div className="frame" styles={{overflow: "hidden"}}>
         <ResourceManagerContextProvider>
           <Background imagesource={"GrassForeground.png"} speed={-1} zindex={1} />
           <Background imagesource={"kalsoy.png"} speed={-0.2} zindex={-1} />
@@ -54,14 +54,13 @@ class App extends Component {
 
 
           <KeyboardObservableContextProvider>
-            <div className="frame"  >
+            <div className="frame" style={{overflow: "hidden"}} >
               <Bird />
-              <ObstacleFactory></ObstacleFactory>
-              {/* <PipesManager /> */}
+              <PipesManager />
             </div>
           </KeyboardObservableContextProvider>
         </ResourceManagerContextProvider>
-      </>
+      </div>
     );
   }
 }

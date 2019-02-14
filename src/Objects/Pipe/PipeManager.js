@@ -7,11 +7,11 @@ class PipesManager extends Component {
         super(props)
         this.counter = 0;
         var pipes = [
-            { top: 0, left: ((window.innerWidth/5)*0.8) -4, up: 15, down: 65 },
-            { top: 0, left: ((window.innerWidth/5)*1.8)   , up: 25, down: 55 },
-            { top: 0, left: ((window.innerWidth/5)*2.8)   , up: 35, down: 45 },
-            { top: 0, left: ((window.innerWidth/5)*3.8)   , up: 45, down: 35 },
-            { top: 0, left: ((window.innerWidth/5)*4.8)   , up: 55, down: 25 }
+            { top: 0, left: ((window.innerWidth/5)*4), up: 15, down: 65 },
+            { top: 0, left: ((window.innerWidth/5)*5), up: 25, down: 55 },
+            { top: 0, left: ((window.innerWidth/5)*6), up: 35, down: 45 },
+            { top: 0, left: ((window.innerWidth/5)*7), up: 45, down: 35 },
+            { top: 0, left: ((window.innerWidth/5)*8), up: 55, down: 25 }
         ]
         this.state = { pipes: pipes }
     }
@@ -37,7 +37,7 @@ class PipesManager extends Component {
 
     render() {
         return (
-            <div >
+            <div style={{overflow: "hidden", width:"400px", height:"400px"}} >
                 <Pipes top={this.state.pipes[0].top} left={this.state.pipes[0].left} up={this.state.pipes[0].up}  down={this.state.pipes[0].down} />
                 <Pipes top={this.state.pipes[1].top} left={this.state.pipes[1].left} up={this.state.pipes[1].up}  down={this.state.pipes[1].down}/>
                 <Pipes top={this.state.pipes[2].top} left={this.state.pipes[2].left} up={this.state.pipes[2].up}  down={this.state.pipes[2].down} />

@@ -31,14 +31,14 @@ class Bird extends GameObject {
     }
 
     jump = () => {
-        this.position.y -= 50; 
+        this.position.y -= 100; 
     }
 
     
 
     render() {
         return (
-            <div style={{ transition: "top 60ms linear ", position:"absolute", top: this.position.y, left: this.position.x} }>
+            <div style={{ transition: "top 100ms linear", position:"absolute", top: this.position.y, left: this.position.x} }>
                 <Sprite hitBox={this.hitBox} />
            </div>
         )
