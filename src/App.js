@@ -6,6 +6,7 @@ import KeyboardObservableContextProvider from './InputManager/Context/KeyboardOb
 import ResourceManagerContextProvider from './Resource Manager/ResourceManagerContextProvider'
 import Background from './Background.js'
 import ObstacleFactory from './Objects/Pipe/ObstacleFactory';
+import Sprite from './Sprite/Sprite'
 
 class App extends Component {
   constructor(props) {
@@ -50,14 +51,13 @@ class App extends Component {
           <Background imagesource={"GrassForeground.png"} speed={-1} zindex={1} />
           <Background imagesource={"kalsoy.png"} speed={-0.2} zindex={-1} />
           <Background imagesource={"Clouds.png"} speed={-0.6} zindex={-2} />
-          <Background imagesource={"Background.png"} speed={-0.2} zindex={-3} />
-
-
+          <Background imagesource={"Background.png"} speed={-0.2} zindex={-3} /> 
+          <Sprite imagesource={"Puffin1.svg"} />
+        
           <KeyboardObservableContextProvider>
             <div className="frame"  >
-              <Bird />
-              <ObstacleFactory></ObstacleFactory>
-              {/* <PipesManager /> */}
+               <Bird />
+               <PipesManager />
             </div>
           </KeyboardObservableContextProvider>
         </ResourceManagerContextProvider>
