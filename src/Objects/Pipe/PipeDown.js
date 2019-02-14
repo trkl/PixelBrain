@@ -12,7 +12,7 @@ class PipeDown extends Component {
     render() {
         return (
             <div className="PipeDown">
-                <img className="pipedownimg" src={this.rm.getImage("pipeDown.png")} style={{height: this.props.up + "vh"  }}  />         
+                <img className="pipedownimg" src={this.rm.getImage("pipeDown.png")} style={{height: this.props.up + "vh", width: "50px"}}  />         
            </div>
         )
     }

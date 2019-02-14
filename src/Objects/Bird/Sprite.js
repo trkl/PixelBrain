@@ -8,7 +8,8 @@ class Sprite extends Component {
         render() {
             return (
                 <div style={{width: this.props.hitBox.width}}>
-                    <img src={this.props.resourceManager.getImage("bird.png")} style={{width: "100%"}}/>
+                    <img src={this.props.resourceManager.getImage("bird.png")} style={{  transition: "transform 500ms ease-in-out",
+width: "100%"}}/>
                 </div>
             )
         }

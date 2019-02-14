@@ -11,7 +11,7 @@ class Bird extends GameObject {
         this.hitBox.height = 40;
 
         this.position.y = 200;
-        this.position.x = 300;
+        this.position.x = 300;       
     }
 
     componentDidMount() {
@@ -24,20 +24,21 @@ class Bird extends GameObject {
 
     fall = () => {
         if (this.position.y > 550) {
-
             this.position.y = 300;
-          } else {
-            this.position.y += 5.5
-          }
+        } else {
+            this.position.y += 10.5
+        }
     }
 
     jump = () => {
-        this.position.y -= 30; 
+        this.position.y -= 50; 
     }
+
+    
 
     render() {
         return (
-            <div style={{position:"absolute", top: this.position.y, left: this.position.x} }>
+            <div style={{ transition: "top 60ms linear ", position:"absolute", top: this.position.y, left: this.position.x} }>
                 <Sprite hitBox={this.hitBox} />
            </div>
         )

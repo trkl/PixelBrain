@@ -15,6 +15,7 @@ class PipesManager extends Component {
         ]
         this.state = { pipes: pipes }
     }
+    
 
     componentDidUpdate() {
         this.move();
