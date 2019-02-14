@@ -52,8 +52,7 @@ class App extends Component {
           <Background imagesource={"kalsoy.png"} speed={-0.2} zindex={-1} />
           <Background imagesource={"Clouds.png"} speed={-0.6} zindex={-2} />
           <Background imagesource={"Background.png"} speed={-0.2} zindex={-3} /> 
-          <Sprite imagesource={"PuffinSprite.png"} />
-        
+          
           <KeyboardObservableContextProvider>
             <div className="frame"  >
                <Bird />
