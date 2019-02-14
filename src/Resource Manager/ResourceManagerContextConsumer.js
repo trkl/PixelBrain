@@ -3,7 +3,7 @@ import React from "react";
 
 const ResourceManagerContextConsumer = props => (
   <ResourceManagerContext.Consumer>
-    {resourcecemanager => props.children(resourcecemanager)}
+    {resourcemanager => props.children(resourcemanager)}
   </ResourceManagerContext.Consumer>
 );
 export default ResourceManagerContextConsumer;
