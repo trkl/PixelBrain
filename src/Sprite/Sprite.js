@@ -8,13 +8,12 @@ class Sprite extends React.Component {
         this.state = {
             frameWidth: '50px',
             frameHeight: '50px',
-            styleSprite:{width: 190,
-                height: 240,
-                background: "url(" + (this.props.resourceManager.getImage(this.props.imagesource)) + ") left center"
+            styleSprite:{width: 500,
+                height: 583 ,
+                background: "url(" + (this.props.resourceManager.getImage(this.props.imagesource)) + ") left center",
             }
         }
-        
-
+    
     }
     render() {
         return (
