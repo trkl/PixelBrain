@@ -23,7 +23,7 @@ class Bird extends GameObject {
     }
 
     fall = () => {
-        if (this.position.y > 550) {
+        if (this.position.y > window.innerHeight - 100) {
             this.position.y = 300;
         } else {
             this.position.y += 10.5
@@ -31,7 +31,9 @@ class Bird extends GameObject {
     }
 
     jump = () => {
-        this.position.y -= 100; 
+        if(this.position.y > 10) {
+            this.position.y -= 50; 
+        }
     }
 
     

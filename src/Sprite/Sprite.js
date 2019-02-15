@@ -31,9 +31,7 @@ class Sprite extends React.Component {
   render() {
     return (
       <div style={this.state.styleSprite}>
-        <style>{`@keyframes play {
-    100% { background-position: ${-this.state.width * this.state.n}px; }
- }`}</style>
+        <style>{`@keyframes play {100% { background-position: ${-this.state.width * this.state.n}px; }}`}</style>
       </div>
     );
   }
