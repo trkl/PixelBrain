@@ -15,7 +15,7 @@ class Bird extends GameObject {
     }
 
     componentDidMount() {
-        this.props.keyboardSubscribe(this, " ", {callback:this.jump, audio: {soundTrack: "sfx_wing.wav"}});
+        this.props.keyboardSubscribe(this, " ", {gameObject: this, callback:this.jump, physics:{forces: [100,200]} ,audio: {soundTrack: "sfx_wing.wav"}});
     }
 
     componentWillUpdate() {

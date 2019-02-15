@@ -30,14 +30,12 @@ export default class EventManager {
   handleTick = () => {
     let event;
     while ((event = this.eventQueue.pop())) {
-      console.log(event)
       const { callback, physics, audio, gameObject } = event;
-      // this.physicsEngine.processGameObject(gameObject, event);
+      this.physicsEngine.processGameObject(gameObject, event);
       callback();
       //  this.collisionManager.processGameObject(
       //    gameObject
       //  );
-      console.log(audio.soundTrack)
       this.audioManager.playSound(audio.soundTrack);
     }
   };

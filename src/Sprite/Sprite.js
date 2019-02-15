@@ -1,7 +1,5 @@
 import React from "react";
 import WithResources from "../Resource Manager/HOC/WithResources";
-import "./SpriteAnimation.css";
-import WithKeyboardSubscribe from "../Timer/HOC/WithTimerSubscribe";
 
 class Sprite extends React.Component {
   constructor(props) {
