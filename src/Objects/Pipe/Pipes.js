@@ -13,11 +13,7 @@ class Pipes extends GameObject {
    
     render() {
         return (
-<<<<<<< HEAD
-            <div className="pipesDiv" style={{transition: "left 60ms ease-in-out", position:"absolute", top: 0, left: this.props.left}} >
-=======
             <div className="pipesDiv" style={{transition: "left 100ms linear ", position:"absolute", top: 0, left: this.props.left}} >
->>>>>>> 4ba3c8d8d22019f06b41850d296a60186e26a988
                 <PipeDown up = {this.props.up}/>
                 <PipeUp down = {this.props.down}/>
             </div>

@@ -4,13 +4,10 @@ import Bird from './Objects/Bird/Bird';
 import PipesManager from './Objects/Pipe/PipeManager'
 import KeyboardObservableContextProvider from './InputManager/Context/KeyboardObservableContextProvider'
 import ResourceManagerContextProvider from './Resource Manager/ResourceManagerContextProvider'
-<<<<<<< HEAD
-import Background from './Background.js'
-=======
 import Background from './BackgroundManager/BackgroundManager'
->>>>>>> 4ba3c8d8d22019f06b41850d296a60186e26a988
 import ObstacleFactory from './Objects/Pipe/ObstacleFactory';
-import Sprite from './Sprite/Sprite'
+import Sprite from './Sprite/Sprite' 
+import HUD from './HUD/HUDManager'
 
 class App extends Component {
   constructor(props) {
@@ -52,6 +49,7 @@ class App extends Component {
     return (
       <div className="frame" styles={{overflow: "hidden"}}>
         <ResourceManagerContextProvider>
+          <HUD zindex={1}/>
           <Background imagesource={"GrassForeground.png"} speed={-1} zindex={1} />
           <Background imagesource={"kalsoy.png"} speed={-0.2} zindex={-1} />
           <Background imagesource={"Clouds.png"} speed={-0.6} zindex={-2} />

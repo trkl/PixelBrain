@@ -10,10 +10,7 @@ class VectorUtilities {
     method = VectorUtilities.addVectors,
     initial: number[] = [0, 0]
   ) {
-<<<<<<< HEAD
-=======
     console.log(arr)
->>>>>>> 4ba3c8d8d22019f06b41850d296a60186e26a988
     if (!arr || arr.length === 0) return [0, 0];
     let vector;
 
