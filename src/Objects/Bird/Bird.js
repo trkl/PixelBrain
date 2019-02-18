@@ -41,7 +41,7 @@ class Bird extends GameObject {
     render() {
         return (
             <div style={{ transition: "top 100ms linear", position:"absolute", top: this.position.y, left: this.position.x} }>
-               <Sprite width={1584} height={583} n={3} scale={.1} imagesource={"PuffinSprite.png"} />
+               <Sprite width={1584} height={583} n={3} scale={.1} imagesource={"puffinpixel.png"} />
            </div>
         )
     }

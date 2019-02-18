@@ -1,7 +1,10 @@
 import React from 'react'
 import './HUDManager.css'
+<<<<<<< HEAD
 import {Font} from './pixel.ttf'
 import Menu from './Menu'
+=======
+>>>>>>> 6e9d1bed52706327bff1dd9492df079f8a7c4682
 
 class HUDManager extends React.Component{
     constructor(props){
@@ -16,8 +19,8 @@ class HUDManager extends React.Component{
                 zIndex: props.zindex,
                 position: "absolute",
                 top: "30px",
-                fontFamily: Font,
-                fontSize: "50px",
+                fontFamily: 'Pixel',
+                fontSize: "100px",
                 textAlign: "center",
                 color: "#FFF",
                 width: "100%"
