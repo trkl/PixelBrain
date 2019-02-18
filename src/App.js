@@ -4,11 +4,7 @@ import Bird from './Objects/Bird/Bird';
 import PipesManager from './Objects/Pipe/PipeManager'
 import KeyboardObservableContextProvider from './InputManager/Context/KeyboardObservableContextProvider'
 import ResourceManagerContextProvider from './Resource Manager/ResourceManagerContextProvider'
-<<<<<<< HEAD
-import Background from './Background.js'
-=======
 import Background from './BackgroundManager/BackgroundManager'
->>>>>>> 4ba3c8d8d22019f06b41850d296a60186e26a988
 import ObstacleFactory from './Objects/Pipe/ObstacleFactory';
 import Sprite from './Sprite/Sprite'
 
