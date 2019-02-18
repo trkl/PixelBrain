@@ -17,7 +17,6 @@ class StartMenu extends React.Component{
             </div>
         )
     }
-
 }
 
 export default StartMenu

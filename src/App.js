@@ -4,10 +4,10 @@ import Bird from './Objects/Bird/Bird';
 import PipesManager from './Objects/Pipe/PipeManager'
 import KeyboardObservableContextProvider from './InputManager/Context/KeyboardObservableContextProvider'
 import ResourceManagerContextProvider from './Resource Manager/ResourceManagerContextProvider'
-import Background from './BackgroundManager/BackgroundManager'
+import BackgroundManager from './BackgroundManager/BackgroundManager'
 import ObstacleFactory from './Objects/Pipe/ObstacleFactory';
 import Sprite from './Sprite/Sprite' 
-import HUD from './HUD/HUDManager'
+import HUDManager from './HUD/HUDManager'
 
 class App extends Component {
   constructor(props) {
@@ -49,11 +49,11 @@ class App extends Component {
     return (
       <div className="frame" styles={{overflow: "hidden"}}>
         <ResourceManagerContextProvider>
-          <HUD zindex={1}/>
-          <Background imagesource={"GrassForeground.png"} speed={-1} zindex={1} />
-          <Background imagesource={"kalsoy.png"} speed={-0.2} zindex={-1} />
-          <Background imagesource={"Clouds.png"} speed={-0.6} zindex={-2} />
-          <Background imagesource={"Background.png"} speed={-0.2} zindex={-3} /> 
+          <HUDManager zindex={1}/>
+          <BackgroundManager imagesource={"GrassForeground.png"} speed={-1} zindex={1} />
+          <BackgroundManager imagesource={"kalsoy.png"} speed={-0.2} zindex={-1} />
+          <BackgroundManager imagesource={"Clouds.png"} speed={-0.6} zindex={-2} />
+          <BackgroundManager imagesource={"Background.png"} speed={-0.2} zindex={-3} /> 
           
           <KeyboardObservableContextProvider>
             <div className="frame"  >
