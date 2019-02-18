@@ -1,6 +1,5 @@
 import React from 'react'
 import './HUDManager.css'
-import {Font} from './pixel.ttf'
 
 class HUDManager extends React.Component{
     constructor(props){
@@ -14,8 +13,8 @@ class HUDManager extends React.Component{
                 zIndex: props.zindex,
                 position: "absolute",
                 top: "30px",
-                fontFamily: Font,
-                fontSize: "50px",
+                fontFamily: 'Pixel',
+                fontSize: "100px",
                 textAlign: "center",
                 color: "#FFF",
                 width: "100%"
