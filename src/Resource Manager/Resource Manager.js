@@ -21,12 +21,7 @@ class ResourceManager {
     );
     this.audio = audio;
   }
-  getImagePaths = async index => {
-    if (this.GameInstance === "Flappy Bird") {
-      return import(this.imagesPuffin[index]);
-    } 
-  };
-
+ 
   getImage = name => {
     return this.images[name];
   };
