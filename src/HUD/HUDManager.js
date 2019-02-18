@@ -1,6 +1,7 @@
 import React from 'react'
 import './HUDManager.css'
 import {Font} from './pixel.ttf'
+import Menu from './Menu'
 
 class HUDManager extends React.Component{
     constructor(props){
@@ -8,7 +9,8 @@ class HUDManager extends React.Component{
 
         this.state = {
             score: 0,
-            playing: false,
+            isPlaying: false,
+            isDead: true,
             zIndex: props.zIndex,
             styleScore: {
                 zIndex: props.zindex,
@@ -38,9 +40,11 @@ class HUDManager extends React.Component{
     }
 
     render(){
+
+      
         return(
             <div>
-                
+                <Menu isPlaying={this.state.isPlaying} isDead={this.state.isDead} score={this.state.score}/>
                 <h2 style={this.state.styleScore}>{this.state.score}</h2>
             </div>
             
