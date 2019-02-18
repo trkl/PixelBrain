@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import WithResources from './Resource Manager/HOC/WithResources'
-class Background extends Component {
+import WithResources from '../Resource Manager/HOC/WithResources'
+class BackgroundManager extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -43,4 +43,4 @@ class Background extends Component {
 
     }
 }
-export default WithResources(Background);
+export default WithResources(BackgroundManager);
