@@ -49,7 +49,7 @@ class App extends Component {
     return (
       <div className="frame" styles={{overflow: "hidden"}}>
         <ResourceManagerContextProvider>
-          <HUD zindex={1}/>
+          <HUD font= "pixel.ttf" fontFamily="Pixel" textAlign="center" position="absolute" top="30px"/>
           <Background imagesource={"GrassForeground.png"} speed={-1} zindex={1} />
           <Background imagesource={"kalsoy.png"} speed={-0.2} zindex={-1} />
           <Background imagesource={"Clouds.png"} speed={-0.6} zindex={-2} />
