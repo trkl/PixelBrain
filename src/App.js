@@ -5,23 +5,19 @@ import PipesManager from './Objects/Pipe/PipeManager'
 import KeyboardObservableContextProvider from './InputManager/Context/KeyboardObservableContextProvider'
 import ResourceManagerContextProvider from './Resource Manager/ResourceManagerContextProvider'
 import Background from './BackgroundManager/BackgroundManager'
-import ObstacleFactory from './Objects/Pipe/ObstacleFactory';
-import Sprite from './Sprite/Sprite'
-
 class App extends Component {
   constructor(props) {
     super(props)
-
 
     this.tick = this.tick.bind(this);
     this.timer = 0;
     this.clock = Date.now() * 0.001;
 
     var bird = new Bird();
-    //var pipes = new PipesManager();
+    var pipes = new PipesManager();
 
-    this.state = { bird: bird};
-    //, pipes: pipes 
+    this.state = { bird: bird, pipes: pipes };
+
   }
 
   componentDidMount() {
@@ -31,11 +27,8 @@ class App extends Component {
   tick() {
     this.timer += (Date.now() * 0.001) - this.clock; // delta time = current - prev
     if (this.timer > 1.0 / 15) {
-
       this.timer = 0; // timer 0
-
-      this.setState({ bird: this.state.bird });
-      //, pipes: this.state.pipes
+      this.setState({ bird: this.state.bird, pipes: this.state.pipes });
     }
 
     this.clock = Date.now() * 0.001 // prev time
