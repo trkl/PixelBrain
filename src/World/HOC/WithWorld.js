@@ -4,7 +4,7 @@ import WorldContextConsumer from "./../Context/WorldContextConsumer";
 const WithWorld = WrappedComponent => props => (
   <WorldContextConsumer>
     {world => (
-      <WrappedComponent {...props} World={world}>
+      <WrappedComponent {...props} world={world}>
         {props.children}
       </WrappedComponent>
     )}

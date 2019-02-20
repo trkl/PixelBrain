@@ -4,39 +4,46 @@ import CollisionManger from "../CollisionManager/CollisionManager";
 import Timer from "../Timer/Timer";
 
 export default class EventManager {
-  eventQueue: any = [];
+  eventQueue: Event[] = [];
   physicsEngine: PhysicsEngine;
   collisionManager: CollisionManger;
-  timer: Timer;
+
+  private static _instance: undefined | EventManager = undefined;
+  public static get instance() {
+    if (EventManager._instance === undefined) {
+      EventManager._instance = new EventManager();
+    }
+    return EventManager._instance;
+  }
 
   // // audioManager: AudioManager;
 
-  constructor(
-    physicsEngine: PhysicsEngine,
-    collisionManager: CollisionManger // // audioManager: AudioManager
+  private constructor(
+    physicsEngine = PhysicsEngine.instance,
+    collisionManager = new CollisionManger() // // audioManager: AudioManager
   ) {
-    this.timer = new Timer(1000); //1 / 15);
-    this.timer.subscribe(this.handleTick);
+    Timer.instance.subscribe(this.handleTick);
     this.physicsEngine = physicsEngine;
     this.collisionManager = collisionManager;
-    // // this.audioManager = audioManager;
+    // this.audioManager = audioManager;
   }
 
-  registerEvent = (event: any) => {
+  public registerEvent = (event: Event) => {
     this.eventQueue.push(event);
   };
 
-  handleTick = (time: number) => {
-    let event;
+  handleTick = async (time: number) => {
+    // copy elements for processing and delete queue, so dublicate processing is less likely to occur
+    const eventQueue = [...this.eventQueue];
+    this.eventQueue = [];
+    const { length } = eventQueue;
+    for (let i = 0; i < length; ++i) {
+      const event = eventQueue[i];
 
-    while ((event = this.eventQueue.pop())) {
-      const { callback, physics, sound, gameObject } = event;
-      this.physicsEngine.processGameObject(gameObject, event, time);
-      callback();
-      //  this.collisionManager.processGameObject(
-      //    gameObject
-      //  );
-      // this.audioManager.playSound(sound);
+      this.physicsEngine.processGameObject(event, time);
+
+      const { callback } = event;
+      if (callback) callback();
     }
   };
 }

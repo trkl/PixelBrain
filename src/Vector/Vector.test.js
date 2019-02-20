@@ -47,6 +47,10 @@ describe("Vector", () => {
     expect(vector.multiply(scale).vector).toEqual([2, 4]);
   });
 
+  it("dividing vectors", () => {
+    expect(vector.divide(2).vector).toEqual([1 / 2, 1]);
+  });
+
   it("dot'ing vectors", () => {
     expect(vector.dot(vector1)).toEqual(8);
   });

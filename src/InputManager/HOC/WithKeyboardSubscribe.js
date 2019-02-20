@@ -5,7 +5,7 @@ const WithKeyboardSubscribe = WrappedComponent => props => (
   <KeyboardObservableContextConsumer>
     {subscribe => (
       <WrappedComponent {...props} keyboardSubscribe={subscribe}>
-        {props.children}
+        {props ? props.children : []}
       </WrappedComponent>
     )}
   </KeyboardObservableContextConsumer>

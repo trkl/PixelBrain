@@ -7,12 +7,9 @@ import CollisionManger from "../CollisionManager/CollisionManager";
 // data-structure for subscriber
 class KeyboardSubscriber {
   constructor(object: GameObject, key: string, event: Event) {
-    this.object = object;
     this.key = key;
-    this.event = event;
+    this.event = { ...event, gameObject: object };
   }
-
-  object: GameObject;
   key: string;
   event: Event;
 }
@@ -20,16 +17,11 @@ class KeyboardSubscriber {
 // This class will tie keyboard inputs to their actions
 export default class KeyboardObservable {
   private subscribers: KeyboardSubscriber[];
-  private eventManager: EventManager;
 
   constructor(eventManager: EventManager) {
-    this.eventManager = new EventManager(
-      new PhysicsEngine(),
-      new CollisionManger()
-    );
     this.subscribers = [];
     document.addEventListener("keydown", this.onNext, false);
-    document.addEventListener("keyup", this.endEvent, false);
+    // document.addEventListener("keyup", this.endEvent, false);
   }
 
   // "key" is the letter of the key on the keyboard to listen for
@@ -41,7 +33,7 @@ export default class KeyboardObservable {
     if (length)
       for (let i = 0; i < length; ++i) {
         const subscriber = this.subscribers[i];
-        if (subscriber.object === object) {
+        if (subscriber.event.gameObject === object) {
           this.subscribers.splice(i, 1);
         }
       }
@@ -59,7 +51,7 @@ export default class KeyboardObservable {
     if (!this.subscribers.length) return;
     this.subscribers.forEach(gameObject => {
       if (event.key === gameObject.key) {
-        this.eventManager.registerEvent({ ...gameObject.event, end: true });
+        EventManager.instance.registerEvent({ ...gameObject.event, end: true });
         console.log(gameObject);
       }
     });
@@ -71,8 +63,10 @@ export default class KeyboardObservable {
     this.subscribers.forEach(gameObject => {
       if (event.key === gameObject.key) {
         console.log(gameObject);
-        this.eventManager.registerEvent(gameObject.event);
+        EventManager.instance.registerEvent(gameObject.event);
       }
+
+      // this.eventManager.registerEvent(gameObject.event);
     });
   };
 }
