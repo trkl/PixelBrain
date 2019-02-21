@@ -1,12 +1,12 @@
 import GameObject from "../GameObject/GameObjectBase/GameObject";
 import Vector from "../Vector/Vector";
 
-interface Physics {
+export interface Physics {
   forces: Array<Vector>;
   duration: number;
 }
 
-class Audio {
+export class Audio {
   soundTrack: string = "";
 }
 

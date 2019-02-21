@@ -3,7 +3,7 @@ import { Component } from "react";
 import WithWorld from "../World/HOC/WithWorld";
 import GameObject from "../GameObject/GameObjectBase/GameObject";
 import Vector from "../Vector/Vector";
-import Event from "../Events/Event";
+import Event, { Physics } from "../Events/Event";
 import EventManager from "../EventManager/EventManager";
 
 const Config = {
@@ -45,35 +45,53 @@ class PhysicsEngine {
     //adding gravity
     // physics.
   };
-
-  private totalForce = (event: Event): Vector => {
-    const { gameObject, physics } = event;
+  // current force on object;
+  private objectForce(gameObject: GameObject) {
     let totalForce = new Vector();
     gameObject.forces.forEach(element => {
       totalForce = totalForce.plus(element);
     });
+    return totalForce;
+  }
+
+  // force added by event
+  private eventForce(physics: Physics) {
+    let totalForce = new Vector();
     physics.forces.forEach(element => {
       totalForce = totalForce.plus(element);
     });
-    gameObject.forces = [totalForce];
-    const { duration } = physics;
+    return totalForce;
+  }
 
-    if (duration !== 0) {
-      EventManager.instance.registerEvent({ ...event, end: true });
+  private totalForce = (event: Event): Vector => {
+    if (!event || !event.gameObject) {
+      throw "PhysicsEngine: event or gameObject is undefined or null";
     }
-    return totalForce.plus(this.gravityVector);
+
+    const { gameObject, physics } = event;
+
+    let totalForce = this.objectForce(gameObject);
+
+    if (physics) {
+      totalForce = totalForce.plus(this.eventForce(physics));
+    }
+    console.log(gameObject);
+    event.gameObject.forces = [totalForce];
+    totalForce = totalForce.plus(
+      this.gravityVector.multiply(gameObject.gravity)
+    );
+
+    return totalForce;
   };
 
   public processGameObject(event: Event, deltaTime: number) {
     const { gameObject, physics } = event;
+
     let { velocity, weight, forces, position } = gameObject;
 
-    let sumForce = new Vector();
-    forces.forEach(force => (sumForce = sumForce.plus(force)));
-    sumForce = sumForce.plus(this.gravityVector);
-    console.log("velocity", velocity);
+    const totalForce = this.totalForce(event);
 
-    const velly = sumForce.divide(weight).multiply(deltaTime / 1000);
+    const velly = totalForce.divide(weight).multiply(deltaTime / 1000);
     gameObject.velocity = velocity.plus(velly);
 
     event.gameObject.position = position.plus(
