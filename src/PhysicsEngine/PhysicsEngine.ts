@@ -52,15 +52,17 @@ class PhysicsEngine {
     gameObject.forces.forEach(element => {
       totalForce = totalForce.plus(element);
     });
+    if(physics && physics.forces){
     physics.forces.forEach(element => {
       totalForce = totalForce.plus(element);
     });
-    gameObject.forces = [totalForce];
     const { duration } = physics;
 
     if (duration !== 0) {
       EventManager.instance.registerEvent({ ...event, end: true });
-    }
+    }}
+    gameObject.forces = [totalForce];
+
     return totalForce.plus(this.gravityVector);
   };
 
@@ -68,9 +70,7 @@ class PhysicsEngine {
     const { gameObject, physics } = event;
     let { velocity, weight, forces, position } = gameObject;
 
-    let sumForce = new Vector();
-    forces.forEach(force => (sumForce = sumForce.plus(force)));
-    sumForce = sumForce.plus(this.gravityVector);
+    let sumForce = this.totalForce(event);
     console.log("velocity", velocity);
 
     const velly = sumForce.divide(weight).multiply(deltaTime / 1000);

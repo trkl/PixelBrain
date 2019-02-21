@@ -14,13 +14,13 @@ class World extends React.Component {
     import("../logo.svg").then(url => this.setState({ url: url.default }));
     this.gameObjects = [
       new GameObject({
-        forces: [new Vector([20, 0])],
+        forces: [new Vector([0, 0])],
         weight: 30,
         elementType: DecInc
       })
     ];
     this.props.keyboardSubscribe(this.gameObjects[0], "j", {
-      force: new Vector([-10, -10])
+      force: new Vector([0, 0])
     });
   }
 
