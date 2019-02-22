@@ -1,10 +1,14 @@
 import React from "react";
-import WithResources from "../Resource Manager/HOC/WithResources";
+import WithResources from "../Resource Manager/Resource Manager";
+import image from "../logo.svg"
+import ResourceManager from "../Resource Manager/Resource Manager";
 
 class Sprite extends React.Component {
   constructor(props) {
     super(props);
     let { height, width, n, scale } = this.props;
+
+    this.rm = new ResourceManager();
 
     height = height * scale;
     width = (width / n) * scale;
@@ -18,11 +22,12 @@ class Sprite extends React.Component {
         height: height,
         background:
           "url(" +
-          this.props.resourceManager.getImage(this.props.imagesource) +
+          this.rm.getImage(this.props.imagesource) +
           ") left center",
         backgroundSize: "cover",
         animation: "play 0.3s steps(" + n + ") infinite",
-        backgroundSize: "cover"
+        backgroundSize: "cover",
+        position: "absolute"
       }
     };
   }
@@ -35,4 +40,4 @@ class Sprite extends React.Component {
   }
 }
 
-export default WithResources(Sprite);
+export default Sprite;

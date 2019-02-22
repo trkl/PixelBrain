@@ -6,6 +6,8 @@ import Vector from "../Vector/Vector";
 import WithKeyboardSubscribe from "../InputManager/HOC/WithKeyboardSubscribe";
 import Timer from "../Timer/Timer";
 import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
+import Bird from "../Objects/Bird/Bird";
+import Sprite from "../Sprite/Sprite";
 
 class World extends React.Component {
   constructor(props) {
@@ -18,27 +20,35 @@ class World extends React.Component {
     this.gameObjects = [
       new GameObject({
         force: new Vector([10, 0]),
-        weight: 15,
-        gravity: 1,
-        drag: 0.25,
-        elementType: DecInc,
+        weight: 0,
+        gravity: 0,
+        drag: 0,
+        elementType: Bird,
         cameraFollows: true
-      }),
-      new GameObject({
-        force: new Vector([0, 0]),
-        weight: 20,
-        gravity: 1,
-        elementType: DecInc,
-        drag: 0.5,
-        position: new Vector([30, 0])
-      })
+      // }),
+      // new GameObject({
+      //   force: new Vector([10, 0]),
+      //   weight: 15,
+      //   gravity: 1,
+      //   drag: 0.25,
+      //   elementType: DecInc,
+      //   cameraFollows: true
+      // }),
+      // new GameObject({
+      //   force: new Vector([0, 0]),
+      //   weight: 20,
+      //   gravity: 1,
+      //   elementType: DecInc,
+      //   drag: 0.5,
+      //   position: new Vector([30, 0])
+       })
     ];
   }
 
   ComponentWillUpdate() {}
 
   componentWillMount() {
-    const gameObj = this.gameObjects[1];
+    const gameObj = this.gameObjects[0];
     const { keyboardSubscribe } = this.props;
     keyboardSubscribe(this.gameObjects[0], " ", {
       callback: () => {
@@ -47,16 +57,16 @@ class World extends React.Component {
       }
     });
     keyboardSubscribe(gameObj, "a", {
-      physics: { force: new Vector([-10, 0]), duration: 1000 }
+      physics: { force: new Vector([-100, 0]), duration: 1 }
     });
     keyboardSubscribe(gameObj, "d", {
-      physics: { force: new Vector([10, 0]), duration: 2000 }
+      physics: { force: new Vector([100, 0]), duration: 1 }
     });
     keyboardSubscribe(gameObj, "w", {
-      physics: { force: new Vector([0, -10000]), duration: 1 }
+      physics: { force: new Vector([0, -100]), duration: 1 }
     });
     keyboardSubscribe(gameObj, "s", {
-      physics: { force: new Vector([0, 1000]), duration: 1000 }
+      physics: { force: new Vector([0, 100]), duration: 1 }
     });
     Timer.instance.subscribeToTime(
       () => console.log("5 sekonds elapsed"),
