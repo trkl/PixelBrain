@@ -1,15 +1,8 @@
-import VectorUtilities from "../VectorUtilities/VectorUtilities";
-import { Component } from "react";
-import WithWorld from "../World/HOC/WithWorld";
 import GameObject from "../GameObject/GameObjectBase/GameObject";
 import Vector from "../Vector/Vector";
-import Event, { Physics } from "../Events/Event";
+import Event from "../Events/Event";
 import EventManager from "../EventManager/EventManager";
-
-const Config = {
-  gravity: 9.98,
-  meter: 100
-};
+import Timer from "../Timer/Timer";
 
 class PhysicsEngine {
   private static _instance: PhysicsEngine;
@@ -41,26 +34,18 @@ class PhysicsEngine {
   // }
   private gravityVector = new Vector([0, 9.82]);
 
-  private acceleration = ({ physics }: Event) => {
-    //adding gravity
-    // physics.
-  };
-  // current force on object;
-  private objectForce(gameObject: GameObject) {
-    let totalForce = new Vector();
-    gameObject.forces.forEach(element => {
-      totalForce = totalForce.plus(element);
-    });
-    return totalForce;
+  //gravity on object
+  gravityForce(gameObject: GameObject): Vector {
+    return this.gravityVector
+      .multiply(gameObject.weight)
+      .multiply(gameObject.gravity);
   }
 
-  // force added by event
-  private eventForce(physics: Physics) {
-    let totalForce = new Vector();
-    physics.forces.forEach(element => {
-      totalForce = totalForce.plus(element);
-    });
-    return totalForce;
+  dragForce(gameObject: GameObject) {
+    return new Vector([
+      -Math.sign(gameObject.velocity.x) * gameObject.velocity.x ** 2,
+      -Math.sign(gameObject.velocity.y) * gameObject.velocity.y ** 2
+    ]).multiply(gameObject.drag * 0.5);
   }
 
   private totalForce = (event: Event): Vector => {
@@ -70,35 +55,64 @@ class PhysicsEngine {
 
     const { gameObject, physics } = event;
 
-    let totalForce = this.objectForce(gameObject);
-
-    if (physics) {
-      totalForce = totalForce.plus(this.eventForce(physics));
+    let totalForce = new Vector([...gameObject.force.vector]);
+    if (physics && !event.end) {
+      console.log("event");
+      totalForce = totalForce.plus(event.physics.force);
     }
-    console.log(gameObject);
-    event.gameObject.forces = [totalForce];
-    totalForce = totalForce.plus(
-      this.gravityVector.multiply(gameObject.gravity)
-    );
+
+    const dragForce = this.dragForce(gameObject);
+
+    // totalForce = new Vector([
+    //   Math.sign(gameObject.velocity.x) *
+    //     (Math.abs(totalForce.x) - Math.abs(dragForce.x)),
+    //   Math.sign(gameObject.velocity.y) *
+    //     (Math.abs(totalForce.y) - Math.abs(dragForce.y))
+    // ]);
+    event.gameObject.force = totalForce;
+    totalForce = totalForce.plus(this.dragForce(gameObject));
+
+    totalForce = totalForce.plus(this.gravityForce(gameObject));
 
     return totalForce;
   };
 
+  checkDuration(event: Event): void {
+    if (event && event.physics) {
+      if (event.physics.duration && !event.end) {
+        Timer.instance.subscribeToTime(() => {
+          console.log("ending event", event);
+          EventManager.instance.registerEvent({ ...event, end: true });
+        }, event.physics.duration);
+      }
+      if (event.end) {
+        event.gameObject.force = event.gameObject.force.minus(
+          event.physics.force
+        );
+      }
+    }
+  }
+
   public processGameObject(event: Event, deltaTime: number) {
-    const { gameObject, physics } = event;
+    const { gameObject } = event;
 
-    let { velocity, weight, forces, position } = gameObject;
-
+    let { velocity, weight, position } = gameObject;
     const totalForce = this.totalForce(event);
 
-    const velly = totalForce.divide(weight).multiply(deltaTime / 1000);
-    gameObject.velocity = velocity.plus(velly);
+    gameObject.acceleration = totalForce.divide(gameObject.weight);
 
+    gameObject.velocity = gameObject.velocity.plus(
+      gameObject.acceleration.multiply(deltaTime / 1000)
+    );
+
+    // event.gameObject.position = position.plus(
+    //   gameObject.acceleration.divide(2).multiply(deltaTime * deltaTime)
+    // );
     event.gameObject.position = position.plus(
       velocity.multiply(deltaTime / 1000)
     );
-    if (gameObject.velocity.vector != [0, 0])
-      EventManager.instance.registerEvent(event);
+
+    this.checkDuration(event);
   }
 }
 

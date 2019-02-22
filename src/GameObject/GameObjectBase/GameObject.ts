@@ -15,9 +15,11 @@ export default class GameObject {
   velocity = new Vector();
   gravity: number | undefined;
   weight!: number;
-  forces: Vector[] = [];
+  force: Vector = new Vector();
   hitBox = new Vector();
   elementType: any = null;
+  drag: number = 0;
+  cameraFollows: boolean = false;
 
   static defaultProps = {
     position: new Vector(),
@@ -25,9 +27,11 @@ export default class GameObject {
     velocity: new Vector(),
     gravity: 1,
     weight: 0,
-    forces: [],
+    force: new Vector(),
     hitBox: new Vector(),
-    elementType: null
+    elementType: null,
+    drag: 0,
+    cameraFollows: false
   };
 
   static propTypes = {
@@ -36,7 +40,9 @@ export default class GameObject {
     velocity: PropTypes.instanceOf(Vector).isRequired,
     gravity: PropTypes.number.isRequired,
     weight: PropTypes.number.isRequired,
-    forces: PropTypes.arrayOf(PropTypes.instanceOf(Vector)).isRequired,
-    hitBox: PropTypes.instanceOf(Vector).isRequired
+    force: PropTypes.instanceOf(Vector).isRequired,
+    hitBox: PropTypes.instanceOf(Vector).isRequired,
+    drag: PropTypes.number.isRequired,
+    cameraFollows: PropTypes.bool.isRequired
   };
 }

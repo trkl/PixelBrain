@@ -44,25 +44,20 @@ export default class KeyboardObservable {
 
   // // supposed to be called after document is mounted
   // init = () =>
-  //   console.log('document.addEventListener("keydown", this.onNext, false)');
 
   endEvent = (event: KeyboardEvent) => {
-    console.log("end");
     if (!this.subscribers.length) return;
     this.subscribers.forEach(gameObject => {
       if (event.key === gameObject.key) {
         EventManager.instance.registerEvent({ ...gameObject.event, end: true });
-        console.log(gameObject);
       }
     });
   };
 
   onNext = (event: KeyboardEvent) => {
-    console.log("begin");
     if (!this.subscribers.length) return;
     this.subscribers.forEach(gameObject => {
       if (event.key === gameObject.key) {
-        console.log(gameObject);
         EventManager.instance.registerEvent(gameObject.event);
       }
 

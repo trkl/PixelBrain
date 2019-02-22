@@ -2,8 +2,10 @@ import GameObject from "../GameObject/GameObjectBase/GameObject";
 import Vector from "../Vector/Vector";
 
 export interface Physics {
-  forces: Array<Vector>;
+  force: Vector;
   duration: number;
+  elapsedTime: number;
+  started: boolean;
 }
 
 export class Audio {

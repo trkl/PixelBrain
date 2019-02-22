@@ -4,6 +4,7 @@ export default class Camera {
   // moving objects on screen to simulate camera movement
 
   moveCamera(distance, gameObjects) {
+    console.log("hey");
     gameObjects.forEach(
       (val, idx) =>
         (gameObjects[idx].position = gameObjects[idx].position.minus(distance))
