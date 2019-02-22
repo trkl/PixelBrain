@@ -17,6 +17,7 @@ class World extends React.Component {
 
     this.gameObjects = [
       new GameObject({
+<<<<<<< HEAD
         force: new Vector([10, 0]),
         weight: 15,
         gravity: 1,
@@ -33,6 +34,16 @@ class World extends React.Component {
         position: new Vector([30, 0])
       })
     ];
+=======
+        forces: [new Vector([0, 0])],
+        weight: 30,
+        elementType: DecInc
+      })
+    ];
+    this.props.keyboardSubscribe(this.gameObjects[0], "j", {
+      force: new Vector([0, 0])
+    });
+>>>>>>> fbe5f37658da0e4c57e71c54ef1dcd7580d25ae6
   }
 
   ComponentWillUpdate() {}
