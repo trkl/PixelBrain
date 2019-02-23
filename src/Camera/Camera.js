@@ -1,14 +1,16 @@
-import ReactDom from "react-dom";
-
 export default class Camera {
   // moving objects on screen to simulate camera movement
 
-  moveCamera(distance, gameObjects) {
-    console.log("hey");
-    gameObjects.forEach(
-      (val, idx) =>
-        (gameObjects[idx].position = gameObjects[idx].position.minus(distance))
-    );
+  constructor(gameObject) {
+    this.protagonist = gameObject;
+  }
+
+  moveCamera(time, gameObjects) {
+    const distance = this.protagonist.velocity.multiply(time / 1000);
+
+    gameObjects.forEach((val, idx) => {
+      gameObjects[idx].position = gameObjects[idx].position.minus(distance);
+    });
 
     // ReactDom.unstable_batchedUpdates(() => {
     //   gameObjects.forEach(element => {

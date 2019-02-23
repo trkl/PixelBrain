@@ -1,7 +1,7 @@
 export default class Timer {
-  static _instance = null;
+  static _instance = undefined;
   static get instance() {
-    if (Timer._instance === null) Timer._instance = new Timer(60);
+    if (Timer._instance === undefined) Timer._instance = new Timer(30);
     return Timer._instance;
   }
   constructor(framerate = 30) {
@@ -30,7 +30,10 @@ export default class Timer {
     this.handleOneTimersEnter = false;
     const length = this.oneTimeCallBacks.length;
     for (let i = 0; i < this.oneTimeCallBacks.length; ++i)
-      if (this.oneTimeCallBacks[i].time <= this.now()) {
+      if (
+        this.oneTimeCallBacks[i] &&
+        this.oneTimeCallBacks[i].time <= this.now()
+      ) {
         this.oneTimeCallBacks[i].callback();
         this.oneTimeCallBacks[i] = this.oneTimeCallBacks[length - 1];
         this.oneTimeCallBacks.pop();
@@ -38,7 +41,6 @@ export default class Timer {
     this.handleOneTimersEnter = true;
   };
 
-  // will only work if element is in list
   unsubscribe = callback => {
     const { callbacks } = this;
     if (callbacks.length) return false;
@@ -49,8 +51,11 @@ export default class Timer {
     );
     return idx === -1 ? false : !!callbacks.splice(idx, 1);
   };
+  // should come elsewhere
+  pause = false;
 
-  step = async () => {
+  step = () => {
+    if (this.pause) return;
     requestAnimationFrame(this.step);
     this.handleOneTimers();
     const dt = this.now() - this.time;

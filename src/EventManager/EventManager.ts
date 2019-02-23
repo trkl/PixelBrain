@@ -8,7 +8,7 @@ export default class EventManager {
   physicsEngine: PhysicsEngine;
   collisionManager: CollisionManger;
 
-  private static _instance: undefined | EventManager = undefined;
+  private static _instance: EventManager = new EventManager();
   public static get instance() {
     if (EventManager._instance === undefined) {
       EventManager._instance = new EventManager();
@@ -22,6 +22,7 @@ export default class EventManager {
     physicsEngine = PhysicsEngine.instance,
     collisionManager = new CollisionManger() // // audioManager: AudioManager
   ) {
+    console.log("constructing eventManager");
     Timer.instance.subscribe(this.handleTick);
     this.physicsEngine = physicsEngine;
     this.collisionManager = collisionManager;
@@ -40,8 +41,7 @@ export default class EventManager {
     for (let i = 0; i < length; ++i) {
       const event = eventQueue[i];
 
-      this.physicsEngine.processGameObject(event, time);
-
+      this.physicsEngine.processEvent(event);
       const { callback } = event;
       if (callback) callback();
     }

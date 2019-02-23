@@ -12,38 +12,28 @@ class World extends React.Component {
     super(props);
 
     this.state = { url: "" };
-    this.camera = new Camera();
+
     import("../logo.svg").then(url => this.setState({ url: url.default }));
 
     this.gameObjects = [
       new GameObject({
-<<<<<<< HEAD
-        force: new Vector([10, 0]),
+        force: new Vector([0, 0]),
         weight: 15,
         gravity: 1,
-        drag: 0.25,
+        drag: 1,
         elementType: DecInc,
         cameraFollows: true
       }),
       new GameObject({
-        force: new Vector([0, 0]),
+        force: new Vector(),
         weight: 20,
-        gravity: 1,
+        gravity: 0,
         elementType: DecInc,
-        drag: 0.5,
-        position: new Vector([30, 0])
+        drag: 1,
+        position: new Vector([30, 30])
       })
     ];
-=======
-        forces: [new Vector([0, 0])],
-        weight: 30,
-        elementType: DecInc
-      })
-    ];
-    this.props.keyboardSubscribe(this.gameObjects[0], "j", {
-      force: new Vector([0, 0])
-    });
->>>>>>> fbe5f37658da0e4c57e71c54ef1dcd7580d25ae6
+    this.camera = new Camera(this.gameObjects[1]);
   }
 
   ComponentWillUpdate() {}
@@ -51,34 +41,32 @@ class World extends React.Component {
   componentWillMount() {
     const gameObj = this.gameObjects[1];
     const { keyboardSubscribe } = this.props;
-    keyboardSubscribe(this.gameObjects[0], " ", {
-      callback: () => {
-        this.camera.moveCamera(new Vector([0, 0]), this.gameObjects);
-        this.setState({});
-      }
-    });
+
     keyboardSubscribe(gameObj, "a", {
-      physics: { force: new Vector([-10, 0]), duration: 1000 }
+      physics: { force: new Vector([-1000, 0]), duration: 1000 }
     });
     keyboardSubscribe(gameObj, "d", {
-      physics: { force: new Vector([10, 0]), duration: 2000 }
+      physics: { force: new Vector([1000, 0]), duration: 1000 }
     });
     keyboardSubscribe(gameObj, "w", {
-      physics: { force: new Vector([0, -10000]), duration: 1 }
+      physics: { force: new Vector([0, -1000]), duration: 1000 }
     });
     keyboardSubscribe(gameObj, "s", {
       physics: { force: new Vector([0, 1000]), duration: 1000 }
     });
-    Timer.instance.subscribeToTime(
-      () => console.log("5 sekonds elapsed"),
-      5000
-    );
-    Timer.instance.subscribe(dt =>
+
+    Timer.instance.subscribe(dt => {
       this.gameObjects.forEach(val => {
-        PhysicsEngine.instance.processGameObject({ gameObject: val }, dt);
-      })
-    );
-    Timer.instance.subscribe(() => this.setState({}));
+        PhysicsEngine.instance.processGameObject(val, dt);
+      });
+    });
+    Timer.instance.subscribe(dt => {
+      console.log(gameObj.velocity);
+      this.camera.moveCamera(dt, this.gameObjects);
+    });
+    Timer.instance.subscribe(() => {
+      this.setState({});
+    });
   }
 
   render = () => {
