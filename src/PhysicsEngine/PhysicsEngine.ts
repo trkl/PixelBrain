@@ -1,7 +1,6 @@
 import GameObject from "../GameObject/GameObjectBase/GameObject";
 import Vector from "../Vector/Vector";
 import Event from "../Events/Event";
-import EventManager from "../EventManager/EventManager";
 import Timer from "../Timer/Timer";
 
 class PhysicsEngine {
@@ -28,7 +27,7 @@ class PhysicsEngine {
     return new Vector([
       -Math.sign(gameObject.velocity.x) * gameObject.velocity.x ** 2,
       -Math.sign(gameObject.velocity.y) * gameObject.velocity.y ** 2
-    ]).multiply(gameObject.drag * 0.5);
+    ]).multiply(gameObject.drag);
   }
 
   private totalForce = (gameObject: GameObject): Vector => {
