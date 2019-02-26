@@ -10,7 +10,7 @@ export default class WorldContextProvider extends Component {
   }
 
   render = () => (
-    <WorldContext.Provider value={this.worldInstance}>
+    <WorldContext.Provider value={this.worldInstance.registerComponent}>
       {this.props.children}
     </WorldContext.Provider>
   );

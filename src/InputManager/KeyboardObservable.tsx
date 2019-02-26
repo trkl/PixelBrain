@@ -3,6 +3,7 @@ import Event from "../Events/Event";
 import EventManager from "../EventManager/EventManager";
 import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
 import CollisionManger from "../CollisionManager/CollisionManager";
+import { isRegExp } from "util";
 
 // data-structure for subscriber
 class KeyboardSubscriber {
@@ -17,16 +18,33 @@ class KeyboardSubscriber {
 // This class will tie keyboard inputs to their actions
 export default class KeyboardObservable {
   private subscribers: KeyboardSubscriber[];
+  private whileDownSubscribers: KeyboardSubscriber[];
 
   constructor(eventManager: EventManager) {
     this.subscribers = [];
+    this.whileDownSubscribers = [];
     document.addEventListener("keydown", this.onNext, false);
+    document.addEventListener("keyup", this.endEvent, false);
     // document.addEventListener("keyup", this.endEvent, false);
   }
 
   // "key" is the letter of the key on the keyboard to listen for
-  subscribe = (object: GameObject, key: string, event: Event) =>
+  subscribe = (
+    object: GameObject,
+    key: string,
+    event: Event,
+    endOnKeyup: boolean = false
+  ) => {
     this.subscribers.push(new KeyboardSubscriber(object, key, event));
+    if (endOnKeyup)
+      this.whileDownSubscribers.push(
+        new KeyboardSubscriber(object, key, event)
+      );
+  };
+
+  subscribeWhileDown = (object: GameObject, key: string, event: Event) => {
+    this.subscribers.push(new KeyboardSubscriber(object, key, event));
+  };
 
   unsubscribe = (object: GameObject) => {
     const { length } = this.subscribers;
@@ -46,15 +64,31 @@ export default class KeyboardObservable {
   // init = () =>
 
   endEvent = (event: KeyboardEvent) => {
-    if (!this.subscribers.length) return;
-    this.subscribers.forEach(gameObject => {
+    this.registerKeyUp(event.key);
+    if (!this.whileDownSubscribers) return;
+    this.whileDownSubscribers.forEach(gameObject => {
       if (event.key === gameObject.key) {
         EventManager.instance.registerEvent({ ...gameObject.event, end: true });
       }
     });
   };
 
+  keysDown: any = [];
+
+  registerKeyDown(key: string) {
+    this.keysDown[key] = true;
+  }
+  registerKeyUp(key: string) {
+    delete this.keysDown[key];
+  }
+
+  isRepeatKey(key: string) {
+    return this.keysDown[key];
+  }
+
   onNext = (event: KeyboardEvent) => {
+    if (this.isRepeatKey(event.key)) return;
+    this.registerKeyDown(event.key);
     if (!this.subscribers.length) return;
     this.subscribers.forEach(gameObject => {
       if (event.key === gameObject.key) {

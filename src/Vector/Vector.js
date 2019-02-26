@@ -32,5 +32,7 @@ export default class Vector {
 
   divide = scaler => new Vector(this.vector.map(val => val / scaler));
 
-  static Zero = new Vector();
+  static get Zero() {
+    return new Vector();
+  }
 }

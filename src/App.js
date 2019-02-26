@@ -1,16 +1,19 @@
 import React, { Component } from "react";
-import World from "./World/World";
 import "./App.css";
-import KeyboardObservableProvider from "./InputManager/Context/KeyboardObservableContextProvider";
-import Camera from "./Camera/Camera";
-import { DecInc } from "./GameObject/DecInc";
+
+import WorldContextProvider from "./World/Context/WorldContextProvider";
+import Bird from "./GameObject/Bird";
+import World from "./World/World";
 
 class App extends Component {
   render() {
     return (
-      <KeyboardObservableProvider>
-        <World camera={new Camera()} />
-      </KeyboardObservableProvider>
+      <WorldContextProvider>
+        <World />
+      </WorldContextProvider>
+      // <KeyboardObservableProvider>
+      //   <World camera={new Camera()} />
+      // </KeyboardObservableProvider>
     );
   }
   componentDidMount() {}
