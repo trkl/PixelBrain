@@ -22,11 +22,7 @@ class ResourceManager {
     this.audio = audio;
   }
   
-  getImagePaths = async index => {
-    if (this.GameInstance === "Flappy Bird") {
-      return import(this.imagesPuffin[index]);
-    } 
-  };
+
 
   getImage = name => {
     console.log(this.images)
