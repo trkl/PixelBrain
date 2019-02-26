@@ -1,22 +1,29 @@
 import React from 'react'
 import PipeDown from './PipeDown'
 import PipeUp from './PipeUp'
-import GameObject from '../../GameObject/GameObjectBase/GameObject';
+import GameComponent from '../../GameObject/GameComponent';
+import RigidBody from '../../GameObject/RigidBody';
+import Vector from '../../Vector/Vector';
+import CollisionZone from '../../GameObject/CollisionZone';
 
 
-class Pipes extends GameObject {
+class Pipes extends React.Component{
     constructor(props) {
         super(props)
-
-        this.hitBox.width = 50;
     }
    
     render() {
         return (
-            <div className="pipesDiv" style={{transition: "left 100ms linear ", position:"absolute", top: 0, left: this.props.left}} >
-                <PipeDown up = {this.props.up}/>
-                <PipeUp down = {this.props.down}/>
-            </div>
+            <GameComponent position={new Vector([10, 10])}>
+                <div style={{ transition: "left 100ms linear ", position: "absolute"}} >
+                    <PipeDown up={this.props.up} />
+                    <PipeUp down={this.props.down} />
+                </div>
+                <CollisionZone dimensions={new Vector([40, 40])} />
+                <CollisionZone dimensions={new Vector([20, 10])} />
+                <CollisionZone dimensions={new Vector([30, 30])} />
+            </GameComponent>
+
         )
     }
 }
