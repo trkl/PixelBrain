@@ -1,28 +1,38 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import bird from './Resources/Images/flappybirdBackground.png';
+//import Game from './Game'
 import './App.css';
+import ResourceManager from './Resource Manager';
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      gameName: "Flappy Bird",
+      ResourceManager: new ResourceManager('Flappy Bird')
+    }
+  }
+
+  findImage = (index) => {
+    return <img src={require(`${ this.state.ResourceManager.getImagePaths(index) }`)} />; // require makes it possible to use local paths
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            <i>ReactJS create-react-app + docker boilerplate</i> til Forritaverkfrøði
-          </p>
-          <p>
-            Rætta <code>src/App.js</code> og goym fyri at fáa nýggja útgávu.
-          </p>
-          <a
-            className="App-link"
-            href="https://www.setur.fo/fo/utbugving/bachelor/kt-verkfrodi/skeidslysingar/?educationYearId=493"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Skeiðslýsingar KT-verkfrøði - Náttúruvísindadeildin
-          </a>
-        </header>
+
+        <div>
+          {
+            this.findImage(3) // get desired image 
+          }
+
+        </div>
+
+        <div>
+          {/* <img src={bird} className='CharacterSprite' alt='sprite' /> */}
+        </div>
+
       </div>
     );
   }
