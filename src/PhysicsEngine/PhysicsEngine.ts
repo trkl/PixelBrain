@@ -1,10 +1,8 @@
-import GameObject from "../GameObject/GameObjectBase/GameObject";
 import Vector from "../Vector/Vector";
 import Event from "../Events/Event";
 import Timer from "../Timer/Timer";
 import EventManager from "../EventManager/EventManager";
 import GameComponent from "../GameObject/GameComponent";
-import RigidBody from "../GameObject/RigidBody";
 
 class PhysicsEngine {
   private static _instance: undefined | PhysicsEngine = undefined;
@@ -20,19 +18,19 @@ class PhysicsEngine {
   private gravityVector = new Vector([0, 9.82]);
 
   //gravity on object
-  private gravityForce(gameObject: GameObject): Vector {
+  private gravityForce(gameObject: any): Vector {
     return this.gravityVector
       .multiply(gameObject.weight)
       .multiply(gameObject.gravity);
   }
 
-  private dragForce(gameObject: GameObject) {
+  private dragForce(gameObject: any) {
     return new Vector([
       -Math.sign(gameObject.velocity.x) * gameObject.velocity.x ** 2,
       -Math.sign(gameObject.velocity.y) * gameObject.velocity.y ** 2
     ]).multiply(gameObject.drag);
   }
-  private totalForce = (gameObject: GameObject): Vector => {
+  private totalForce = (gameObject: any): Vector => {
     let totalForce = new Vector([...gameObject.force.vector]);
     totalForce = totalForce.plus(this.dragForce(gameObject));
     totalForce = totalForce.plus(this.gravityForce(gameObject));

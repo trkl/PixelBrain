@@ -9,6 +9,7 @@ class GameComponent extends Component {
     this.children = [];
     this._position = new Vector(this.props.position.vector);
     this.components = [];
+    this.props.parent.gameComponent = this;
   }
   _isChanged = false;
 
