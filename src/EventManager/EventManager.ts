@@ -5,10 +5,9 @@ import Timer from "../Timer/Timer";
 
 export default class EventManager {
   eventQueue: Event[] = [];
-  physicsEngine: PhysicsEngine;
   collisionManager: CollisionManger;
 
-  private static _instance: undefined | EventManager = undefined;
+  private static _instance: EventManager = new EventManager();
   public static get instance() {
     if (EventManager._instance === undefined) {
       EventManager._instance = new EventManager();
@@ -18,13 +17,10 @@ export default class EventManager {
 
   // // audioManager: AudioManager;
 
-  private constructor(
-    physicsEngine = PhysicsEngine.instance,
-    collisionManager = new CollisionManger() // // audioManager: AudioManager
-  ) {
+  private constructor() {
+    console.log("constructing eventManager");
     Timer.instance.subscribe(this.handleTick);
-    this.physicsEngine = physicsEngine;
-    this.collisionManager = collisionManager;
+    this.collisionManager = new CollisionManger();
     // this.audioManager = audioManager;
   }
 
@@ -40,8 +36,7 @@ export default class EventManager {
     for (let i = 0; i < length; ++i) {
       const event = eventQueue[i];
 
-      this.physicsEngine.processGameObject(event, time);
-
+      PhysicsEngine.instance.processEvent(event);
       const { callback } = event;
       if (callback) callback();
     }

@@ -31,4 +31,8 @@ export default class Vector {
   multiply = scaler => new Vector(this.vector.map(val => val * scaler));
 
   divide = scaler => new Vector(this.vector.map(val => val / scaler));
+
+  static get Zero() {
+    return new Vector();
+  }
 }
