@@ -11,6 +11,7 @@ class HUDManager extends React.Component{
             score: 0,
             start: false,
             dead: false,
+            bestScore: 25
         }
     }
 
@@ -31,8 +32,8 @@ class HUDManager extends React.Component{
     render(){
         return(
             <div>
-                <Menu start={this.state.start} dead={this.state.dead}/>
-                <h2 style={this.state.styleScore}>{this.state.score}</h2>
+                <Menu start={this.state.start} dead={this.state.dead} score={this.state.score} bestScore={this.state.bestScore}/>
+                {/* <h2 style={this.state.styleScore}>{this.state.score}</h2> */}
             </div>
         )
     }

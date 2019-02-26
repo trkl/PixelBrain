@@ -9,35 +9,44 @@ class Menu extends React.Component{
         this.state = {
             start: this.props.start,
             dead: this.props.dead,
+            score: this.props.score,
+            bestScore: this.props.bestScore,
         }
+
+        this.handleStart = this.handleStart.bind(this)
+        this.handleDeath = this.handleDeath.bind(this)
     }
 
-    handleClick(){
-        
+    handleStart(){
         this.setState((prevState) => {
-            console.log(prevState.dead)
             return {  
-                dead: !prevState.dead
+                start: !prevState.start,
+                dead: false
             }
         })
     }
 
+    handleDeath(){
+        this.setState((prevState) => {
+            return {  
+                dead: !prevState.dead,
+                start: false
+            }
+        })
+    }
     render(){
-        let menu = null
-        if(this.state.start === false){
-            menu = <StartMenu />
+        let temp
+        if(this.state.start){
+            temp = <StartMenu />
         }
         if(this.state.dead){
-            menu = <GameOverMenu score={0}/>
-        }
-        if(this.start && !this.dead){
-            menu = null
+            temp = <GameOverMenu score={this.state.score} bestScore={this.state.bestScore}/>
         }
         return(
             <div>
-                {<GameOverMenu score={0} />}
-                {/* {menu} */}
-                {/* <button onClick={this.handleClick.bind(this)}>Click</button> */}
+                {temp}
+                <button onClick={this.handleStart}>start</button>
+                <button onClick={this.handleDeath}>die</button>
             </div>
         )
     }
