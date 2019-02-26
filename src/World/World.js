@@ -8,6 +8,7 @@ import CollisionManger from "../CollisionManager/CollisionManager";
 import Bird from '../Objects/Bird/Bird';
 import ResourceManagerContextProvider from "../Resource Manager/ResourceManagerContextProvider";
 import BackgroundManager from "../BackgroundManager/BackgroundManager";
+import PipesManager from "../Objects/Pipe/PipeManager";
 
 class World extends React.Component {
   constructor(props) {
@@ -46,6 +47,7 @@ class World extends React.Component {
     <ResourceManagerContextProvider>
       <BackgroundManager/>
       <Bird />
+      <PipesManager />
     </ResourceManagerContextProvider>
 }
 
