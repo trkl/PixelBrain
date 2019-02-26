@@ -8,7 +8,6 @@ import "./App.css";
 import KeyboardObservable from "./InputManager/KeyboardObservable";
 import KeyboardObservableProvider from "./InputManager/Context/KeyboardObservableContextProvider";
 class App extends Component {
-  decInc = new DecInc();
   constructor() {
     super();
     this.keyboardObservable = new KeyboardObservable();
