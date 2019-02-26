@@ -1,4 +1,3 @@
-import GameObject from "../GameObject/GameObjectBase/GameObject";
 import Event from "../Events/Event";
 import EventManager from "../EventManager/EventManager";
 import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
@@ -7,7 +6,7 @@ import { isRegExp } from "util";
 
 // data-structure for subscriber
 class KeyboardSubscriber {
-  constructor(object: GameObject, key: string, event: Event) {
+  constructor(object: any, key: string, event: Event) {
     this.key = key;
     this.event = { ...event, gameObject: object };
   }
@@ -30,7 +29,7 @@ export default class KeyboardObservable {
 
   // "key" is the letter of the key on the keyboard to listen for
   subscribe = (
-    object: GameObject,
+    object: any,
     key: string,
     event: Event,
     endOnKeyup: boolean = false
@@ -42,11 +41,11 @@ export default class KeyboardObservable {
       );
   };
 
-  subscribeWhileDown = (object: GameObject, key: string, event: Event) => {
+  subscribeWhileDown = (object: any, key: string, event: Event) => {
     this.subscribers.push(new KeyboardSubscriber(object, key, event));
   };
 
-  unsubscribe = (object: GameObject) => {
+  unsubscribe = (object: any) => {
     const { length } = this.subscribers;
     if (length)
       for (let i = 0; i < length; ++i) {
