@@ -5,7 +5,9 @@ import WithKeyboardSubscribe from "../InputManager/HOC/WithKeyboardSubscribe";
 import Timer from "../Timer/Timer";
 import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
 import CollisionManger from "../CollisionManager/CollisionManager";
-import Bird from "../GameObject/Bird";
+import Bird from '../Objects/Bird/Bird';
+import ResourceManagerContextProvider from "../Resource Manager/ResourceManagerContextProvider";
+import BackgroundManager from "../BackgroundManager/BackgroundManager";
 
 class World extends React.Component {
   constructor(props) {
@@ -40,7 +42,11 @@ class World extends React.Component {
     // });
   }
 
-  render = () => <Bird />;
+  render = () =>
+    <ResourceManagerContextProvider>
+      <BackgroundManager/>
+      <Bird zIndex={3}/>
+  </ResourceManagerContextProvider>
 }
 
 export default WithKeyboardSubscribe(World);

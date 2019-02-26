@@ -36,7 +36,6 @@ export default class CollisionZone extends Component {
           width: this.props.dimensions.x,
           top: this.props.position.y,
           left: this.props.position.x,
-          backgroundColor: "black"
         }}
       />
     );

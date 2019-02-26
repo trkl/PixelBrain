@@ -1,46 +1,24 @@
 import React, { Component } from 'react';
 import WithResources from '../Resource Manager/HOC/WithResources'
+import Background from './Background';
+import ResourceManagerContextProvider from '../Resource Manager/ResourceManagerContextProvider';
+
+
 class BackgroundManager extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            speed: props.speed,
-            counter: 0,
-            imagesource: '',
-            styleImg: {
-                height: '100vh',
-                width: '100vw',
-                backgroundPosition: '300px',
-                backgroundImage: 'url('+(props.resourceManager.getImage(props.imagesource)),
-                backgroundRepeat: "repeat-x",
-                position: 'absolute',
-                zIndex: props.zindex,
-                overflow: "hidden"
-            },                
-            ResourceManager: props.ResourceManager  
-        }
-    }
+  
 
-    componentDidMount() {
-        this.gameLoop();
-    }
-
-    gameLoop = () => {
-        this.setState({
-            counter: this.state.counter + this.state.speed,
-            styleImg: {...this.state.styleImg,backgroundPosition:this.state.counter}  
-        })
-        requestAnimationFrame(this.gameLoop)
-    }
-
+ 
     render() {
         return (
-            <div style={this.state.styleImg}>
-        
-                
+            <div >
+                <ResourceManagerContextProvider>
+                    <Background imagesource="GrassForeground.png" speed={-1} zindex={1} />
+                    <Background imagesource="kalsoy.png" speed={-0.2} zindex={-1} />
+                    <Background imagesource="Clouds.png" speed={-0.6} zindex={-2} />
+                    <Background imagesource="Background.png" speed={-0.2} zindex={-3} />
+                </ResourceManagerContextProvider>
             </div>
         )
-
     }
 }
 export default WithResources(BackgroundManager);

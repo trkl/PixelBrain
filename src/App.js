@@ -1,22 +1,23 @@
 import React, { Component } from "react";
 import "./App.css";
-
 import WorldContextProvider from "./World/Context/WorldContextProvider";
-import Bird from "./GameObject/Bird";
 import World from "./World/World";
+import ResourceManagerContextProvider from "./Resource Manager/ResourceManagerContextProvider";
 
 class App extends Component {
   render() {
     return (
       <WorldContextProvider>
-        <World />
+        <ResourceManagerContextProvider>
+          <World />
+        </ResourceManagerContextProvider>
       </WorldContextProvider>
       // <KeyboardObservableProvider>
       //   <World camera={new Camera()} />
       // </KeyboardObservableProvider>
     );
   }
-  componentDidMount() {}
+  componentDidMount() { }
 }
 
 export default App;
