@@ -27,7 +27,6 @@ export default class CollisionZone extends Component {
   };
 
   render = () => {
-    console.log("position", this.state.position);
     return (
       <div
         style={{
@@ -36,6 +35,7 @@ export default class CollisionZone extends Component {
           width: this.props.dimensions.x,
           top: this.props.position.y,
           left: this.props.position.x,
+          backgroundColor: "black"
         }}
       />
     );

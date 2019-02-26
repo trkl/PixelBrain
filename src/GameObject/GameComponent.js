@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import WithWorld from "../World/HOC/WithWorld";
 import Vector from "./../Vector/Vector";
-import GameObject from "./GameObjectBase/GameObject";
 import PropTypes from "prop-types";
 
 class GameComponent extends Component {
@@ -15,10 +14,6 @@ class GameComponent extends Component {
 
   add(component) {
     this.components.push(component);
-  }
-
-  componentWillMount() {
-    this.position = new Vector([30, 30]);
   }
 
   get position() {
