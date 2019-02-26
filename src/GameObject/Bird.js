@@ -3,8 +3,18 @@ import React, { Component } from "react";
 import RigidBody from "./RigidBody";
 import CollisionZone from "./CollisionZone";
 import Vector from "../Vector/Vector";
+import WithKeyboardSubscribe from "../InputManager/HOC/WithKeyboardSubscribe";
 
-export default class Bird extends Component {
+class Bird extends Component {
+  componentWillMount() {
+    this.props.keyboardSubscribe(
+      this,
+      " ",
+      { physics: { force: new Vector([0, 20]) } },
+      true
+    );
+  }
+
   render = () => (
     <GameComponent parent={this} position={this.props.position}>
       <RigidBody
@@ -20,3 +30,5 @@ export default class Bird extends Component {
     console.log(this, " collided with ", collider);
   }
 }
+
+export default WithKeyboardSubscribe(Bird);

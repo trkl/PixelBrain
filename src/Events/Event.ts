@@ -1,4 +1,3 @@
-import GameObject from "../GameObject/GameObjectBase/GameObject";
 import Vector from "../Vector/Vector";
 
 export interface Physics {
@@ -13,7 +12,7 @@ export class Audio {
 }
 
 export default interface Event {
-  gameObject: GameObject;
+  gameObject: any;
   // end showing wether this is an ending event or starting
   end: boolean;
 
