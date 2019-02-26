@@ -16,10 +16,10 @@ export default class CollisionManger {
     this.gameObjects.filterInPlace(zone => zone !== collisionZone);
 
   collisionDetected(obj1, obj2) {
-    const position1 = obj1.position;
-    const position2 = obj2.position;
-    const bottomRight1 = obj1.position.plus(obj1.dimensions);
-    const bottomRight2 = obj2.position.plus(obj2.dimensions);
+    const position1 = obj1.props.position;
+    const position2 = obj2.props.position;
+    const bottomRight1 = position1.plus(obj1.dimensions);
+    const bottomRight2 = position2.plus(obj2.dimensions);
     return (
       position1.x < bottomRight2.x &&
       bottomRight1.x > position2.x &&
@@ -33,22 +33,22 @@ export default class CollisionManger {
 
     for (let i = 0, length = this.gameObjects.length; i < length; ++i) {
       const obj1 = this.gameObjects[i];
-      const { velocity } = obj1;
-      if (velocity.x === 0 && velocity.y === 0) break;
       for (let j = i + 1; j < length; ++j) {
         const obj2 = this.gameObjects[j];
-        console.log("obj1", obj1);
-        console.log("obj2", obj2);
+
         if (this.collisionDetected(obj1, obj2)) {
-          console.log("Collision detected between", obj1, obj2);
-          collisions.push([obj1, obj2]);
+          collisions.push([
+            obj1.props.parent.props.parent,
+            obj2.props.parent.props.parent
+          ]);
         }
       }
     }
     for (const collision of collisions) {
       collision.forEach(
         (element, idx) =>
-          element.handleCollisions && element.handleCollision(Number(!idx))
+          element.handleCollision &&
+          element.handleCollision(collision[Number(!idx)])
       );
     }
   };

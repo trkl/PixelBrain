@@ -27,7 +27,6 @@ export default class CollisionZone extends Component {
   };
 
   render = () => {
-    console.log("position", this.state.position);
     return (
       <div
         style={{

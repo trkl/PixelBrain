@@ -26,6 +26,7 @@ class World extends React.Component {
   componentWillMount() {
     Timer.instance.subscribe(PhysicsEngine.instance.processRigidBodies);
     Timer.instance.subscribe(this.updateWorld);
+    Timer.instance.subscribe(CollisionManger.instance.handleCollisions);
     // Timer.instance.subscribe(
     //   CollisionManger.instance.withObjects(this.gameObjects).handleCollisions
     // );
@@ -40,7 +41,12 @@ class World extends React.Component {
     // });
   }
 
-  render = () => <Bird />;
+  render = () => (
+    <>
+      <Bird gravity={0} position={new Vector([0, 200])} />
+      <Bird position={new Vector([0, 0])} />
+    </>
+  );
 }
 
 export default WithKeyboardSubscribe(World);

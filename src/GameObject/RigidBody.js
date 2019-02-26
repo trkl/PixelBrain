@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Vector from "./../Vector/Vector";
 
 import WithWorld from "./../World/HOC/WithWorld";
-import GameComponent from "./GameComponent";
 import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
 
 class RigidBody extends Component {

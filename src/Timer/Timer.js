@@ -1,7 +1,7 @@
 export default class Timer {
   static _instance = undefined;
   static get instance() {
-    if (Timer._instance === undefined) Timer._instance = new Timer(20);
+    if (Timer._instance === undefined) Timer._instance = new Timer(30);
     return Timer._instance;
   }
   constructor(framerate = 30) {
@@ -10,7 +10,6 @@ export default class Timer {
     this.callbacks = [];
     this.oneTimeCallBacks = [];
     this.time = this.now();
-    console.log(this.interval);
     requestAnimationFrame(this.step);
   }
 
