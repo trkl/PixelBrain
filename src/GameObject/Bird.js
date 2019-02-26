@@ -7,12 +7,12 @@ import WithKeyboardSubscribe from "../InputManager/HOC/WithKeyboardSubscribe";
 
 class Bird extends Component {
   componentWillMount() {
-    this.props.keyboardSubscribe(
-      this,
-      " ",
-      { physics: { force: new Vector([0, 20]) } },
-      true
-    );
+    // this.props.keyboardSubscribe(
+    //   this,
+    //   " ",
+    //   { physics: { force: new Vector([0, 20]) } },
+    //   true
+    // );
   }
 
   render = () => (
@@ -23,7 +23,10 @@ class Bird extends Component {
         force={this.props.force}
         gravity={this.props.gravity}
       />
-      <CollisionZone dimensions={new Vector([100, 100])} />
+      <CollisionZone
+        offset={new Vector([100, 100])}
+        dimensions={new Vector([100, 100])}
+      />
     </GameComponent>
   );
   handleCollision(collider) {

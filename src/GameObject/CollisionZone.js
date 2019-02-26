@@ -48,6 +48,5 @@ CollisionZone.propTypes = {
 };
 
 CollisionZone.defaultProps = {
-  dimensions: new Vector(),
-  offset: PropTypes.instanceOf(Vector).isRequired
+  offset: new Vector()
 };
