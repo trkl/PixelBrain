@@ -45,8 +45,8 @@ class World extends React.Component {
   render = () =>
     <ResourceManagerContextProvider>
       <BackgroundManager/>
-      <Bird zIndex={3}/>
-  </ResourceManagerContextProvider>
+      <Bird />
+    </ResourceManagerContextProvider>
 }
 
 export default WithKeyboardSubscribe(World);

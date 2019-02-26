@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import WorldContextProvider from "./World/Context/WorldContextProvider";
+import WorldContextProvider from "./World/Context/WorldContextProvider"
 import World from "./World/World";
 import ResourceManagerContextProvider from "./Resource Manager/ResourceManagerContextProvider";
 
