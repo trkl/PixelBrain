@@ -28,17 +28,7 @@ class RigidBody extends Component {
   }
 
   render = () => {
-    return (
-      <h1
-        style={{
-          position: "absolute",
-          top: this.props.position.y,
-          left: this.props.position.x
-        }}
-      >
-        hey
-      </h1>
-    );
+    return <></>;
   };
 }
 

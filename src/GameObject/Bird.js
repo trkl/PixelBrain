@@ -5,18 +5,27 @@ import CollisionZone from "./CollisionZone";
 import Vector from "../Vector/Vector";
 import WithKeyboardSubscribe from "../InputManager/HOC/WithKeyboardSubscribe";
 
-class Bird extends Component {
-  componentWillMount() {
-    // this.props.keyboardSubscribe(
-    //   this,
-    //   " ",
-    //   { physics: { force: new Vector([0, 20]) } },
-    //   true
-    // );
-  }
-
+class Bard extends Component {
   render = () => (
     <GameComponent parent={this} position={this.props.position}>
+      <RigidBody
+        weight={10}
+        velocity={this.props.velocity}
+        force={this.props.force}
+        gravity={this.props.gravity}
+      />
+      <CollisionZone
+        offset={new Vector([400, 100])}
+        dimensions={new Vector([100, 100])}
+      />
+    </GameComponent>
+  );
+}
+
+class Bird extends Component {
+  render = () => (
+    <GameComponent parent={this} position={this.props.position}>
+      <Bard />
       <RigidBody
         weight={10}
         velocity={this.props.velocity}

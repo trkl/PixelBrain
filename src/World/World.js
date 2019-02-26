@@ -43,7 +43,6 @@ class World extends React.Component {
 
   render = () => (
     <>
-      <Bird gravity={0} position={new Vector([0, 200])} />
       <Bird position={new Vector([0, 0])} />
     </>
   );
