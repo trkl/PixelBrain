@@ -2,6 +2,9 @@ import Vector from "./../../Vector/Vector";
 import PropTypes, { element } from "prop-types";
 import DecInc from "../DecInc";
 import { type } from "os";
+import { Component } from "react";
+
+
 
 export default class GameObject {
   constructor(gameObject: GameObject) {

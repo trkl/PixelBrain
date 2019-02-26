@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Vector from "./../Vector/Vector";
 
 import WithWorld from "./../World/HOC/WithWorld";
-import GameComponent from "./GameComponent";
 import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
 
 class RigidBody extends Component {
@@ -29,7 +28,16 @@ class RigidBody extends Component {
   }
 
   render = () => {
-    return (<div style={{position: "absolute"}}></div>
+    return (
+      <h1
+        style={{
+          position: "absolute",
+          top: this.props.position.y,
+          left: this.props.position.x
+        }}
+      >
+        hey
+      </h1>
     );
   };
 }

@@ -18,7 +18,6 @@ export default class EventManager {
   // // audioManager: AudioManager;
 
   private constructor() {
-    console.log("constructing eventManager");
     Timer.instance.subscribe(this.handleTick);
     this.collisionManager = new CollisionManger();
     // this.audioManager = audioManager;
