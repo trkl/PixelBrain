@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import Vector from "./../../Vector/Vector";
 import PropTypes, { element } from "prop-types";
 import DecInc from "../DecInc";
@@ -45,27 +44,5 @@ export default class GameObject {
     hitBox: PropTypes.instanceOf(Vector).isRequired,
     drag: PropTypes.number.isRequired,
     cameraFollows: PropTypes.bool.isRequired
-=======
-import { Component } from "react";
-
-export enum Solid {
-  solid,
-  walkThrough
-}
-
-export default class GameObject extends Component {
-  position = {
-    x: null,
-    y: null
-  };
-  velocity = {
-    vX: null,
-    vY: null
-  };
-
-  shape = {
-    height: null,
-    width: null
->>>>>>> dev
   };
 }

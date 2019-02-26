@@ -1,5 +1,4 @@
 import KeyboardObservable from "./KeyboardObservable";
-<<<<<<< HEAD
 import { isMainThread } from "worker_threads";
 import GameObject from "./../GameObject/GameObjectBase/GameObject";
 import Event from "./../Events/Event";
@@ -12,5 +11,3 @@ describe("KeyboardObservable", () => {
     expect(observable.subscribers.length === 1).toBeTruthy();
   });
 });
-=======
->>>>>>> dev
