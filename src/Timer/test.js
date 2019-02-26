@@ -1,4 +1,4 @@
-var stop = false;
+export var stop = false;
 var frameCount = 0;
 var $results = $("#results");
 var fps, fpsInterval, startTime, now, then, elapsed;
