@@ -11,32 +11,33 @@ class ResourceManager {
   constructor(GameName) {
     this.GameInstance = GameName;
 
-    this.audioPuffin = [
-      "./Resources/sounds/sfx_die.wav",
-      "./Resources/sounds/sfx_hit.wav",
-      "./Resources/sounds/sfx_point.wav",
-      "./Resources/sounds/sfx_swooshing.wav",
-      "./Resources/sounds/sfx_wing.wav"
-    ];
     const images = this.importAll(
       require.context("./../Resources/Images", false, /\.(png|jpe?g|svg)$/)
     );
     this.images = images;
+
+    const audio = this.importAll(
+      require.context("./../Resources/sounds", false, /\.(wav)$/)
+    );
+    this.audio = audio;
+
+    const fonts = this.importAll(
+      require.context("./../Resources/fonts", false, /\.(ttf)$/)
+    );
+
+    this.fonts = fonts;
   }
-  getImagePaths = async index => {
-    if (this.GameInstance === "Flappy Bird") {
-      return import(this.imagesPuffin[index]);
-    } 
-  };
 
   getImage = name => {
     return this.images[name];
   };
 
-  getAudioPaths = index => {
-    if (this.GameInstance === "Flappy Bird") {
-      return this.audioPuffin[index];
-    } 
+  getAudioPath = index => {
+    return this.audio[index];
+  };
+
+  getFont = font => {
+    return this.fonts[font];
   };
 }
 
