@@ -7,6 +7,8 @@ import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
 import CollisionManger from "../CollisionManager/CollisionManager";
 import Bird from "../GameObject/Bird";
 import EventManager from "../EventManager/EventManager";
+import BackgroundManager from "../BackgroundManager/BackgroundManager";
+import PipesManager from "../Objects/Pipe/PipeManager";
 
 class World extends React.Component {
   constructor(props) {
@@ -34,6 +36,8 @@ class World extends React.Component {
   render = () => (
     <>
       <Bird position={new Vector([0, 0])} />
+      <BackgroundManager/>
+      {/* <PipesManager/> */}
     </>
   );
 }
