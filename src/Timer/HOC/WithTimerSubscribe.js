@@ -1,7 +1,7 @@
 import React from "react";
 import TimerContextConsumer from "../Context/TimerContextConsumer";
 
-const WithKeyboardSubscribe = WrappedComponent => props => (
+const WithTimerSubcribe = WrappedComponent => props => (
   <TimerContextConsumer>
     {subscribe => (
       <WrappedComponent {...props} timerSubscribe={subscribe}>
@@ -11,4 +11,4 @@ const WithKeyboardSubscribe = WrappedComponent => props => (
   </TimerContextConsumer>
 );
 
-export default WithKeyboardSubscribe;
+export default WithTimerSubcribe;

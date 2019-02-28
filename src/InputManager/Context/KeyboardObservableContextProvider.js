@@ -2,7 +2,7 @@ import KeyboardObservableContext from "./KeyboardObservableContext";
 import React from "react";
 import KeyboardObservable from "../KeyboardObservable";
 
-export default class KeyboardObservableContextProvider extends React.Component {
+export default class KeyboardObservableProvider extends React.Component {
   observable;
   constructor() {
     super();

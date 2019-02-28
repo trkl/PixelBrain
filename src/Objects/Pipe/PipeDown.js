@@ -1,21 +1,19 @@
 import React, { Component } from 'react'
-import ResourceManager from '../../Resource Manager/Resource Manager'
+import WithResources from '../../Resource Manager/HOC/WithResources'
 import './PipeDown.css'
-
 
 class PipeDown extends Component {
     constructor(props) {
         super(props)
 
-        this.rm = new ResourceManager();
     }
     render() {
         return (
             <div className="PipeDown">
-                <img className="pipedownimg" src={this.rm.getImage("pipeDown.png")} style={{height: this.props.up + "vh", width: "50px"}}  />         
+                <img className="pipedownimg" src={this.props.resourceManager.getImage("pipeDown.png")} style={{height: this.props.up + "vh", width: "50px"}}  />         
            </div>
         )
     }
 }
 
-export default PipeDown;
+export default WithResources(PipeDown)

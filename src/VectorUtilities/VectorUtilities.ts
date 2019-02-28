@@ -1,3 +1,4 @@
+import Vector from "./../Vector/Vector";
 class VectorUtilities {
   static addNumbers = (a: string, b: string) => Number(a) + Number(b);
 
@@ -6,12 +7,11 @@ class VectorUtilities {
 
   //sums vector array with function.
   static reduceVectorArray(
-    arr: number[][],
-    method = VectorUtilities.addVectors,
-    initial: number[] = [0, 0]
-  ) {
-    console.log(arr)
-    if (!arr || arr.length === 0) return [0, 0];
+    arr: Array<Vector>,
+    method = (a: Vector, b: Vector) => a.plus(b),
+    initial: Vector = new Vector()
+  ): Vector {
+    if (!arr || arr.length === 0) return new Vector();
     let vector;
 
     while ((vector = arr.pop())) initial = method(vector, initial);
