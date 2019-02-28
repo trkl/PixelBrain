@@ -9,12 +9,16 @@ class GameComponent extends Component {
     this.children = [];
     this._position = new Vector(this.props.position.vector);
     this.components = [];
+<<<<<<< HEAD
     this.rigidBody = null;
     this.collisionZones = [];
+=======
+>>>>>>> dev
     this.props.parent.gameComponent = this;
   }
   _isChanged = false;
 
+<<<<<<< HEAD
   add(component) {
     this.components.push(component);
 
@@ -26,6 +30,11 @@ class GameComponent extends Component {
       } else throw "more than one rigidBody not supported";
     }
   }
+=======
+  add = component => {
+    this.components.push(component);
+  };
+>>>>>>> dev
 
   get position() {
     return this._position;
@@ -55,7 +64,12 @@ GameComponent.defaultProps = {
 };
 
 GameComponent.propTypes = {
+<<<<<<< HEAD
   position: PropTypes.instanceOf(Vector).isRequired
+=======
+  position: PropTypes.instanceOf(Vector).isRequired,
+  parent: PropTypes.instanceOf(Component).isRequired
+>>>>>>> dev
 };
 
 export default WithWorld(GameComponent);

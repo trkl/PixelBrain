@@ -24,11 +24,21 @@ class RigidBody extends Component {
   }
 
   componentWillMount() {
-    PhysicsEngine.instance.add(this);
+    // PhysicsEngine.instance.add(this);
   }
 
   render = () => {
-    return <></>;
+    return (
+      <h1
+        style={{
+          position: "absolute",
+          top: this.props.position.y,
+          left: this.props.position.x
+        }}
+      >
+        hey
+      </h1>
+    );
   };
 }
 
