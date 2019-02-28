@@ -29,18 +29,6 @@ class World extends React.Component {
     Timer.instance.subscribe(PhysicsEngine.instance.processRigidBodies);
     Timer.instance.subscribe(this.updateWorld);
     Timer.instance.subscribe(CollisionManger.instance.handleCollisions);
-    // Timer.instance.subscribe(
-    //   CollisionManger.instance.withObjects(this.gameObjects).handleCollisions
-    // );
-    // Timer.instance.subscribe(dt => {
-    //   this.camera.moveCamera(dt, this.gameObjects);
-    // });
-    // Timer.instance.subscribe(
-    //   dt => (this.gameObjects[0].fps = Math.round(1000 / dt))
-    // );
-    // Timer.instance.subscribe(() => {
-    //   this.setState({});
-    // });
   }
 
   render = () => (

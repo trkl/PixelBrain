@@ -7,11 +7,7 @@ export default class EventManager {
   eventQueue: Event[] = [];
   collisionManager: CollisionManger;
 
-<<<<<<< HEAD
   private static _instance: EventManager;
-=======
-  private static _instance: EventManager = new EventManager();
->>>>>>> dev
   public static get instance() {
     if (EventManager._instance === undefined) {
       EventManager._instance = new EventManager();
@@ -31,11 +27,7 @@ export default class EventManager {
     this.eventQueue.push(event);
   };
 
-<<<<<<< HEAD
   handleTick = (time: number) => {
-=======
-  handleTick = async (time: number) => {
->>>>>>> dev
     // copy elements for processing and delete queue, so dublicate processing is less likely to occur
     const eventQueue = [...this.eventQueue];
     this.eventQueue = [];
