@@ -20,27 +20,14 @@ class RigidBody extends Component {
     // this.weight = this.props.weight;
     // this.position = this.props.parent.position;
     // this.parent = this.props.parent;
-    console.log(this.props.parent);
-    this.props.parent.add(this);
+    this.parent.add(this);
   }
 
   componentWillMount() {
-    // PhysicsEngine.instance.add(this);
+    PhysicsEngine.instance.add(this);
   }
 
-  render = () => {
-    return (
-      <h1
-        style={{
-          position: "absolute",
-          top: this.props.position.y,
-          left: this.props.position.x
-        }}
-      >
-        hey
-      </h1>
-    );
-  };
+  render = () => <></>;
 }
 
 RigidBody.propTypes = {

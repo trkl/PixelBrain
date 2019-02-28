@@ -1,3 +1,4 @@
+//@ts-nocheck
 import Vector from "../Vector/Vector";
 import Event from "../Events/Event";
 import Timer from "../Timer/Timer";
@@ -5,11 +6,13 @@ import EventManager from "../EventManager/EventManager";
 import GameComponent from "../GameObject/GameComponent";
 
 class PhysicsEngine {
-  private static _instance: undefined | PhysicsEngine = undefined;
+  private static _instance: PhysicsEngine;
   public static get instance() {
+    console.log(PhysicsEngine._instance);
     if (PhysicsEngine._instance === undefined) {
       PhysicsEngine._instance = new PhysicsEngine();
     }
+    console.log(PhysicsEngine._instance);
     return PhysicsEngine._instance;
   }
 
@@ -65,25 +68,34 @@ class PhysicsEngine {
   }
 
   public processEvent(event: Event) {
-    const { gameObject, physics, end } = event;
-    if (!gameObject) {
+    const { physics, end } = event;
+
+    if (!event.gameObject) {
       throw "PhysicsEngine: gameObject is undefined or null";
     }
+    if (!event.gameObject.gameComponent) {
+      throw 'PhysicsEngine: event fired without "gameComponent" is undefined or null';
+    }
+    if (!event.gameObject.gameComponent.rigidBody) {
+      throw "PhysicsEngine: physics event fired withour rigidBody";
+    }
 
-    // nothing to do if no force is applied
+    const gameObject = event.gameObject.gameComponent.rigidBody;
+
     if (!physics || !physics.force) return;
     const { duration } = physics;
 
-    if (duration && end) {
-      throw "both duration and end defined. Not supported... could lead to obscure bugs";
-    }
+    // if (duration && end) {
+    //   throw "both duration and end defined. Not supported... could lead to obscure bugs";
+    // }
     if (end) {
+      console.log("end");
       gameObject.force = gameObject.force.minus(physics.force);
     } else {
+      //@ts-ignore
       gameObject.force = gameObject.force.plus(physics.force);
       if (duration) {
         Timer.instance.subscribeToTime(async () => {
-          event.physics.duration = 0;
           EventManager.instance.registerEvent({
             ...event,
             end: true

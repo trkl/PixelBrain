@@ -1,13 +1,17 @@
 import KeyboardObservable from "./KeyboardObservable";
-import { isMainThread } from "worker_threads";
-import GameObject from "./../GameObject/GameObjectBase/GameObject";
-import Event from "./../Events/Event";
+
 describe("KeyboardObservable", () => {
   it("subscribers should be subscribed", () => {
-    const gameObject = new GameObject();
-    const event = new Event();
+    const event = { gameObject: null, physics: { force: 20 } };
     const observable = new KeyboardObservable();
-    observable.subscribe(gameObject, "w", event);
+    observable.subscribe(null, "w", event);
     expect(observable.subscribers.length === 1).toBeTruthy();
+  });
+  it("subscribers should be unsubscibed", () => {
+    const event = { gameObject: null, physics: { force: 20 } };
+    const observable = new KeyboardObservable();
+    observable.subscribe(null, "w", event);
+    observable.unsubscribe(null);
+    expect(observable.subscribers.length === 0).toBeTruthy();
   });
 });

@@ -1,14 +1,12 @@
 import React from "react";
 
-import EventManager from "./../EventManager/EventManager";
+import Vector from "../Vector/Vector";
 import WithKeyboardSubscribe from "../InputManager/HOC/WithKeyboardSubscribe";
 import Timer from "../Timer/Timer";
-// import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
+import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
 import CollisionManger from "../CollisionManager/CollisionManager";
-import ResourceManagerContextProvider from "../Resource Manager/ResourceManagerContextProvider";
-import Bird from "../Objects/Bird/Bird";
-import BackgroundManager from "../BackgroundManager/BackgroundManager";
-import PipesManager from "../Objects/Pipe/PipeManager";
+import Bird from "../GameObject/Bird";
+import EventManager from "../EventManager/EventManager";
 
 class World extends React.Component {
   constructor(props) {
@@ -26,20 +24,17 @@ class World extends React.Component {
     this.setState({});
   };
 
-  // componentWillMount() {
-  //   // console.log(PhysicsEngine.instance);
-  //   // Timer.instance.subscribe(EventManager.instance.handleTick);
-  //   // // Timer.instance.subscribe(PhysicsEngine.instance.processRigidBodies);
-  //   // Timer.instance.subscribe(this.updateWorld);
-  //   // Timer.instance.subscribe(CollisionManger.instance.handleCollisions);
-  // }
+  componentWillMount() {
+    Timer.instance.subscribe(EventManager.instance.handleTick);
+    Timer.instance.subscribe(PhysicsEngine.instance.processRigidBodies);
+    Timer.instance.subscribe(this.updateWorld);
+    Timer.instance.subscribe(CollisionManger.instance.handleCollisions);
+  }
 
   render = () => (
-    <ResourceManagerContextProvider>
-      <BackgroundManager />
-      <Bird />
-      <PipesManager />
-    </ResourceManagerContextProvider>
+    <>
+      <Bird position={new Vector([0, 0])} />
+    </>
   );
 }
 
