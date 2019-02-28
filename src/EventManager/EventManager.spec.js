@@ -4,7 +4,6 @@ import Vector from "../Vector/Vector";
 import React from "react";
 import ReactDOM from "react-dom";
 import Bird from "./../GameObject/Bird";
-import ReactTestUtils from "react-dom/test-utils"; // ES6
 import { act } from "react-dom/test-utils";
 
 describe("EventManager", () => {

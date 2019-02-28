@@ -7,13 +7,8 @@ export interface Physics {
   started: boolean;
 }
 
-<<<<<<< HEAD
 export interface Audio {
   soundTrack: string;
-=======
-export class Audio {
-  soundTrack: string = "";
->>>>>>> dev
 }
 
 export default interface Event {

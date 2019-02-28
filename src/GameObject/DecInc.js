@@ -4,7 +4,6 @@ import Logo from "./../logo.svg";
 import WithKeyboardSubscribe from "../InputManager/HOC/WithKeyboardSubscribe";
 
 export class DecInc extends React.Component {
-  hey = () => console.log("hey");
 
   render = () => (
     <img
