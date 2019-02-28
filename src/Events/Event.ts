@@ -7,8 +7,8 @@ export interface Physics {
   started: boolean;
 }
 
-export interface Audio {
-  soundTrack: string;
+export class Audio {
+  soundTrack: string = "";
 }
 
 export default interface Event {

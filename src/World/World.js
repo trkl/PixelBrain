@@ -5,8 +5,10 @@ import WithKeyboardSubscribe from "../InputManager/HOC/WithKeyboardSubscribe";
 import Timer from "../Timer/Timer";
 import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
 import CollisionManger from "../CollisionManager/CollisionManager";
-import Bird from "../GameObject/Bird";
-import EventManager from "../EventManager/EventManager";
+import Bird from '../Objects/Bird/Bird';
+import ResourceManagerContextProvider from "../Resource Manager/ResourceManagerContextProvider";
+import BackgroundManager from "../BackgroundManager/BackgroundManager";
+import PipesManager from "../Objects/Pipe/PipeManager";
 
 class World extends React.Component {
   constructor(props) {
@@ -43,11 +45,12 @@ class World extends React.Component {
     // });
   }
 
-  render = () => (
-    <>
-      <Bird position={new Vector([0, 0])} />
-    </>
-  );
+  render = () =>
+    <ResourceManagerContextProvider>
+      <BackgroundManager/>
+      <Bird />
+      <PipesManager />
+    </ResourceManagerContextProvider>
 }
 
 export default WithKeyboardSubscribe(World);

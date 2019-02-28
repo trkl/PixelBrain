@@ -2,7 +2,7 @@ import Event from "../Events/Event";
 import EventManager from "../EventManager/EventManager";
 import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
 import CollisionManger from "../CollisionManager/CollisionManager";
-import { isRegExp } from "util";
+//import { isRegExp } from "util";
 
 // data-structure for subscriber
 class KeyboardSubscriber {
