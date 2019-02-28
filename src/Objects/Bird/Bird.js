@@ -7,13 +7,19 @@ import Sprite from "./Sprite";
 
 export default class Bird extends Component {
   render = () => (
-    <GameComponent position={new Vector([10, 10])}>
+    <GameComponent parent={this} position={new Vector([10, 10])}>
       <RigidBody
         weight={200}
         velocity={new Vector([100, 100])}
         force={new Vector([100, 100])}
       />
-      <Sprite width={1584} height={583} n={3} scale={.1} imagesource={"puffinpixel.png"} />
+      <Sprite
+        width={1584}
+        height={583}
+        n={3}
+        scale={0.1}
+        imagesource={"puffinpixel.png"}
+      />
       <CollisionZone dimensions={new Vector([10, 10])} />
     </GameComponent>
   );

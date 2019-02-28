@@ -1,12 +1,12 @@
 import React from "react";
 
-import Vector from "../Vector/Vector";
+import EventManager from "./../EventManager/EventManager";
 import WithKeyboardSubscribe from "../InputManager/HOC/WithKeyboardSubscribe";
 import Timer from "../Timer/Timer";
-import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
+// import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
 import CollisionManger from "../CollisionManager/CollisionManager";
-import Bird from '../Objects/Bird/Bird';
 import ResourceManagerContextProvider from "../Resource Manager/ResourceManagerContextProvider";
+import Bird from "../Objects/Bird/Bird";
 import BackgroundManager from "../BackgroundManager/BackgroundManager";
 import PipesManager from "../Objects/Pipe/PipeManager";
 
@@ -26,29 +26,21 @@ class World extends React.Component {
     this.setState({});
   };
 
-  componentWillMount() {
-    Timer.instance.subscribe(PhysicsEngine.instance.processRigidBodies);
-    Timer.instance.subscribe(this.updateWorld);
-    // Timer.instance.subscribe(
-    //   CollisionManger.instance.withObjects(this.gameObjects).handleCollisions
-    // );
-    // Timer.instance.subscribe(dt => {
-    //   this.camera.moveCamera(dt, this.gameObjects);
-    // });
-    // Timer.instance.subscribe(
-    //   dt => (this.gameObjects[0].fps = Math.round(1000 / dt))
-    // );
-    // Timer.instance.subscribe(() => {
-    //   this.setState({});
-    // });
-  }
+  // componentWillMount() {
+  //   // console.log(PhysicsEngine.instance);
+  //   // Timer.instance.subscribe(EventManager.instance.handleTick);
+  //   // // Timer.instance.subscribe(PhysicsEngine.instance.processRigidBodies);
+  //   // Timer.instance.subscribe(this.updateWorld);
+  //   // Timer.instance.subscribe(CollisionManger.instance.handleCollisions);
+  // }
 
-  render = () =>
+  render = () => (
     <ResourceManagerContextProvider>
-      <BackgroundManager/>
+      <BackgroundManager />
       <Bird />
       <PipesManager />
     </ResourceManagerContextProvider>
+  );
 }
 
 export default WithKeyboardSubscribe(World);

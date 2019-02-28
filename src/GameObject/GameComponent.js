@@ -13,9 +13,9 @@ class GameComponent extends Component {
   }
   _isChanged = false;
 
-  add(component) {
+  add = component => {
     this.components.push(component);
-  }
+  };
 
   get position() {
     return this._position;
@@ -45,7 +45,8 @@ GameComponent.defaultProps = {
 };
 
 GameComponent.propTypes = {
-  position: PropTypes.instanceOf(Vector).isRequired
+  position: PropTypes.instanceOf(Vector).isRequired,
+  parent: PropTypes.instanceOf(Component).isRequired
 };
 
 export default WithWorld(GameComponent);

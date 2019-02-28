@@ -20,11 +20,12 @@ class RigidBody extends Component {
     // this.weight = this.props.weight;
     // this.position = this.props.parent.position;
     // this.parent = this.props.parent;
+    console.log(this.props.parent);
     this.props.parent.add(this);
   }
 
   componentWillMount() {
-    PhysicsEngine.instance.add(this);
+    // PhysicsEngine.instance.add(this);
   }
 
   render = () => {
