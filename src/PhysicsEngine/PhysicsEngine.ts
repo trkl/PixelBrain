@@ -1,3 +1,4 @@
+//@ts-nocheck
 import Vector from "../Vector/Vector";
 import Event from "../Events/Event";
 import Timer from "../Timer/Timer";
@@ -65,25 +66,34 @@ class PhysicsEngine {
   }
 
   public processEvent(event: Event) {
-    const { gameObject, physics, end } = event;
-    if (!gameObject) {
+    const { physics, end } = event;
+
+    if (!event.gameObject) {
       throw "PhysicsEngine: gameObject is undefined or null";
     }
+    if (!event.gameObject.gameComponent) {
+      throw 'PhysicsEngine: event fired without "gameComponent" is undefined or null';
+    }
+    if (!event.gameObject.gameComponent.rigidBody) {
+      throw "PhysicsEngine: physics event fired withour rigidBody";
+    }
 
-    // nothing to do if no force is applied
+    const gameObject = event.gameObject.gameComponent.rigidBody;
+
     if (!physics || !physics.force) return;
     const { duration } = physics;
 
-    if (duration && end) {
-      throw "both duration and end defined. Not supported... could lead to obscure bugs";
-    }
+    // if (duration && end) {
+    //   throw "both duration and end defined. Not supported... could lead to obscure bugs";
+    // }
     if (end) {
+      console.log("end");
       gameObject.force = gameObject.force.minus(physics.force);
     } else {
+      //@ts-ignore
       gameObject.force = gameObject.force.plus(physics.force);
       if (duration) {
         Timer.instance.subscribeToTime(async () => {
-          event.physics.duration = 0;
           EventManager.instance.registerEvent({
             ...event,
             end: true

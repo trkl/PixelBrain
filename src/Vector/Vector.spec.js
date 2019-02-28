@@ -54,4 +54,8 @@ describe("Vector", () => {
   it("dot'ing vectors", () => {
     expect(vector.dot(vector1)).toEqual(8);
   });
+
+  it("Vector.Zero.vector should be [0,0]", () => {
+    expect(Vector.Zero.vector).toEqual([0, 0]);
+  });
 });

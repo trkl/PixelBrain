@@ -6,6 +6,7 @@ import Timer from "../Timer/Timer";
 import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
 import CollisionManger from "../CollisionManager/CollisionManager";
 import Bird from "../GameObject/Bird";
+import EventManager from "../EventManager/EventManager";
 
 class World extends React.Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class World extends React.Component {
   };
 
   componentWillMount() {
+    Timer.instance.subscribe(EventManager.instance.handleTick);
     Timer.instance.subscribe(PhysicsEngine.instance.processRigidBodies);
     Timer.instance.subscribe(this.updateWorld);
     Timer.instance.subscribe(CollisionManger.instance.handleCollisions);

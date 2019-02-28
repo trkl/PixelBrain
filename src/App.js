@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import "./App.css";
 
 import WorldContextProvider from "./World/Context/WorldContextProvider";
-import Bird from "./GameObject/Bird";
 import World from "./World/World";
+import KeyboardObservableProvider from "./InputManager/Context/KeyboardObservableContextProvider";
 
 class App extends Component {
   render() {
     return (
       <WorldContextProvider>
-        <World />
+        <KeyboardObservableProvider>
+          <World />
+        </KeyboardObservableProvider>
       </WorldContextProvider>
       // <KeyboardObservableProvider>
       //   <World camera={new Camera()} />

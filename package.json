@@ -27,5 +27,8 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {}
+  "devDependencies": {
+    "jest-dom": "^3.1.2",
+    "react-testing-library": "^6.0.0"
+  }
 }

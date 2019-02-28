@@ -8,7 +8,7 @@ export default class CollisionZone extends Component {
     super(props);
     this.position = this.props.parent.position;
     this.dimensions = this.props.dimensions;
-    this.state = { ...props };
+    this.name = this.props.name;
     this.props.parent.add(this);
   }
 
@@ -27,15 +27,16 @@ export default class CollisionZone extends Component {
 
   render = () => {
     const newPosition = this.props.position.plus(this.props.offset);
+    const { dimensions } = this.props;
     return (
       <div
         style={{
           position: "absolute",
-          height: this.props.dimensions.y,
-          width: this.props.dimensions.x,
-          top: newPosition.y,
-          left: newPosition.x,
-          backgroundColor: "black"
+          height: dimensions.y + "%",
+          width: dimensions.x + "%",
+          top: newPosition.y + "%",
+          left: newPosition.x + "%",
+          backgroundColor: "rgba(99,99,99,.1)"
         }}
       />
     );
@@ -44,9 +45,11 @@ export default class CollisionZone extends Component {
 
 CollisionZone.propTypes = {
   dimensions: PropTypes.instanceOf(Vector).isRequired,
-  offset: PropTypes.instanceOf(Vector).isRequired
+  offset: PropTypes.instanceOf(Vector).isRequired,
+  name: PropTypes.string.isRequired
 };
 
 CollisionZone.defaultProps = {
-  offset: new Vector()
+  offset: new Vector(),
+  name: "unnamed"
 };
