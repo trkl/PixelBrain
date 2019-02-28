@@ -27,7 +27,7 @@ export default class EventManager {
     this.eventQueue.push(event);
   };
 
-  handleTick = (time: number) => {
+  handleTick = async (time: number) => {
     // copy elements for processing and delete queue, so dublicate processing is less likely to occur
     const eventQueue = [...this.eventQueue];
     this.eventQueue = [];
