@@ -26,5 +26,4 @@ class App extends Component {
   }
   componentDidMount() { }
 }
-
 export default App;
