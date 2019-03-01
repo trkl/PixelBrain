@@ -67,7 +67,7 @@ class GameComponent extends Component {
 
   componentWillUnmount() {
     this.mounted = false;
-    this.props.world.unregisterComponent(this);
+    // this.props.world.unregisterComponent(this);
     this.components = [];
   }
 }

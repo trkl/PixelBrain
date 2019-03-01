@@ -12,7 +12,12 @@ class Pipes extends React.Component {
     for (const i in this.props) {
       this[i] = this.props[i];
     }
-    this.collided = false;
+  }
+
+  componentWillReceiveProps(props) {
+    for (const i in props) {
+      this[i] = props[i];
+    }
   }
 
   render() {

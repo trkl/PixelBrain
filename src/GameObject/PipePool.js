@@ -28,7 +28,7 @@ export default class PipePool extends Component {
     );
   }
   pipeObj = React.createElement(Pipes, {
-    offset: this.pipeKey++ * this.interval,
+    offset: new Vector([this.pipeKey++ * this.interval, 0]),
     upperPipeLength: getRandomArbitrary(10, 50),
     key: this.pipeKey++
   });
@@ -36,8 +36,9 @@ export default class PipePool extends Component {
   prepareForRender = () => {
     while (this.pipes.length < 7) {
       this.pipes.push(
-        React.cloneElement(this.pipeObj, {
+        React.createElement(Pipes, {
           offset: this.pipeKey++ * this.interval,
+          position: this.position,
           upperPipeLength: getRandomArbitrary(10, 50),
           key: this.pipeKey
         })
@@ -49,9 +50,9 @@ export default class PipePool extends Component {
 
   rotateRender = () => {
     console.log("rotate");
-
+    this.pipes.shift();
     this.pipes.push(
-      React.cloneElement(this.pipes.shift(), {
+      React.createElement(Pipes, {
         offset: this.pipeKey++ * this.interval,
         upperPipeLength: getRandomArbitrary(10, 50),
         key: this.pipeKey
@@ -60,7 +61,7 @@ export default class PipePool extends Component {
 
     this.renderObj = React.cloneElement(
       this.renderObj,
-      { position: this.position, parent: this },
+      { parent: this, position: this.gameComponent.position },
       this.pipes
     );
   };
@@ -75,7 +76,8 @@ export default class PipePool extends Component {
 
   beforeFrameRender = () => {
     const { position } = this.gameComponent;
-    if (Math.round(position.x + this.interval * (this.pipeKey - 1)) < 0) {
+    if (position.x + this.interval * (this.pipeKey - 1) < 100) {
+      console.log("rotate");
       this.rotateRender();
     }
   };

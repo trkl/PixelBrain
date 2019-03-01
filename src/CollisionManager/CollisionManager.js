@@ -7,13 +7,18 @@ export default class CollisionManger {
     return CollisionManger._instance;
   }
 
-  gameObjects = [];
+  gameObjects = [undefined];
 
   add = collisionZone => {
-    this.gameObjects.push(collisionZone);
+    let i = -1;
+    while (this.gameObjects[++i] !== undefined) {
+      this.gameObjects[i] = collisionZone;
+      return i;
+    }
+    return this.gameObjects.push(collisionZone) - 1;
   };
-  remove = collisionZone =>
-    this.gameObjects.filterInPlace(zone => zone !== collisionZone);
+
+  remove = number => (this.gameObjects[number] = undefined);
 
   collisionDetected(obj1, obj2) {
     const position1 = obj1.props.position.plus(obj1.props.offset);
@@ -33,8 +38,10 @@ export default class CollisionManger {
 
     for (let i = 0, length = this.gameObjects.length; i < length; ++i) {
       const obj1 = this.gameObjects[i];
+      if (!obj1) continue;
       for (let j = i + 1; j < length; ++j) {
         const obj2 = this.gameObjects[j];
+        if (!obj2) continue;
         if (this.collisionDetected(obj1, obj2)) {
           if (obj1.collision.has(obj2)) continue;
 

@@ -9,16 +9,27 @@ export default class CollisionZone extends Component {
     this.position = this.props.parent.position;
     this.dimensions = this.props.dimensions;
     this.name = this.props.name;
-    this.props.parent.add(this);
     this.collision = new Set();
+    for (const i in this.props) {
+      this[i] = this.props[i];
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    for (const i in props) {
+      this[i] = props[i];
+    }
   }
 
   componentWillMount() {
-    CollisionManger.instance.add(this);
+    this.props.parent.add(this);
+    console.log("collisionZone: ", this.name, " willMount");
+    this.idx = CollisionManger.instance.add(this);
   }
 
   componentWillUnmount() {
-    CollisionManger.instance.remove(this);
+    console.log("collisionZone: ", this.name, " unMount");
+    CollisionManger.instance.remove(this.idx);
     this.props.parent.remove(this);
   }
 
