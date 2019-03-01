@@ -49,7 +49,7 @@ class World extends React.Component {
   render = () => (
     <WorldContextProvider>
       {/* <Bird position={new Vector([0, 0])} /> */}
-      {/* <BackgroundManager /> */}
+     <BackgroundManager /> 
       <ScoreKeep />
       <Bird
         cameraFollows={true}
