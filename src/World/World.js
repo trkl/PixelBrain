@@ -9,6 +9,7 @@ import Bird from "../GameObject/Bird";
 import EventManager from "../EventManager/EventManager";
 import BackgroundManager from "../BackgroundManager/BackgroundManager";
 import PipesManager from "../Objects/Pipe/PipeManager";
+import Sprite from "../Sprite/Sprite";
 
 class World extends React.Component {
   constructor(props) {
@@ -35,7 +36,8 @@ class World extends React.Component {
 
   render = () => (
     <>
-      <Bird position={new Vector([0, 0])} />
+      <Bird position={new Vector([0, 0])} >
+      </Bird>
       <BackgroundManager/>
       {/* <PipesManager/> */}
     </>
