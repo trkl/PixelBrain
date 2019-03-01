@@ -10,19 +10,20 @@ export default class CollisionZone extends Component {
     this.dimensions = this.props.dimensions;
     this.name = this.props.name;
     this.props.parent.add(this);
+    this.collision = new Set();
   }
 
   componentWillMount() {
     CollisionManger.instance.add(this);
-    // setInterval(this.update, 2000);
   }
 
   componentWillUnmount() {
     CollisionManger.instance.remove(this);
+    this.props.parent.remove(this);
   }
 
   update = () => {
-    this.setState({ ...this.props });
+    this.setState({});
   };
 
   render = () => {

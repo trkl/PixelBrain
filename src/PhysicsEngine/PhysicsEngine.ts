@@ -8,11 +8,9 @@ import GameComponent from "../GameObject/GameComponent";
 class PhysicsEngine {
   private static _instance: PhysicsEngine;
   public static get instance() {
-    console.log(PhysicsEngine._instance);
     if (PhysicsEngine._instance === undefined) {
       PhysicsEngine._instance = new PhysicsEngine();
     }
-    console.log(PhysicsEngine._instance);
     return PhysicsEngine._instance;
   }
 
@@ -89,7 +87,6 @@ class PhysicsEngine {
     //   throw "both duration and end defined. Not supported... could lead to obscure bugs";
     // }
     if (end) {
-      console.log("end");
       gameObject.force = gameObject.force.minus(physics.force);
     } else {
       //@ts-ignore

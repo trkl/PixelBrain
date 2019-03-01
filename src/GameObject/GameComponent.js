@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import WithWorld from "../World/HOC/WithWorld";
 import Vector from "./../Vector/Vector";
 import PropTypes from "prop-types";
+import Camera from "../Camera/Camera";
 
 class GameComponent extends Component {
   constructor(props) {
@@ -12,10 +13,14 @@ class GameComponent extends Component {
     this.rigidBody = null;
     this.collisionZones = [];
     this.props.parent.gameComponent = this;
+    if (this.props.cameraFollows) {
+      this.props.world.camera = new Camera(this);
+      this.props.world.startCamera();
+    }
   }
   _isChanged = false;
 
-  add(component) {
+  add = component => {
     this.components.push(component);
 
     if (component.constructor.name === "CollisionZone") {
@@ -23,9 +28,14 @@ class GameComponent extends Component {
     } else if (component.constructor.name === "RigidBody") {
       if (!this.rigidBody) {
         this.rigidBody = component;
-      } else throw "more than one rigidBody not supported";
+      } else throw new Error("more than one rigidBody not supported");
     }
-  }
+  };
+
+  remove = component => {
+    this.components.filterInPlace(component2 => component2 !== component);
+    this.collisionZones.filterInPlace(component2 => component2 !== component);
+  };
 
   get position() {
     return this._position;
@@ -35,10 +45,11 @@ class GameComponent extends Component {
     this._position = position;
   }
 
-  update() {
+  update = () => {
+    if (!this.mounted) return;
     this.setState({});
     this.components.forEach(component => component.update());
-  }
+  };
 
   shouldComponentUpdate() {
     return this._isChanged;
@@ -48,6 +59,17 @@ class GameComponent extends Component {
     React.Children.map(this.props.children, child =>
       React.cloneElement(child, { position: this.position, parent: this })
     );
+
+  componentWillMount() {
+    this.mounted = true;
+    this.props.world.registerComponent(this);
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+    this.props.world.unregisterComponent(this);
+    this.components = [];
+  }
 }
 
 GameComponent.defaultProps = {

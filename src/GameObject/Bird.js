@@ -4,18 +4,27 @@ import RigidBody from "./RigidBody";
 import CollisionZone from "./CollisionZone";
 import Vector from "../Vector/Vector";
 import WithKeyboardSubscribe from "../InputManager/HOC/WithKeyboardSubscribe";
-import EventManager from "../EventManager/EventManager";
+import PropTypes from "prop-types";
+import Game from "./../Game/Game";
 
 class Bird extends Component {
+  constructor(props) {
+    super(props);
+    this.cameraFollows = this.props.cameraFollows;
+  }
+
   componentWillMount() {
-    console.log(this.props);
-    this.props.keyboardSubscribe(this, " ", {
-      physics: { force: new Vector([0, -2000]), duration: 100 },
-      callback: () => console.log("fly")
-    });
+    if (this.props.controller)
+      this.props.keyboardSubscribe(this, " ", {
+        physics: { force: new Vector([0, -2000]), duration: 100 }
+      });
   }
   render = () => (
-    <GameComponent parent={this} position={this.props.position}>
+    <GameComponent
+      cameraFollows={this.cameraFollows}
+      parent={this}
+      position={this.props.position}
+    >
       <RigidBody
         weight={10}
         velocity={this.props.velocity}
@@ -25,13 +34,16 @@ class Bird extends Component {
       />
       <CollisionZone
         offset={new Vector([2, 2])}
-        dimensions={new Vector([10, 10])}
+        dimensions={new Vector([5, 10])}
       />
     </GameComponent>
   );
-  handleCollision(collider) {
-    console.log(this, " collided with ", collider);
-  }
+  handleCollision = collider => {};
 }
 
+Bird.propTypes = { cameraFollows: PropTypes.bool.isRequired };
+Bird.defaultProps = { cameraFollows: false };
+
 export default WithKeyboardSubscribe(Bird);
+
+export const ScoreKeep = props => <h1>{Game.instance.score}</h1>;

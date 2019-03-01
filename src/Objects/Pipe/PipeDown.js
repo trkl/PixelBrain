@@ -5,14 +5,11 @@ import "./PipeDown.css";
 class PipeDown extends Component {
   render() {
     return (
-      <div className="PipeDown">
-        <img
-          alt="PipeDown"
-          className="pipedownimg"
-          src={this.props.resourceManager.getImage("pipeDown.png")}
-          style={{ height: this.props.up + "vh", width: "50px" }}
-        />
-      </div>
+      <img
+        alt="PipeDown"
+        src={this.props.resourceManager.getImage("pipeDown.png")}
+        style={{ height: this.props.up + "vh", width: "50px" }}
+      />
     );
   }
 }
