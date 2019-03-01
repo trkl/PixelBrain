@@ -20,7 +20,7 @@ class GameOverMenu extends React.Component{
                 marginTop: "-50px",
                 marginLeft: "-100px",
                 zIndex: 5,
-                backgroundRepeat: "repeat-x",
+                backgroundRepeat: "no-repeat",
                 overflow: "hidden",
                 backgroundSize: "contain",
             },
