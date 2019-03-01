@@ -8,7 +8,7 @@ class Menu extends React.Component{
 
         this.state = {
             start: this.props.start,
-            dead: this.props.dead,
+            gameOver: this.props.gameOver,
             score: this.props.score,
             bestScore: this.props.bestScore,
         }
@@ -29,7 +29,7 @@ class Menu extends React.Component{
     handleDeath(){
         this.setState((prevState) => {
             return {  
-                dead: !prevState.dead,
+                gameOver: !prevState.gameOver,
                 start: false
             }
         })
@@ -39,7 +39,7 @@ class Menu extends React.Component{
         if(this.state.start){
             temp = <StartMenu />
         }
-        if(this.state.dead){
+        if(this.state.gameOver){
             temp = <GameOverMenu score={this.state.score} bestScore={this.state.bestScore}/>
         }
         return(
