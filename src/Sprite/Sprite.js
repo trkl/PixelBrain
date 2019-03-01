@@ -21,15 +21,15 @@ class Sprite extends React.Component {
           this.props.resourceManager.getImage(this.props.imagesource) +
           ") left center",
         backgroundSize: "cover",
-        animation: "play 0.3s steps(" + n + ") infinite",
-        backgroundSize: "cover"
+        animation: "play 0.3s steps(" + n + ") infinite"
       }
     };
   }
   render() {
     return (
       <div style={this.state.styleSprite}>
-        <style>{`@keyframes play {100% { background-position: ${-this.state.width * this.state.n}px; }}`}</style>
+        <style>{`@keyframes play {100% { background-position: ${-this.state
+          .width * this.state.n}px; }}`}</style>
       </div>
     );
   }

@@ -1,25 +1,81 @@
 import React from "react";
-import PipeDown from "./PipeDown";
-import PipeUp from "./PipeUp";
 import GameComponent from "../../GameObject/GameComponent";
-import RigidBody from "../../GameObject/RigidBody";
 import Vector from "../../Vector/Vector";
 import CollisionZone from "../../GameObject/CollisionZone";
+import Sprite from "../Bird/Sprite";
+import PropTypes from "prop-types";
+import Game from "../../Game/Game";
 
 class Pipes extends React.Component {
+  constructor(props) {
+    super(props);
+    for (const i in this.props) {
+      this[i] = this.props[i];
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    for (const i in props) {
+      this[i] = props[i];
+    }
+  }
+
   render() {
+    const upperPipeOffset = 0;
+    const upperPipeSize = this.upperPipeLength ? this.upperPipeLength : 20;
+    const gap = this.gap ? this.gap : 20;
+    const lowerPipeSize = 100 - upperPipeSize + gap;
+    const lowerPipeOffset = upperPipeOffset + upperPipeSize + gap;
+
     return (
-      <GameComponent parent={this} position={new Vector([10, 10])}>
-        <div style={{ transition: "left 100ms linear ", position: "absolute" }}>
-          <PipeDown up={this.props.up} />
-          <PipeUp down={this.props.down} />
-        </div>
-        <CollisionZone dimensions={new Vector([40, 40])} />
-        <CollisionZone dimensions={new Vector([20, 10])} />
-        <CollisionZone dimensions={new Vector([30, 30])} />
+      <GameComponent parent={this} position={this.position}>
+        {/* <PipeDown up={this.props.up} />
+        <PipeUp down={this.props.down} /> */}
+        <Sprite
+          offset={new Vector([this.offset, upperPipeOffset])}
+          size={new Vector([this.width, upperPipeSize])}
+          imagesource="pipeDown.png"
+        />
+        <CollisionZone
+          offset={new Vector([this.offset, upperPipeOffset])}
+          dimensions={new Vector([this.width, upperPipeSize])}
+        />
+        <Sprite
+          offset={new Vector([this.offset, lowerPipeOffset])}
+          size={new Vector([this.width, 70])}
+          imagesource="pipeUp.png"
+        />
+
+        <CollisionZone
+          offset={new Vector([this.offset, lowerPipeOffset])}
+          dimensions={new Vector([this.width, lowerPipeSize])}
+        />
+        <CollisionZone
+          name="scoreZone"
+          offset={new Vector([this.offset + this.width, upperPipeSize])}
+          dimensions={new Vector([this.width, gap])}
+        />
       </GameComponent>
     );
   }
+  handleCollision = collider => {
+    const { object, collisionZone } = collider;
+    // if (object.constructor.name !== "Bird") return;
+
+    if (collisionZone.name === "scoreZone") {
+      console.log(++Game.instance.score);
+    } else {
+      document.body.innerHTML = "<h1>You Lost</h1>";
+      console.log("you lost!");
+    }
+  };
 }
+
+Pipes.propTypes = {
+  width: PropTypes.number
+};
+Pipes.defaultProps = {
+  width: 4
+};
 
 export default Pipes;

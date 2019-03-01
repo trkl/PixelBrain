@@ -1,3 +1,5 @@
+import Vector from "../Vector/Vector";
+
 export default class Camera {
   // moving objects on screen to simulate camera movement
 
@@ -6,10 +8,13 @@ export default class Camera {
   }
 
   moveCamera(time, gameObjects) {
-    const distance = this.protagonist.velocity.multiply(time / 1000);
+    const distance = this.protagonist.rigidBody.velocity.multiply(time / 1000);
 
     gameObjects.forEach((val, idx) => {
-      gameObjects[idx].position = gameObjects[idx].position.minus(distance);
+      gameObjects[idx].position = new Vector([
+        gameObjects[idx].position.x - distance.x,
+        gameObjects[idx].position.y
+      ]);
     });
 
     // ReactDom.unstable_batchedUpdates(() => {

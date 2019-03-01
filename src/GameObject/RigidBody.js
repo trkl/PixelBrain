@@ -28,6 +28,10 @@ class RigidBody extends Component {
   }
 
   render = () => <></>;
+
+  update = () => {
+    this.setState({});
+  };
 }
 
 RigidBody.propTypes = {

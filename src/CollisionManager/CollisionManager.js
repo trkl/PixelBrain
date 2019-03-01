@@ -7,19 +7,24 @@ export default class CollisionManger {
     return CollisionManger._instance;
   }
 
-  gameObjects = [];
+  gameObjects = [undefined];
 
   add = collisionZone => {
-    this.gameObjects.push(collisionZone);
+    let i = -1;
+    while (this.gameObjects[++i] !== undefined) {
+      this.gameObjects[i] = collisionZone;
+      return i;
+    }
+    return this.gameObjects.push(collisionZone) - 1;
   };
-  remove = collisionZone =>
-    this.gameObjects.filterInPlace(zone => zone !== collisionZone);
+
+  remove = number => (this.gameObjects[number] = undefined);
 
   collisionDetected(obj1, obj2) {
-    const position1 = obj1.props.position;
-    const position2 = obj2.props.position;
-    const bottomRight1 = position1.plus(obj1.dimensions);
-    const bottomRight2 = position2.plus(obj2.dimensions);
+    const position1 = obj1.props.position.plus(obj1.props.offset);
+    const position2 = obj2.props.position.plus(obj2.props.offset);
+    const bottomRight1 = position1.plus(obj1.props.dimensions);
+    const bottomRight2 = position2.plus(obj2.props.dimensions);
     return (
       position1.x < bottomRight2.x &&
       bottomRight1.x > position2.x &&
@@ -33,23 +38,35 @@ export default class CollisionManger {
 
     for (let i = 0, length = this.gameObjects.length; i < length; ++i) {
       const obj1 = this.gameObjects[i];
+      if (!obj1) continue;
       for (let j = i + 1; j < length; ++j) {
         const obj2 = this.gameObjects[j];
-
+        if (!obj2) continue;
         if (this.collisionDetected(obj1, obj2)) {
+          if (obj1.collision.has(obj2)) continue;
+
           collisions.push([
-            obj1.props.parent.props.parent,
-            obj2.props.parent.props.parent
+            {
+              object: obj1.props.parent.props.parent,
+              collisionZone: obj2
+            },
+            {
+              object: obj2.props.parent.props.parent,
+              collisionZone: obj1
+            }
           ]);
+          obj1.collision.add(obj2);
+        } else {
+          obj1.collision.delete(obj2);
         }
       }
     }
     for (const collision of collisions) {
-      collision.forEach(
-        (element, idx) =>
-          element.handleCollision &&
-          element.handleCollision(collision[Number(!idx)])
-      );
+      collision.forEach((element, idx) => {
+        const { object } = element;
+        object.handleCollision &&
+          object.handleCollision(collision[Number(!idx)]);
+      });
     }
   };
 }

@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import WorldContextProvider from "./World/Context/WorldContextProvider";
 import World from "./World/World";
 import KeyboardObservableProvider from "./InputManager/Context/KeyboardObservableContextProvider";
+import ResourceManagerContextProvider from "./Resource Manager/ResourceManagerContextProvider";
 
 class App extends Component {
   render() {
     return (
-      <WorldContextProvider>
-        <KeyboardObservableProvider>
+      <KeyboardObservableProvider>
+        <ResourceManagerContextProvider>
           <World />
-        </KeyboardObservableProvider>
-      </WorldContextProvider>
+        </ResourceManagerContextProvider>
+      </KeyboardObservableProvider>
       // <KeyboardObservableProvider>
       //   <World camera={new Camera()} />
       // </KeyboardObservableProvider>
