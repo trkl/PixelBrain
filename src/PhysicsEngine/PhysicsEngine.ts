@@ -83,9 +83,6 @@ class PhysicsEngine {
     if (!physics || !physics.force) return;
     const { duration } = physics;
 
-    // if (duration && end) {
-    //   throw "both duration and end defined. Not supported... could lead to obscure bugs";
-    // }
     if (end) {
       gameObject.force = gameObject.force.minus(physics.force);
     } else {
@@ -102,30 +99,5 @@ class PhysicsEngine {
     }
   }
 }
-
-// public processEvent(event: Event) {
-//   const { gameObject, physics, end } = event;
-//   if (!gameObject) {
-//     throw "PhysicsEngine: gameObject is undefined or null";
-//   }
-//   // nothing to do if no force is applied
-//   if (!physics || !physics.force) return;
-
-//   const force = end
-//     ? gameObject.force.minus(physics.force)
-//     : gameObject.force.plus(physics.force);
-
-//   const { duration } = physics;
-//   if (duration && end)
-//     throw "both duration and end defined. Not supported... could lead to obscure bugs";
-
-//   // force has finite duration subscribe to remove it at given time
-//   if (!duration != !end) {
-//     Timer.instance.subscribeToTime(
-//       () => (gameObject.force = gameObject.force.minus(physics.force)),
-//       duration
-//     );
-//   }
-// }
 
 export default PhysicsEngine;

@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 
-import GameComponent from "./GameComponent";
-import Pipes from "../Objects/Pipe/Pipes";
-import Vector from "../Vector/Vector";
+import GameComponent from "../../../../GameObject/GameComponent";
+import Pipes from "./Pipes";
+import Vector from "../../../../Vector/Vector";
 import PropTypes from "prop-types";
-import GameObject from "./GameObjectBase/GameObject";
 
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
@@ -27,14 +26,9 @@ export default class PipePool extends Component {
       this.pipes
     );
   }
-  pipeObj = React.createElement(Pipes, {
-    offset: new Vector([this.pipeKey++ * this.interval, 0]),
-    upperPipeLength: getRandomArbitrary(10, 50),
-    key: this.pipeKey++
-  });
 
   prepareForRender = () => {
-    while (this.pipes.length < 7) {
+    while (this.pipes.length < 9) {
       this.pipes.push(
         React.createElement(Pipes, {
           offset: this.pipeKey++ * this.interval,
@@ -49,21 +43,15 @@ export default class PipePool extends Component {
   notOnScreen = [];
 
   rotateRender = () => {
-    console.log("rotate");
-    this.pipes.shift();
     this.pipes.push(
-      React.createElement(Pipes, {
+      React.cloneElement(this.pipes.shift(), {
         offset: this.pipeKey++ * this.interval,
         upperPipeLength: getRandomArbitrary(10, 50),
         key: this.pipeKey
       })
     );
 
-    this.renderObj = React.cloneElement(
-      this.renderObj,
-      { parent: this, position: this.gameComponent.position },
-      this.pipes
-    );
+    this.renderObj = React.cloneElement(this.renderObj, {}, this.pipes);
   };
 
   componentWillReceiveProps(props) {
@@ -76,8 +64,7 @@ export default class PipePool extends Component {
 
   beforeFrameRender = () => {
     const { position } = this.gameComponent;
-    if (position.x + this.interval * (this.pipeKey - 1) < 100) {
-      console.log("rotate");
+    if (position.x + this.interval * this.pipeKey - 3 < 100) {
       this.rotateRender();
     }
   };
