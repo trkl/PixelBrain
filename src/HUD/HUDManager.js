@@ -2,52 +2,66 @@ import React from 'react'
 import './HUDManager.css'
 import Menu from './Menu'
 import WithResources from '../Resource Manager/HOC/WithResources'
-import Game from '../Resources/Games/FlappyBird/Game'
+import Game from '../Game/Game';
+import Timer from '../Timer/Timer';
 
 class HUDManager extends React.Component{
-    constructor(props){
+    constructor (props){
         super(props)
 
         this.state = {
-            score: Game.instance.score,
-            start: false,
-            dead: false,
-            bestScore: 25,
-            font: this.props.font,
+            font: props.font,
             styleScore: {
-                zIndex: props.zindex,
+                zIndex: 6,
                 position: props.position,
                 top: props.top,
                 fontFamily: props.fontFamily,
-                fontSize: props.fontSize,
+                fontSize: 50,
                 textAlign: this.props.textAlign,
                 color: "#FFF",
                 width: "100%",
               },
-            gameOver: Game.instance.gameOver
         }
     }
 
-    handleScore(){
-
-        this.setState(prevScore => {
-            return {  
-                score: prevScore.score + 1
+    componentWillMount() {
+        Timer.instance.subscribe(this.updateScore);
+        Timer.instance.subscribe(this.updateGameOver);
+        Timer.instance.subscribe(this.updateStart);
+       
+        document.addEventListener("keydown", (event) => {
+            if(event.key !== " ") return
+            if(Game.instance.start === false){
+                Game.instance.pause = false
+                Game.instance.start = true
+            }} )
+    }
+    updateScore = () => {
+        if(Game.instance.score !==this.state.score) {
+            this.setState({score: Game.instance.score})
+            if(this.state.score > this.state.highScore){
+                this.setState({highScore: this.state.score})
             }
-        })
+        }
+    }
+    updateGameOver = () => {
+        if(Game.instance.gameOver) {
+            this.setState({gameOver: Game.instance.gameOver})
+            Game.instance.pause = true
+        }
+    }
+    updateStart = () => {
+        if(Game.instance.start !== this.state.start) {
+            this.setState({start: Game.instance.start})
+        }
     }
 
-    displayMenu(){
-
-
-    }
-
+    
     render(){
+        console.log(Game.instance.pause)
         return(
             <div>
-                <Menu start={this.state.start} gameOver={this.state.gameOver} score={this.state.score} bestScore={this.state.bestScore}>
-                </Menu>
-
+                <Menu start={Game.instance.start} gameOver={Game.instance.gameOver} score={Game.instance.score} highScore={Game.instance.highScore}/>
                 <h2 style={this.state.styleScore}>
                 <style>{`@font-face {
                     font-family: '${this.state.styleScore.fontFamily}';
@@ -61,4 +75,4 @@ class HUDManager extends React.Component{
         )
     }
 }
-export default WithResources(HUDManager)
+export default WithKeyboardSubscribe(WithResources(HUDManager))

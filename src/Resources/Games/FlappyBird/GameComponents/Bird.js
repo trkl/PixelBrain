@@ -5,7 +5,8 @@ import CollisionZone from "../../../../GameObject/CollisionZone";
 import Vector from "../../../../Vector/Vector";
 import WithKeyboardSubscribe from "../../../../InputManager/HOC/WithKeyboardSubscribe";
 import PropTypes from "prop-types";
-import Game from "../Game";
+import Game from "./../Game/Game";
+import Sprite from "../Sprite/Sprite";
 
 class Bird extends Component {
   constructor(props) {
@@ -33,9 +34,10 @@ class Bird extends Component {
         drag={0.5}
       />
       <CollisionZone
-        offset={new Vector([2, 2])}
-        dimensions={new Vector([5, 10])}
+        offset={new Vector([0, 0])}
+        dimensions={new Vector([3.1, 7.1])}
       />
+      <Sprite scale={0.1} width={1674} height={620} n={3} imagesource="puffinpixel.png"/>
     </GameComponent>
   );
   handleCollision = collider => {};

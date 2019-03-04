@@ -66,9 +66,14 @@ class Pipes extends React.Component {
     }
 
     if (collisionZone.name === "scoreZone") {
-      console.log(++Game.instance.score);
+      ++Game.instance.score;
     } else {
-      Game.instance.gameOver();
+      Game.instance.gameOver = true;
+      if(Game.instance.score > Game.instance.highScore){
+        Game.instance.highScore = Game.instance.score
+      }
+      // document.body.innerHTML = "<h1>You Lost</h1>";
+      // console.log("you lost!");
     }
   };
 }

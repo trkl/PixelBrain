@@ -1,3 +1,5 @@
+import Game from "../Game/Game";
+
 export default class Timer {
   static _instance = undefined;
   static get instance() {
@@ -54,8 +56,8 @@ export default class Timer {
   pause = false;
 
   step = () => {
-    if (this.pause) return;
     requestAnimationFrame(this.step);
+    if (Game.instance.pause) {this.time = this.now();return};
     this.handleOneTimers();
     const dt = this.now() - this.time;
     if (dt >= this.interval) {

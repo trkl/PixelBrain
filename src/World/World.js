@@ -12,6 +12,8 @@ import WorldContextProvider from "./Context/WorldContextProvider";
 import Game from "./../Resources/Games/FlappyBird/Game";
 import HUDManager from "../HUD/HUDManager";
 
+
+
 class World extends React.Component {
   constructor(props) {
     super(props);
@@ -49,8 +51,23 @@ class World extends React.Component {
 
   render = () => (
     <WorldContextProvider>
+<<<<<<< HEAD
+      { <BackgroundManager /> }
+      <Bird
+        cameraFollows={true}
+        force={new Vector([30, 0])}
+        position={new Vector([5, 30])}
+        gravity={3}
+        weight={20}
+        controller={true}
+        
+      />
+      
+      <PipePool position={new Vector([40, 0])} />
+=======
       <Game />
 
+>>>>>>> 22c022a4d475312b5fce69406f38f597aa121432
     </WorldContextProvider>
   );
 
