@@ -5,7 +5,7 @@ import CollisionZone from "../../../../GameObject/CollisionZone";
 import Vector from "../../../../Vector/Vector";
 import WithKeyboardSubscribe from "../../../../InputManager/HOC/WithKeyboardSubscribe";
 import PropTypes from "prop-types";
-import Game from "../../../../Game/Game";
+import Game from "../Game";
 
 class Bird extends Component {
   constructor(props) {

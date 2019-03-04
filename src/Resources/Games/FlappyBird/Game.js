@@ -22,17 +22,17 @@ Game.instance = {
 };
 
 Game.gameComponents = [
-  <BackgorundManager />,
+  // <BackgorundManager />,
   <Bird
     cameraFollows={true}
     force={new Vector([30, 0])}
     position={new Vector([5, 30])}
-    gravity={4}
+    gravity={3}
     weight={20}
     controller={true}
   />,
-  <PipePool position={new Vector([40, 0])} />,
-  <Floor position={new Vector([0, 80])} dimensions={new Vector([100, 20])} />
+  <PipePool position={new Vector([40, 0])} />
+  // <Floor position={new Vector([0, 80])} dimensions={new Vector([100, 20])} />
 ];
 
 export default Game;
