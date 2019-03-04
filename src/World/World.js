@@ -1,17 +1,15 @@
 import React from "react";
+import ReactDOM from "react-dom";
 
-import Vector from "../Vector/Vector";
 import WithKeyboardSubscribe from "../InputManager/HOC/WithKeyboardSubscribe";
 import Timer from "../Timer/Timer";
 import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
 import CollisionManger from "../CollisionManager/CollisionManager";
-import Bird, { ScoreKeep } from "../GameObject/Bird";
+
 import EventManager from "../EventManager/EventManager";
-import BackgroundManager from "../BackgroundManager/BackgroundManager";
-import PipePool from "../GameObject/PipePool";
 import Camera from "./../Camera/Camera";
 import WorldContextProvider from "./Context/WorldContextProvider";
-import GameObject from "../GameObject/GameObjectBase/GameObject";
+import Game from "./../Resources/Games/FlappyBird/Game";
 import HUDManager from "../HUD/HUDManager";
 
 
@@ -39,8 +37,10 @@ class World extends React.Component {
   };
 
   updateWorld = () => {
-    this.components.forEach(component => component.update());
-    this.setState({});
+    ReactDOM.unstable_batchedUpdates(() => {
+      this.components.forEach(component => component.update());
+      this.setState({});
+    });
   };
 
   componentWillMount() {}
@@ -51,6 +51,7 @@ class World extends React.Component {
 
   render = () => (
     <WorldContextProvider>
+<<<<<<< HEAD
       { <BackgroundManager /> }
       <Bird
         cameraFollows={true}
@@ -63,6 +64,10 @@ class World extends React.Component {
       />
       
       <PipePool position={new Vector([40, 0])} />
+=======
+      <Game />
+
+>>>>>>> 22c022a4d475312b5fce69406f38f597aa121432
     </WorldContextProvider>
   );
 

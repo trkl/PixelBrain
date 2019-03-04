@@ -3,8 +3,9 @@ import Vector from "../Vector/Vector";
 export default class Camera {
   // moving objects on screen to simulate camera movement
 
-  constructor(gameObject) {
-    this.protagonist = gameObject;
+  constructor(rigidBody) {
+    console.log(rigidBody);
+    this.protagonist = rigidBody;
   }
 
   moveCamera(time, gameObjects) {

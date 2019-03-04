@@ -36,8 +36,9 @@ export default class CollisionZone extends Component {
   };
 
   render = () => {
-    const newPosition = this.props.position.plus(this.props.offset);
+    const realPosition = this.props.position.plus(this.props.offset);
     const { dimensions } = this.props;
+<<<<<<< HEAD
     return (<></>
       // <div
       //   style={{
@@ -49,6 +50,19 @@ export default class CollisionZone extends Component {
       //     backgroundColor: "rgba(99,99,99,.1)"
       //   }}
       // />
+=======
+    return (
+      <div
+        style={{
+          position: "absolute",
+          height: dimensions.y + "%",
+          width: dimensions.x + "%",
+          top: realPosition.y + "%",
+          left: realPosition.x + "%",
+          backgroundColor: "rgba(99,99,99,.1)"
+        }}
+      />
+>>>>>>> 22c022a4d475312b5fce69406f38f597aa121432
     );
   };
 }
