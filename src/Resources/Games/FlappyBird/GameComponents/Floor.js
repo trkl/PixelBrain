@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import GameComponent from "../../../../GameObject/GameComponent";
 import CollisionZone from "../../../../GameObject/CollisionZone";
-import Vector from "../../../../Vector/Vector";
 import Game from "./../Game";
 
 export default class Floor extends Component {
@@ -19,7 +18,7 @@ export default class Floor extends Component {
   );
   handleCollision = collider => {
     if (collider.object.constructor.name === "Bird") {
-      Game.instance.gameOver();
+      Game.instance.gameOver = true;
       console.log("Game Over!");
       console.log(collider);
     }

@@ -6,23 +6,21 @@ import BackgorundManager from "./../../../BackgroundManager/BackgroundManager";
 import Floor from "./GameComponents/Floor";
 
 class Game extends React.Component {
-  render = () => Game.gameComponents.map((component, idx) => ({...component, key: idx}));
+  render = () =>
+    Game.gameComponents.map((component, idx) => ({ ...component, key: idx }));
   shouldComoponentUpdate = () => false;
 }
 
 Game.instance = {
   name: "Flappy Bird",
   score: 0,
-  gameOver: function() {
-    document.body.innerHTML = `<h1>Game Over. Your score was ${
-      Game.instance.score
-    }</h1>`;
-  },
-  pause: false
+  gameOver: false,
+  start: false,
+  pause: true
 };
 
 Game.gameComponents = [
-  // <BackgorundManager />,
+  <BackgorundManager />,
   <Bird
     cameraFollows={true}
     force={new Vector([30, 0])}

@@ -4,6 +4,7 @@ import GameComponent from "../../../../GameObject/GameComponent";
 import Pipes from "./Pipes";
 import Vector from "../../../../Vector/Vector";
 import PropTypes from "prop-types";
+import Game from "../Game";
 
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
@@ -27,8 +28,12 @@ export default class PipePool extends Component {
     );
   }
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
   prepareForRender = () => {
-    while (this.pipes.length < 9) {
+    while (this.pipes.length < 7) {
       this.pipes.push(
         React.createElement(Pipes, {
           offset: this.pipeKey++ * this.interval,
@@ -39,8 +44,6 @@ export default class PipePool extends Component {
       );
     }
   };
-
-  notOnScreen = [];
 
   rotateRender = () => {
     this.pipes.push(
@@ -68,6 +71,13 @@ export default class PipePool extends Component {
       this.rotateRender();
     }
   };
+
+  handleCollision({ object, collisionZone }) {
+    if (object.constructor.name !== "Bird") return;
+    if (collisionZone.name === "scoreZone") {
+      Game.instance.score += 1;
+    }
+  }
 }
 
 PipePool.propTypes = {
