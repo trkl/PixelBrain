@@ -4,12 +4,20 @@ import "./App.css";
 import World from "./World/World";
 import KeyboardObservableProvider from "./InputManager/Context/KeyboardObservableContextProvider";
 import ResourceManagerContextProvider from "./Resource Manager/ResourceManagerContextProvider";
+import HUDManager from "./HUD/HUDManager";
 
 class App extends Component {
   render() {
     return (
       <KeyboardObservableProvider>
         <ResourceManagerContextProvider>
+          <HUDManager
+            font="pixel.ttf"
+            fontFamily="Pixel"
+            textAlign="center"
+            position="absolute"
+            top="20px"
+          />
           <World />
         </ResourceManagerContextProvider>
       </KeyboardObservableProvider>
