@@ -19,11 +19,6 @@ class World extends React.Component {
     WorldContextProvider.WorldInstance = this;
   }
 
-  // componentWillMount() {
-  //   Game.instance.pause = false;
-  //   Game.instance.started = true;
-  // }
-
   registerComponent = component => {
     if (this.camera === null && component.cameraFollows) {
       this.camera = new Camera(component.rigidBody);

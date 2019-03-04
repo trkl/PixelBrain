@@ -15,12 +15,12 @@ Game.instance = {
   name: "Flappy Bird",
   score: 0,
   gameOver: false,
-  started: false,
+  start: false,
   pause: true
 };
 
 Game.gameComponents = [
-  // <BackgorundManager />,
+  <BackgorundManager />,
   <Bird
     cameraFollows={true}
     force={new Vector([30, 0])}
