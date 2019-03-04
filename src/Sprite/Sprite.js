@@ -4,7 +4,7 @@ import WithResources from "../Resource Manager/HOC/WithResources";
 class Sprite extends React.Component {
   constructor(props) {
     super(props);
-    let { height, width, n, scale } = this.props;
+    let { position, height, width, n, scale } = this.props;
 
     height = height * scale;
     width = (width / n) * scale;
@@ -14,6 +14,7 @@ class Sprite extends React.Component {
       scale: scale,
       n: n,
       styleSprite: {
+        position: "absolute",
         width: width,
         height: height,
         background:
@@ -27,7 +28,8 @@ class Sprite extends React.Component {
   }
   render() {
     return (
-      <div style={this.state.styleSprite}>
+
+      <div style={{...this.state.styleSprite, top: this.props.position.y+"%", left: this.props.position.x+"%"}}>
         <style>{`@keyframes play {100% { background-position: ${-this.state
           .width * this.state.n}px; }}`}</style>
       </div>

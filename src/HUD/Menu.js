@@ -9,7 +9,7 @@ class Menu extends React.Component{
 
     render(){
         let temp       
-        if(this.props.start){
+        if(!this.props.start){
             temp = <StartMenu />
         }
         if(this.props.gameOver){

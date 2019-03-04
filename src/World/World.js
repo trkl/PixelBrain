@@ -15,6 +15,7 @@ import GameObject from "../GameObject/GameObjectBase/GameObject";
 import HUDManager from "../HUD/HUDManager";
 
 
+
 class World extends React.Component {
   constructor(props) {
     super(props);
@@ -50,10 +51,7 @@ class World extends React.Component {
 
   render = () => (
     <WorldContextProvider>
-      <HUDManager />
-      { <Bird position={new Vector([0, 0])} /> }
       { <BackgroundManager /> }
-      <ScoreKeep />
       <Bird
         cameraFollows={true}
         force={new Vector([30, 0])}
@@ -61,7 +59,9 @@ class World extends React.Component {
         gravity={3}
         weight={20}
         controller={true}
+        
       />
+      
       <PipePool position={new Vector([40, 0])} />
     </WorldContextProvider>
   );
