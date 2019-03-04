@@ -12,6 +12,7 @@ import PipePool from "../GameObject/PipePool";
 import Camera from "./../Camera/Camera";
 import WorldContextProvider from "./Context/WorldContextProvider";
 import GameObject from "../GameObject/GameObjectBase/GameObject";
+import HUDManager from "../HUD/HUDManager";
 
 class World extends React.Component {
   constructor(props) {
@@ -49,8 +50,7 @@ class World extends React.Component {
   render = () => (
     <WorldContextProvider>
       {/* <Bird position={new Vector([0, 0])} /> */}
-      {/* <BackgroundManager /> */}
-      <ScoreKeep />
+     <BackgroundManager /> 
       <Bird
         cameraFollows={true}
         force={new Vector([30, 0])}
