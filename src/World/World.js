@@ -1,17 +1,15 @@
 import React from "react";
+import ReactDOM from "react-dom";
 
-import Vector from "../Vector/Vector";
 import WithKeyboardSubscribe from "../InputManager/HOC/WithKeyboardSubscribe";
 import Timer from "../Timer/Timer";
 import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
 import CollisionManger from "../CollisionManager/CollisionManager";
-import Bird, { ScoreKeep } from "../GameObject/Bird";
+
 import EventManager from "../EventManager/EventManager";
-import BackgroundManager from "../BackgroundManager/BackgroundManager";
-import PipePool from "../GameObject/PipePool";
 import Camera from "./../Camera/Camera";
 import WorldContextProvider from "./Context/WorldContextProvider";
-import GameObject from "../GameObject/GameObjectBase/GameObject";
+import Game from "./../Resources/Games/FlappyBird/Game";
 import HUDManager from "../HUD/HUDManager";
 
 class World extends React.Component {
@@ -37,8 +35,10 @@ class World extends React.Component {
   };
 
   updateWorld = () => {
-    this.components.forEach(component => component.update());
-    this.setState({});
+    ReactDOM.unstable_batchedUpdates(() => {
+      this.components.forEach(component => component.update());
+      this.setState({});
+    });
   };
 
   componentWillMount() {}
@@ -49,17 +49,8 @@ class World extends React.Component {
 
   render = () => (
     <WorldContextProvider>
-      {/* <Bird position={new Vector([0, 0])} /> */}
-     <BackgroundManager /> 
-      <Bird
-        cameraFollows={true}
-        force={new Vector([30, 0])}
-        position={new Vector([5, 30])}
-        gravity={3}
-        weight={20}
-        controller={true}
-      />
-      <PipePool position={new Vector([40, 0])} />
+      <Game />
+
     </WorldContextProvider>
   );
 

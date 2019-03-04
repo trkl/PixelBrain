@@ -1,11 +1,11 @@
-import GameComponent from "./GameComponent";
+import GameComponent from "../../../../GameObject/GameComponent";
 import React, { Component } from "react";
-import RigidBody from "./RigidBody";
-import CollisionZone from "./CollisionZone";
-import Vector from "../Vector/Vector";
-import WithKeyboardSubscribe from "../InputManager/HOC/WithKeyboardSubscribe";
+import RigidBody from "../../../../GameObject/RigidBody";
+import CollisionZone from "../../../../GameObject/CollisionZone";
+import Vector from "../../../../Vector/Vector";
+import WithKeyboardSubscribe from "../../../../InputManager/HOC/WithKeyboardSubscribe";
 import PropTypes from "prop-types";
-import Game from "./../Game/Game";
+import Game from "../Game";
 
 class Bird extends Component {
   constructor(props) {

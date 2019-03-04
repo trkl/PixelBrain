@@ -23,12 +23,10 @@ export default class CollisionZone extends Component {
 
   componentWillMount() {
     this.props.parent.add(this);
-    console.log("collisionZone: ", this.name, " willMount");
     this.idx = CollisionManger.instance.add(this);
   }
 
   componentWillUnmount() {
-    console.log("collisionZone: ", this.name, " unMount");
     CollisionManger.instance.remove(this.idx);
     this.props.parent.remove(this);
   }
@@ -38,7 +36,7 @@ export default class CollisionZone extends Component {
   };
 
   render = () => {
-    const newPosition = this.props.position.plus(this.props.offset);
+    const realPosition = this.props.position.plus(this.props.offset);
     const { dimensions } = this.props;
     return (
       <div
@@ -46,8 +44,8 @@ export default class CollisionZone extends Component {
           position: "absolute",
           height: dimensions.y + "%",
           width: dimensions.x + "%",
-          top: newPosition.y + "%",
-          left: newPosition.x + "%",
+          top: realPosition.y + "%",
+          left: realPosition.x + "%",
           backgroundColor: "rgba(99,99,99,.1)"
         }}
       />
