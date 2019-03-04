@@ -16,7 +16,8 @@ Game.instance = {
   score: 0,
   gameOver: false,
   start: false,
-  pause: true
+  pause: true,
+  highScore: 0
 };
 
 Game.gameComponents = [
