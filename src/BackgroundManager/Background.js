@@ -19,7 +19,6 @@ class Background extends Component {
         zIndex: props.zindex,
         overflow: "hidden"
       },
-      ResourceManager: props.ResourceManager
     };
   }
 
