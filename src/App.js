@@ -11,7 +11,13 @@ class App extends Component {
     return (
       <KeyboardObservableProvider>
         <ResourceManagerContextProvider>
-          <HUDManager font= "pixel.ttf" fontFamily="Pixel" textAlign="center" position="absolute" top="30px"/>
+          <HUDManager
+            font="pixel.ttf"
+            fontFamily="Pixel"
+            textAlign="center"
+            position="absolute"
+            top="20px"
+          />
           <World />
         </ResourceManagerContextProvider>
       </KeyboardObservableProvider>
