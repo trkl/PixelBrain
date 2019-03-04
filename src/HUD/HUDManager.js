@@ -4,6 +4,7 @@ import Menu from './Menu'
 import WithResources from '../Resource Manager/HOC/WithResources'
 import Game from '../Game/Game';
 import Timer from '../Timer/Timer';
+import WithKeyboardSubscribe from '../InputManager/HOC/WithKeyboardSubscribe'
 
 class HUDManager extends React.Component{
     constructor (props){
