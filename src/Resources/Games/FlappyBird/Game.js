@@ -6,7 +6,7 @@ import BackgorundManager from "./../../../BackgroundManager/BackgroundManager";
 import Floor from "./GameComponents/Floor";
 
 class Game extends React.Component {
-  render = () => Game.gameComponents;
+  render = () => Game.gameComponents.map((component, idx) => ({...component, key: idx}));
   shouldComoponentUpdate = () => false;
 }
 
