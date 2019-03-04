@@ -2,7 +2,7 @@ import React from 'react'
 import './HUDManager.css'
 import Menu from './Menu'
 import WithResources from '../Resource Manager/HOC/WithResources'
-import Game from '../Game/Game';
+import Game from '../Resources/Games/FlappyBird/Game'
 
 class HUDManager extends React.Component{
     constructor(props){
@@ -57,7 +57,6 @@ class HUDManager extends React.Component{
                  </style>
                  {this.state.score}
                 </h2>
-               
             </div>
         )
     }
