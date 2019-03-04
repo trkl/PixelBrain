@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <KeyboardObservableProvider>
         <ResourceManagerContextProvider>
-          <HUDManager />
+          
           <World />
         </ResourceManagerContextProvider>
       </KeyboardObservableProvider>

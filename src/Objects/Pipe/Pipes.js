@@ -63,10 +63,14 @@ class Pipes extends React.Component {
     // if (object.constructor.name !== "Bird") return;
 
     if (collisionZone.name === "scoreZone") {
-      console.log(++Game.instance.score);
+      ++Game.instance.score;
     } else {
-      document.body.innerHTML = "<h1>You Lost</h1>";
-      console.log("you lost!");
+      Game.instance.gameOver = true;
+      if(Game.instance.score > Game.instance.highScore){
+        Game.instance.highScore = Game.instance.score
+      }
+      // document.body.innerHTML = "<h1>You Lost</h1>";
+      // console.log("you lost!");
     }
   };
 }

@@ -3,6 +3,7 @@ import './HUDManager.css'
 import Menu from './Menu'
 import WithResources from '../Resource Manager/HOC/WithResources'
 import Game from '../Game/Game';
+import Timer from '../Timer/Timer';
 
 class HUDManager extends React.Component{
     constructor(props){
@@ -10,30 +11,35 @@ class HUDManager extends React.Component{
 
         this.state = {
             score: Game.instance.score,
-            start: false,
+            start: Game.instance.score,
             gameOver: Game.instance.gameOver,
-            bestScore: 25
+            highScore: Game.instance.highScore
         }
     }
 
-    handleScore(){
-
-        this.setState(prevScore => {
-            return {  
-                score: prevScore.score + 1
+    componentWillMount() {
+        Timer.instance.subscribe(this.updateScore);
+        Timer.instance.subscribe(this.updateGameOver);
+    }
+    updateScore = () => {
+        if(Game.instance.score !==this.state.score) {
+            this.setState({score: Game.instance.score})
+            if(this.state.score > this.state.highScore){
+                this.setState({highScore: this.state.score})
             }
-        })
+        }
     }
-
-    displayMenu(){
-
-
+    updateGameOver = () => {
+        if(Game.instance.gameOver !== this.state.gameOver) {
+            this.setState({gameOver: Game.instance.gameOver})
+            Game.instance.pause = true
+        }
     }
-
+    
     render(){
         return(
             <div>
-                <Menu start={this.state.start} gameOver={this.state.gameOver} score={this.state.score} bestScore={this.state.bestScore}/>
+                <Menu start={this.state.start} gameOver={this.state.gameOver} score={this.state.score} highScore={this.state.highScore}/>
                 {<h2>{this.state.score}</h2>}
             </div>
         )

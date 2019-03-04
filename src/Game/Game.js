@@ -7,4 +7,5 @@ export default class Game {
   gameOver = false;
   score = 0;
   pause = false;
+  highScore = 0;
 }

@@ -36,7 +36,7 @@ class GameOverMenu extends React.Component{
                 marginTop: "-50px",
                 marginLeft: "-100px",
                 zIndex: 5,
-                backgroundRepeat: "repeat-x",
+                backgroundRepeat: "no-repeat",
                 overflow: "hidden",
                 backgroundSize: "contain",
             },
@@ -50,7 +50,7 @@ class GameOverMenu extends React.Component{
                 fontSize: 60,
                 fontWeight: "bold"
             },
-            bestScoreStyle: {
+            highScoreStyle: {
                 position: 'relative',
                 top: "68%",
                 left: "95%",
@@ -59,10 +59,7 @@ class GameOverMenu extends React.Component{
                 zIndex: 5,
                 fontSize: 60,
                 fontWeight: "bold"
-            },
-
-            bestScore: props.bestScore,
-            score: props.score,            
+            },          
         }
     }
 
@@ -71,8 +68,8 @@ class GameOverMenu extends React.Component{
             <div>
                 <div style={this.state.gameOverStyleImg}></div>
                 <div style={this.state.scoreBoardStyleImg}>
-                    <div style={this.state.scoreStyle}>{this.state.score}</div>
-                    <div style={this.state.bestScoreStyle}>{this.state.bestScore}</div>
+                    <div style={this.state.scoreStyle}>{this.props.score}</div>
+                    <div style={this.state.highScoreStyle}>{this.props.highScore}</div>
                 </div>
             </div>
         )
