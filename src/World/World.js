@@ -1,20 +1,15 @@
 import React from "react";
-
-import Vector from "../Vector/Vector";
 import WithKeyboardSubscribe from "../InputManager/HOC/WithKeyboardSubscribe";
 import Timer from "../Timer/Timer";
 import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
 import CollisionManger from "../CollisionManager/CollisionManager";
-import Bird, { ScoreKeep } from "../GameObject/Bird";
+
 import EventManager from "../EventManager/EventManager";
-import BackgroundManager from "../BackgroundManager/BackgroundManager";
-import PipePool from "../GameObject/PipePool";
+
 import Camera from "./../Camera/Camera";
 import WorldContextProvider from "./Context/WorldContextProvider";
-import GameObject from "../GameObject/GameObjectBase/GameObject";
-import HUDManager from "../HUD/HUDManager";
 
-
+import Game from "./../Resources/Games/FlappyBird/Game";
 
 class World extends React.Component {
   constructor(props) {
@@ -23,6 +18,11 @@ class World extends React.Component {
     this.components = [];
     WorldContextProvider.WorldInstance = this;
   }
+
+  // componentWillMount() {
+  //   Game.instance.pause = false;
+  //   Game.instance.started = true;
+  // }
 
   registerComponent = component => {
     if (this.camera === null && component.cameraFollows) {
@@ -43,26 +43,13 @@ class World extends React.Component {
     this.setState({});
   };
 
-  componentWillMount() {}
-
   shouldComponentUpdate() {
     return false;
   }
 
   render = () => (
     <WorldContextProvider>
-      { <BackgroundManager /> }
-      <Bird
-        cameraFollows={true}
-        force={new Vector([30, 0])}
-        position={new Vector([5, 30])}
-        gravity={3}
-        weight={20}
-        controller={true}
-        
-      />
-      
-      <PipePool position={new Vector([40, 0])} />
+      <Game />
     </WorldContextProvider>
   );
 
