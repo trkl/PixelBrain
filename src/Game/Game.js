@@ -6,5 +6,7 @@ export default class Game {
   }
   gameOver = false;
   score = 0;
-  pause = false;
+  pause = true;
+  start = false;
+  highScore = 0;
 }
