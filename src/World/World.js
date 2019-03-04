@@ -51,7 +51,6 @@ class World extends React.Component {
     <WorldContextProvider>
       {/* <Bird position={new Vector([0, 0])} /> */}
      <BackgroundManager /> 
-       <ScoreKeep /> 
       <Bird
         cameraFollows={true}
         force={new Vector([30, 0])}
