@@ -1,10 +1,10 @@
 import React from "react";
-import GameComponent from "../../GameObject/GameComponent";
-import Vector from "../../Vector/Vector";
-import CollisionZone from "../../GameObject/CollisionZone";
-import Sprite from "../Bird/Sprite";
+import GameComponent from "../../../../GameObject/GameComponent";
+import Vector from "../../../../Vector/Vector";
+import CollisionZone from "../../../../GameObject/CollisionZone";
+import Sprite from "../../../../GameComponents/Sprite";
 import PropTypes from "prop-types";
-import Game from "../../Game/Game";
+import Game from "../Game";
 
 class Pipes extends React.Component {
   constructor(props) {
@@ -61,12 +61,14 @@ class Pipes extends React.Component {
   handleCollision = collider => {
     const { object, collisionZone } = collider;
     // if (object.constructor.name !== "Bird") return;
+    if (object.constructor.name !== "Bird") {
+      return;
+    }
 
     if (collisionZone.name === "scoreZone") {
       console.log(++Game.instance.score);
     } else {
-      document.body.innerHTML = "<h1>You Lost</h1>";
-      console.log("you lost!");
+      Game.instance.gameOver();
     }
   };
 }

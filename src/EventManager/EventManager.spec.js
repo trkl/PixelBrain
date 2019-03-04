@@ -3,7 +3,7 @@ import GameComponent from "./../GameObject/GameComponent";
 import Vector from "../Vector/Vector";
 import React from "react";
 import ReactDOM from "react-dom";
-import Bird from "./../GameObject/Bird";
+import Bird from "../Resources/Games/FlappyBird/GameComponents/Bird";
 import { act } from "react-dom/test-utils";
 
 describe("EventManager", () => {
@@ -34,14 +34,6 @@ describe("EventManager", () => {
   it("'handleTick should call callbacks of events'", () => {
     let best = { success: false };
 
-    act(() => {
-      ReactDOM.render(
-        <Bird>
-          <GameComponent />
-        </Bird>,
-        container
-      );
-    });
     event.callback = () => (best = { success: true });
     console.log(event);
 
