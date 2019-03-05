@@ -40,7 +40,9 @@ export default class EventManager {
       const event = eventQueue[i];
       PhysicsEngine.instance.processEvent(event);
       if(!event.end){
-        this.audioManager.playSound(event.audio.soundName)
+        if(event.audio) {
+          this.audioManager.playSound(event.audio.soundName)
+        }
       }
       const { callback } = event;
       if (callback) callback();
