@@ -1,41 +1,31 @@
-import React, { Component } from 'react';
-import bird from './Resources/Images/flappybirdBackground.png';
-//import Game from './Game'
-import './App.css';
-import ResourceManager from './Resource Manager';
+import React, { Component } from "react";
+import "./App.css";
+
+import World from "./World/World";
+import KeyboardObservableProvider from "./InputManager/Context/KeyboardObservableContextProvider";
+import ResourceManagerContextProvider from "./Resource Manager/ResourceManagerContextProvider";
+import HUDManager from "./HUD/HUDManager";
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      gameName: "Flappy Bird",
-      ResourceManager: new ResourceManager('Flappy Bird')
-    }
-  }
-
-  findImage = (index) => {
-    return <img src={require(`${ this.state.ResourceManager.getImagePaths(index) }`)} />; // require makes it possible to use local paths
-  }
-
   render() {
     return (
-      <div className="App">
-
-        <div>
-          {
-            this.findImage(3) // get desired image 
-          }
-
-        </div>
-
-        <div>
-          {/* <img src={bird} className='CharacterSprite' alt='sprite' /> */}
-        </div>
-
-      </div>
+      <KeyboardObservableProvider>
+        <ResourceManagerContextProvider>
+          <HUDManager
+            font="pixel.ttf"
+            fontFamily="Pixel"
+            textAlign="center"
+            position="absolute"
+            top="20px"
+          />
+          <World />
+        </ResourceManagerContextProvider>
+      </KeyboardObservableProvider>
+      // <KeyboardObservableProvider>
+      //   <World camera={new Camera()} />
+      // </KeyboardObservableProvider>
     );
   }
+  componentDidMount() {}
 }
-
 export default App;
