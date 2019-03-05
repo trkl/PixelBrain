@@ -5,6 +5,7 @@ import CollisionZone from "../../../../GameObject/CollisionZone";
 import Sprite from "../../../../GameComponents/Sprite";
 import PropTypes from "prop-types";
 import Game from "../Game";
+import AudioManager from "../../../../AudioManager/AudioManager";
 
 class Pipes extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class Pipes extends React.Component {
     for (const i in this.props) {
       this[i] = this.props[i];
     }
+    this.AudioManager = new AudioManager()
   }
 
   componentWillReceiveProps(props) {
@@ -67,8 +69,12 @@ class Pipes extends React.Component {
 
     if (collisionZone.name === "scoreZone") {
       ++Game.instance.score;
+      this.AudioManager.playSound("sfx_point.wav")
+
     } else {
       Game.instance.gameOver = true;
+      this.AudioManager.playSound("sfx_hit.wav")
+      this.AudioManager.playSound("sfx_die.wav")
       if(Game.instance.score > Game.instance.highScore){
         Game.instance.highScore = Game.instance.score
       }
