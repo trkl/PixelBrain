@@ -2,7 +2,6 @@ import React from "react";
 import Vector from "./../../../Vector/Vector";
 import Runner from "./GameComponents/Runner";
 import SheepPool from "./GameComponents/SheepPool";
-import BackgorundManager from "./../../../BackgroundManager/BackgroundManager";
 import Floor from "./GameComponents/Floor";
 import Background from '../../../BackgroundManager/Background'
 import HUDManager from "./HUD/HUDManager";

@@ -33,6 +33,7 @@ class HUDManager extends React.Component {
       if (Game.instance.start === false) {
         Game.instance.pause = false;
         Game.instance.start = true;
+        console.log("shit")
       }
     });
   }
