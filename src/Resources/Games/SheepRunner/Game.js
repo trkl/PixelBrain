@@ -1,10 +1,10 @@
 import React from "react";
 import Vector from "./../../../Vector/Vector";
-import Bird from "./GameComponents/Bird";
-import PipePool from "./GameComponents/PipePool";
+import Runner from "./GameComponents/Runner";
+import SheepPool from "./GameComponents/SheepPool";
 import Floor from "./GameComponents/Floor";
-import HUDManager from "./HUD/HUDManager";
 import Background from '../../../BackgroundManager/Background'
+import HUDManager from "./HUD/HUDManager";
 
 class Game extends React.Component {
   render = () =>
@@ -13,7 +13,7 @@ class Game extends React.Component {
 }
 
 Game.instance = {
-  name: "Flappy Bird",
+  name: "Sheep Runner",
   score: 0,
   gameOver: false,
   start: false,
@@ -22,33 +22,28 @@ Game.instance = {
 };
 
 Game.gameComponents = [
-  <Background imagesource="Grass.png" speed={-1} zindex={1} />,
+  // <BackgorundManager />,
+  <HUDManager
+            font="pixel.ttf"
+            fontFamily="Pixel"
+            textAlign="center"
+            position="absolute"
+            top="20px"
+          />,
+  <Background imagesource="SheepGrass.png" speed={-1} zindex={1} />,
   <Background imagesource="kalsoy.png" speed={-0.2} zindex={-1} />,
   <Background imagesource="Clouds.png" speed={-0.6} zindex={-2} />,
-  <Background imagesource="Background.png" speed={-0.2} zindex={-3} />,
-  <HUDManager
-  font="pixel.ttf"
-  fontFamily="Pixel"
-  textAlign="center"
-  position="absolute"
-  top="20px"
-  />, 
-  <Bird
+  <Background imagesource="SheepBackground.png" speed={-0.2} zindex={-3} />,
+  <Background imagesource="disneyTruck.png" speed={-0.2} zindex={0} />,
+  <Runner
     cameraFollows={true}
-    force={new Vector([30, 0])}
-    position={new Vector([5, 30])}
-    gravity={3}
-    weight={20}
+    force={new Vector([300, 0])}
+    position={new Vector([0, 60])}
+    gravity={4}
+    weight={40}
     controller={true}
   />,
-   <HUDManager
-   font="pixel.ttf"
-   fontFamily="Pixel"
-   textAlign="center"
-   position="absolute"
-   top="20px"
- />,
-  <PipePool position={new Vector([40, 0])} />,
+  <SheepPool position={new Vector([60, 0])} />,
   <Floor position={new Vector([0, 80])} dimensions={new Vector([100, 20])} />
 ];
 

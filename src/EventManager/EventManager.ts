@@ -3,6 +3,7 @@ import Event from "../Events/Event";
 import CollisionManger from "../CollisionManager/CollisionManager";
 import Timer from "../Timer/Timer";
 import AudioManager from "../AudioManager/AudioManager"
+import Game from "../Resources/Games/SheepRunner/Game";
 
 export default class EventManager {
   eventQueue: Event[] = [];
@@ -38,12 +39,15 @@ export default class EventManager {
     
     for (let i = 0; i < length; ++i) {
       const event = eventQueue[i];
-      PhysicsEngine.instance.processEvent(event);
+      PhysicsEngine.instance.processEvent(event);      
       if(!event.end){
-        this.audioManager.playSound(event.audio.soundName)
+        if(event.audio) {
+          this.audioManager.playSound(event.audio.soundName)
+        }
       }
       const { callback } = event;
       if (callback) callback();
     }
   };
 }
+
