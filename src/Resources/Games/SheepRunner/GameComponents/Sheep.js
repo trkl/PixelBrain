@@ -6,48 +6,40 @@ import Sprite from "../../../../GameComponents/Sprite";
 import PropTypes from "prop-types";
 import Game from "../Game";
 import AudioManager from "../../../../AudioManager/AudioManager";
+import { WithWorld } from "../../../../World/HOC/WithWorld";
 
 class Sheep extends GameComponent {
   constructor(props) {
     super(props);
-    for (const i in this.props) {
-      this[i] = this.props[i];
-    }
     this.AudioManager = new AudioManager();
-  }
-
-  componentWillReceiveProps(props) {
-    for (const i in props) {
-      this[i] = props[i];
-    }
+    console.log(this.position);
   }
 
   CollisionHeight = 10;
   sheepSize = 100;
-  sheepOffset = 71.5;
+  sheepOffset = 50;
 
   children = [
     <Sprite
-      offset={new Vector([this.offset, this.sheepOffset])}
-      size={new Vector([this.width, 10])}
+      offset={this.props.offset}
       imagesource="sheep.png"
-    />,
-
-    <CollisionZone
-      offset={new Vector([this.offset, this.sheepOffset])}
-      dimensions={new Vector([3.5, this.sheepSize])}
+      size={new Vector([this.props.width, 10])}
     />,
     <CollisionZone
-      name="scoreZone"
-      offset={new Vector([this.offset + this.width, this.CollisionHeight])}
-      dimensions={new Vector([this.width, 200])}
+      offset={this.props.offset}
+      dimensions={new Vector([this.props.width, 10])}
+    />,
+    <CollisionZone
+      name={"scoreZone"}
+      offset={new Vector([this.props.offset.x + this.props.width / 4, 0])}
+      dimensions={new Vector([this.props.width / 2, this.props.offset.y])}
     />
   ];
 
   handleCollision = collider => {
     const { object, collisionZone } = collider;
     // if (object.constructor.name !== "Bird") return;
-    if (object.constructor.name !== "Runner") {
+    if (object.name !== "Runner") {
       return;
     }
 
@@ -72,4 +64,4 @@ Sheep.defaultProps = {
   width: 4
 };
 
-export default Sheep;
+export default WithWorld(Sheep);

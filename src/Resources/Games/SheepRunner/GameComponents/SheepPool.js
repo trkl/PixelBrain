@@ -12,9 +12,6 @@ function getRandomArbitrary(min, max) {
 class SheepPool extends GameComponent {
   constructor(props) {
     super(props);
-    for (const i in this.props) {
-      this[i] = this.props[i];
-    }
     this.interval = () => getRandomArbitrary(30, 50);
     this.children = [];
     this.sheepKey = 0;
@@ -28,7 +25,7 @@ class SheepPool extends GameComponent {
     while (this.children.length < 9) {
       this.children.push(
         React.createElement(Sheep, {
-          offset: this.sheepKey++ * this.interval(),
+          offset: new Vector([this.sheepKey++ * this.interval(), 70]),
           position: this.position,
           key: this.sheepKey
         })
@@ -39,7 +36,7 @@ class SheepPool extends GameComponent {
   rotateRender = offset => {
     this.children.push(
       React.cloneElement(this.children.shift(), {
-        offset: offset,
+        offset: new Vector([offset, 70]),
         position: this.position,
         key: this.sheepKey
       })

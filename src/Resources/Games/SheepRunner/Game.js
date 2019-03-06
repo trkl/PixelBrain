@@ -5,6 +5,7 @@ import SheepPool from "./GameComponents/SheepPool";
 import Floor from "./GameComponents/Floor";
 import Background from "../../../BackgroundManager/Background";
 import HUDManager from "./HUD/HUDManager";
+import Sheep from "./GameComponents/Sheep";
 
 class Game extends React.Component {
   render = () =>
