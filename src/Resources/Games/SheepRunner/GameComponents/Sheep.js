@@ -30,8 +30,6 @@ class Sheep extends React.Component {
 
     return (
       <GameComponent parent={this} position={this.position}>
-        {/* <PipeDown up={this.props.up} />
-        <PipeUp down={this.props.down} /> */}
         <Sprite
           offset={new Vector([this.offset, sheepOffset])}
           size={new Vector([this.width, 10])}
@@ -68,8 +66,6 @@ class Sheep extends React.Component {
       if(Game.instance.score > Game.instance.highScore){
         Game.instance.highScore = Game.instance.score
       }
-      // document.body.innerHTML = "<h1>You Lost</h1>";
-      // console.log("you lost!");
     }
   };
 }
