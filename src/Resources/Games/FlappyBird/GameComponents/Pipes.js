@@ -5,11 +5,8 @@ import CollisionZone from "../../../../GameObject/CollisionZone";
 import Sprite from "../../../../GameComponents/Sprite";
 import PropTypes from "prop-types";
 import Game from "../Game";
-<<<<<<< HEAD
-import Bird from "./Bird";
-=======
-import AudioManager from "../../../../AudioManager/AudioManager";
->>>>>>> dev
+import { WithWorld } from "../../../../World/HOC/WithWorld";
+import EventManager from "../../../../EventManager/EventManager";
 
 class Pipes extends GameComponent {
   constructor(props) {
@@ -17,19 +14,6 @@ class Pipes extends GameComponent {
     for (const i in this.props) {
       this[i] = this.props[i];
     }
-<<<<<<< HEAD
-=======
-    this.AudioManager = new AudioManager()
-  }
-
-  componentWillReceiveProps(props) {
-    for (const i in props) {
-      this[i] = props[i];
-    }
-  }
-
-  render() {
->>>>>>> dev
     const upperPipeOffset = 0;
     const upperPipeSize = this.upperPipeLength ? this.upperPipeLength : 20;
     const gap = this.gap ? this.gap : 20;
@@ -37,20 +21,20 @@ class Pipes extends GameComponent {
     const lowerPipeOffset = upperPipeOffset + upperPipeSize + gap;
 
     this.children = [
-      // <Sprite
-      //   offset={new Vector([this.offset, upperPipeOffset])}
-      //   size={new Vector([this.width, upperPipeSize])}
-      //   imagesource="pipeDown.png"
-      // />,
+      <Sprite
+        offset={new Vector([this.offset, upperPipeOffset])}
+        size={new Vector([this.width, upperPipeSize])}
+        imagesource="pipeDown.png"
+      />,
       <CollisionZone
         offset={new Vector([this.offset, upperPipeOffset])}
         dimensions={new Vector([this.width, upperPipeSize])}
       />,
-      // <Sprite
-      //   offset={new Vector([this.offset, lowerPipeOffset])}
-      //   size={new Vector([this.width, 70])}
-      //   imagesource="pipeUp.png"
-      // />,
+      <Sprite
+        offset={new Vector([this.offset, lowerPipeOffset])}
+        size={new Vector([this.width, 70])}
+        imagesource="pipeUp.png"
+      />,
 
       <CollisionZone
         offset={new Vector([this.offset, lowerPipeOffset])}
@@ -72,26 +56,21 @@ class Pipes extends GameComponent {
 
   handleCollision = collider => {
     const { object, collisionZone } = collider;
-    // if (object.constructor.name !== "Bird") return;
+    if (object.name !== "Bird") return;
 
     if (collisionZone.name === "scoreZone") {
       ++Game.instance.score;
-      this.AudioManager.playSound("sfx_point.wav")
-
+      EventManager.instance.registerEvent({
+        audio: { soundName: "sfx_point.wav" }
+      });
     } else {
+      EventManager.instance.registerEvent({
+        audio: { soundName: "sfx_die.wav" }
+      });
       Game.instance.gameOver = true;
-<<<<<<< HEAD
       if (Game.instance.score > Game.instance.highScore) {
         Game.instance.highScore = Game.instance.score;
-=======
-      this.AudioManager.playSound("sfx_hit.wav")
-      this.AudioManager.playSound("sfx_die.wav")
-      if(Game.instance.score > Game.instance.highScore){
-        Game.instance.highScore = Game.instance.score
->>>>>>> dev
       }
-      // document.body.innerHTML = "<h1>You Lost</h1>";
-      // console.log("you lost!");
     }
   };
 }
@@ -105,4 +84,4 @@ Pipes.defaultProps = {
   position: new Vector()
 };
 
-export default Pipes;
+export default WithWorld(Pipes);

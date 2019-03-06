@@ -3,7 +3,7 @@ import Game from "../Resources/Games/SheepRunner/Game";
 export default class Timer {
   static _instance = undefined;
   static get instance() {
-    if (Timer._instance === undefined) Timer._instance = new Timer(60);
+    if (Timer._instance === undefined) Timer._instance = new Timer(30);
     return Timer._instance;
   }
   constructor(framerate = 30) {

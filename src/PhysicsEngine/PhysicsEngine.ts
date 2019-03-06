@@ -67,6 +67,7 @@ class PhysicsEngine {
 
   public processEvent(event: Event) {
     const { physics, end } = event;
+    if (!physics) return;
 
     if (!event.gameObject) {
       throw "PhysicsEngine: gameObject is undefined or null";
@@ -82,7 +83,6 @@ class PhysicsEngine {
     const { duration } = physics;
 
     if (end) {
-      console.log("end");
       gameObject.force = gameObject.force.minus(physics.force);
     } else {
       //@ts-ignore

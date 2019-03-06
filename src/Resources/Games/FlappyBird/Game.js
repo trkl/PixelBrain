@@ -34,6 +34,7 @@ Game.gameComponents = [
     top="20px"
   />,
   <Bird
+    name={"Bird"}
     position={new Vector([5, 30])}
     cameraFollows={true}
     force={new Vector([30, 0])}

@@ -11,6 +11,15 @@ import WorldContextProvider from "./Context/WorldContextProvider";
 
 import Game from "./../Resources/Games/SheepRunner/Game";
 
+Array.prototype.filterInPlace = function(predicate) {
+  for (let i = 0; i < this.length; ++i) {
+    if (predicate(this[i])) {
+      this[this.length - 1] = this[i];
+      this.pop();
+    }
+  }
+};
+
 class World extends React.Component {
   constructor(props) {
     super(props);
@@ -21,8 +30,7 @@ class World extends React.Component {
 
   registerComponent = component => {
     if (this.camera === null && component.props.cameraFollows) {
-      this.camera = new Camera(component.rigidBody);
-      this.startCamera();
+      this.camera = new Camera(component);
     }
     this.components.push(component);
   };
@@ -45,8 +53,6 @@ class World extends React.Component {
       <Game />
     </WorldContextProvider>
   );
-
-  startCamera = () => {};
 
   beforeFrameRender = () => {
     this.components.forEach(component => {

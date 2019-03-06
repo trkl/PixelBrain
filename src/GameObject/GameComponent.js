@@ -1,22 +1,15 @@
 import React, { Component } from "react";
 import Vector from "./../Vector/Vector";
 import PropTypes from "prop-types";
-import Camera from "../Camera/Camera";
-import CollisionManger from "../CollisionManager/CollisionManager";
 
 export default class GameComponent extends Component {
   constructor(props) {
-    console.log(props);
     super(props);
     this._position = this.props.position;
     this.components = [];
     this.rigidBody = null;
     this.collisionZones = [];
-    if (this.props.cameraFollows) {
-      this.props.world.camera = new Camera(this);
-      this.props.world.startCamera();
-    }
-    console.log(this.props);
+    this.name = this.props.name;
   }
   _isChanged = false;
 
@@ -34,7 +27,6 @@ export default class GameComponent extends Component {
   };
 
   remove = component => {
-    console.log(this.components.length);
     this.components.filterInPlace(component2 => component2 !== component);
     this.collisionZones.filterInPlace(component2 => component2 !== component);
   };
@@ -61,21 +53,22 @@ export default class GameComponent extends Component {
 
   render = () => this.children;
 
-  shouldComponentUpdate = () => true;
+  shouldComponentUpdate = () => false;
 
   componentWillMount() {
     this.children = this.children ? this.children : [];
     this.children = this.children.map((child, idx) =>
       React.cloneElement(child, {
         ...this.props,
+        name: null,
         ...child.props,
+
         world: this.props.world,
         parent: this,
         key: idx,
         position: this.rigidBody ? this.rigidBody.position : this.props.position
       })
     );
-    console.log(this.props.world);
     this.props.world.registerComponent(this);
   }
   componentDidMount() {
@@ -95,7 +88,8 @@ GameComponent.defaultProps = {
 };
 
 GameComponent.propTypes = {
-  position: PropTypes.instanceOf(Vector).isRequired
+  position: PropTypes.instanceOf(Vector).isRequired,
+  name: PropTypes.string.isRequired
 };
 
 // export default WithWorld(GameComponent);

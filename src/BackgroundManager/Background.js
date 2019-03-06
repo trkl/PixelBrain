@@ -23,13 +23,13 @@ class Background extends Component {
   }
 
   second = false;
-  // componentDidMount() {
-  //   Timer.instance.subscribe(() => {
-  //     //   this.second = !this.second;
-  //     //   if (this.second)
-  //     this.gameLoop();
-  //   });
-  // }
+  componentDidMount() {
+    Timer.instance.subscribe(() => {
+      //   this.second = !this.second;
+      //   if (this.second)
+      this.gameLoop();
+    });
+  }
 
   gameLoop = () => {
     this.setState({

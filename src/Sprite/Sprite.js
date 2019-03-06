@@ -1,10 +1,10 @@
 import React from "react";
-import {WithResources} from "../Resource Manager/HOC/WithResources";
+import { WithResources } from "../Resource Manager/HOC/WithResources";
 
 class Sprite extends React.Component {
   constructor(props) {
     super(props);
-    let { parent, position, height, width, n, scale } = this.props;
+    let { parent, height, width, n, scale } = this.props;
     parent.add(this);
     height = height * scale;
     width = (width / n) * scale;

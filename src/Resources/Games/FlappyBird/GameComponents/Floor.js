@@ -20,8 +20,6 @@ export default class Floor extends Component {
   handleCollision = collider => {
     if (collider.object.constructor.name === Bird.prototype.constructor.name) {
       Game.instance.gameOver = true;
-      console.log("Game Over!");
-      console.log(collider);
     }
   };
   beforeFrameRender() {

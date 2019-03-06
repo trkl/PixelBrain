@@ -15,18 +15,5 @@ export default class Camera {
         gameObjects[idx].position.y
       ]);
     });
-
-    // ReactDom.unstable_batchedUpdates(() => {
-    //   gameObjects.forEach(element => {
-    //     console.log(element.ref);
-    //   });
-    //   //   for (let i = 0; i < gameObjects.length; ++i) {
-    //     console.log(gameObjects[i]);
-    //     // console.log(gameObjects);
-    //     // gameObjects[i].position = gameObjects[i].position.minus(distance);
-    //     // gameObjects[i].updateState();
-    //   }
-    // });
   }
-  //TODO: hook background movement into this.
 }

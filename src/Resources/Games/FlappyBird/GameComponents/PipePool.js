@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 
 import GameComponent from "../../../../GameObject/GameComponent";
 import Pipes from "./Pipes";
 import Vector from "../../../../Vector/Vector";
 import PropTypes from "prop-types";
-import Game from "../Game";
 import { WithWorld } from "../../../../World/HOC/WithWorld";
 
 function getRandomArbitrary(min, max) {
@@ -17,16 +16,12 @@ class PipePool extends GameComponent {
     for (const i in this.props) {
       this[i] = this.props[i];
     }
+    console.log(this.position.vector);
     this.interval = 20;
     this.children = [];
     this.pipeKey = 0;
 
     this.prepareForRender();
-  }
-
-  shouldComponentUpdate() {
-    console.log(this.children);
-    return true;
   }
 
   prepareForRender = () => {
@@ -37,11 +32,13 @@ class PipePool extends GameComponent {
           offset: this.pipeKey++ * this.interval,
           position: this.position,
           upperPipeLength: getRandomArbitrary(10, 50),
-          key: this.key
+          key: this.pipeKey
         })
       );
     }
   };
+
+  shouldComponentUpdate = () => true;
 
   rotateRender = () => {
     this.children.push(
@@ -63,7 +60,7 @@ class PipePool extends GameComponent {
 
   beforeFrameRender = () => {
     const { position } = this;
-    if (position.x + this.interval * this.pipeKey < 100) {
+    if (position.x + this.interval * (this.pipeKey - 1) < 100) {
       console.log("hey");
       this.rotateRender();
     }

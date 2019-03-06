@@ -1,6 +1,5 @@
 class ResourceManager {
   importAll(r) {
-    console.log("in import all");
     let images = {};
     r.keys().map((item, index) => {
       images[item.replace("./", "")] = r(item);
