@@ -84,6 +84,7 @@ class PhysicsEngine {
     const { duration } = physics;
 
     if (end) {
+      console.log("end");
       gameObject.force = gameObject.force.minus(physics.force);
     } else {
       //@ts-ignore

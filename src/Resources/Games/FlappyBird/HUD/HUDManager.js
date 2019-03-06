@@ -1,9 +1,8 @@
 import React from "react";
-import "./HUDManager.css";
 import Menu from "./Menu";
-import WithResources from "../Resource Manager/HOC/WithResources";
-import Game from "../Resources/Games/FlappyBird/Game";
-import Timer from "../Timer/Timer";
+import WithResources from '../../../../Resource Manager/HOC/WithResources'
+import Game from '../Game'
+import Timer from "../../../../Timer/Timer"
 
 class HUDManager extends React.Component {
   constructor(props) {
@@ -34,6 +33,7 @@ class HUDManager extends React.Component {
       if (Game.instance.start === false) {
         Game.instance.pause = false;
         Game.instance.start = true;
+        console.log("shit")
       }
     });
   }

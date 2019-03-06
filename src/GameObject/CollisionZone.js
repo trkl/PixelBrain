@@ -38,7 +38,7 @@ export default class CollisionZone extends Component {
   render = () => {
     const realPosition = this.props.position.plus(this.props.offset);
     const { dimensions } = this.props;
-    return (<></>
+     return (<></>
       // <div
       //   style={{
       //     position: "absolute",
