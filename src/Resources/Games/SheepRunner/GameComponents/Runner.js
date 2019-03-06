@@ -1,12 +1,12 @@
-import GameComponent from "../../../GameObject/GameComponent";
+import GameComponent from "../../../../GameObject/GameComponent";
 import React, { Component } from "react";
-import RigidBody from "../../../GameObject/RigidBody";
-import CollisionZone from "../../../GameObject/CollisionZone";
-import Vector from "../../../Vector/Vector";
-import WithKeyboardSubscribe from "../../../InputManager/HOC/WithKeyboardSubscribe";
+import RigidBody from "../../../../GameObject/RigidBody";
+import CollisionZone from "../../../../GameObject/CollisionZone";
+import Vector from "../../../../Vector/Vector";
+import WithKeyboardSubscribe from "../../../../InputManager/HOC/WithKeyboardSubscribe";
 import PropTypes from "prop-types";
-import Sprite from "../../../Sprite/Sprite";
-import AudioManager from "../../../AudioManager/AudioManager"
+import Sprite from "../../../../Sprite/Sprite";
+import AudioManager from "../../../../AudioManager/AudioManager"
 
 class Runner extends Component {
   constructor(props) {
@@ -39,7 +39,7 @@ class Runner extends Component {
       />
       <CollisionZone
         offset={new Vector([.5, 0])}
-        dimensions={new Vector([3.5, 10])}
+        dimensions={new Vector([3.5, 10.3])}
       />
       <Sprite
         scale={0.4}

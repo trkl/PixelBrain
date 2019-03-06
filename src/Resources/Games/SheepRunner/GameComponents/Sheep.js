@@ -1,11 +1,11 @@
 import React from "react";
-import GameComponent from "../../../GameObject/GameComponent";
-import Vector from "../../../Vector/Vector";
-import CollisionZone from "../../../GameObject/CollisionZone";
-import Sprite from "../../../GameComponents/Sprite";
+import GameComponent from "../../../../GameObject/GameComponent";
+import Vector from "../../../../Vector/Vector";
+import CollisionZone from "../../../../GameObject/CollisionZone";
+import Sprite from "../../../../GameComponents/Sprite";
 import PropTypes from "prop-types";
-import Game from "../SheepRunner/Game";
-import AudioManager from "../../../AudioManager/AudioManager";
+import Game from "../Game";
+import AudioManager from '../../../../AudioManager/AudioManager'
 
 class Sheep extends React.Component {
   constructor(props) {
@@ -23,9 +23,8 @@ class Sheep extends React.Component {
   }
 
   render() {
-    const upperPipeOffset = 0;
+
     const upperPipeSize = this.upperPipeLength ? this.upperPipeLength : 20;
-    const gap = this.gap ? this.gap : 20;
     const lowerPipeSize = 100
     const lowerPipeOffset = 71.5
 
@@ -41,7 +40,7 @@ class Sheep extends React.Component {
 
         <CollisionZone
           offset={new Vector([this.offset, lowerPipeOffset])}
-          dimensions={new Vector([this.width, lowerPipeSize])}
+          dimensions={new Vector([3.5, lowerPipeSize])}
         />
         <CollisionZone
           name="scoreZone"

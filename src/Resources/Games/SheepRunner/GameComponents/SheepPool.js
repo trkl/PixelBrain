@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import GameComponent from "../../../GameObject/GameComponent";
-import Pipes from "../SheepRunner/Sheep";
-import Vector from "../../../Vector/Vector";
+import GameComponent from "../../../../GameObject/GameComponent";
+import Sheep from './Sheep'
+import Vector from "../../../../Vector/Vector";
 import PropTypes from "prop-types";
-import Game from "../SheepRunner/Game";
 
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
@@ -15,15 +14,15 @@ export default class SheepPool extends Component {
     for (const i in this.props) {
       this[i] = this.props[i];
     }
-    this.interval = () => getRandomArbitrary(20,30);
-    this.pipes = [];
+    this.interval = () => 30
+    this.sheep = [];
     this.pipeKey = 0;
 
     this.prepareForRender();
     this.renderObj = React.createElement(
       GameComponent,
       { position: this.position, parent: this },
-      this.pipes
+      this.sheep
     );
   }
 
@@ -32,9 +31,9 @@ export default class SheepPool extends Component {
   }
 
   prepareForRender = () => {
-    while (this.pipes.length < 9) {
-      this.pipes.push(
-        React.createElement(Pipes, {
+    while (this.sheep.length < 9) {
+      this.sheep.push(
+        React.createElement(Sheep, {
           offset: this.pipeKey++ * this.interval(),
           position: this.position,
           key: this.pipeKey
@@ -44,15 +43,15 @@ export default class SheepPool extends Component {
   };
 
   rotateRender = (offset) => {
-    this.pipes.push(
-      React.cloneElement(this.pipes.shift(), {
+    this.sheep.push(
+      React.cloneElement(this.sheep.shift(), {
         offset: offset,
 
         key: this.pipeKey
       })
     );
 
-    this.renderObj = React.cloneElement(this.renderObj, {}, this.pipes);
+    this.renderObj = React.cloneElement(this.renderObj, {}, this.sheep);
   };
 
   componentWillReceiveProps(props) {

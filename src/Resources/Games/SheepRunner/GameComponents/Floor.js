@@ -1,9 +1,15 @@
 import React, { Component } from "react";
-import GameComponent from "../../../GameObject/GameComponent";
-import CollisionZone from "../../../GameObject/CollisionZone";
-import Game from "../SheepRunner/Game";
-import Vector from "../../../Vector/Vector"
-import EventManager from './../../../EventManager/EventManager'
+
+import GameComponent from '../../../../GameObject/GameComponent'
+import CollisionZone from '../../../../GameObject/CollisionZone'
+import Game from '../Game'
+import Vector from "../../../../Vector/Vector"
+import EventManager from '../../../../EventManager/EventManager'
+// import GameComponent from "../../../../GameObject/GameComponent";
+// import CollisionZone from "../../../../GameObject/CollisionZone";
+// import Game from "../Game";
+// import Vector from "../../../../Vector/Vector"
+// import EventManager from '../../../../EventManager/EventManager'
 
 export default class Floor extends Component {
   constructor(props) {
@@ -26,7 +32,7 @@ export default class Floor extends Component {
     if (collider.object.constructor.name === "Runner") {
       const {gameComponent} = collider.object;
       const {rigidBody} = gameComponent;
-      console.log(rigidBody)
+      Game.instance.ableToJump = true;
 
       rigidBody.velocity = new Vector([rigidBody.velocity.x,0])
       this.runnerCollisionEvent =  this.collisionEvent(collider.object,new Vector([0,-rigidBody.weight*9.82*rigidBody.gravity]));
@@ -35,9 +41,7 @@ export default class Floor extends Component {
     }
   };
   onCollisionEnd = collider => {
-    console.log("Collision ends with ", collider.object.constructor.name)
     if (collider.object.constructor.name === "Runner") {
-      console.log("end")
       EventManager.instance.registerEvent({...this.runnerCollisionEvent,end:true})
     }
   }
