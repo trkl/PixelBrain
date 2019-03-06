@@ -41,6 +41,13 @@ Game.gameComponents = [
     weight={20}
     controller={true}
   />,
+   <HUDManager
+   font="pixel.ttf"
+   fontFamily="Pixel"
+   textAlign="center"
+   position="absolute"
+   top="20px"
+ />,
   <PipePool position={new Vector([40, 0])} />,
   <Floor position={new Vector([0, 80])} dimensions={new Vector([100, 20])} />
 ];
