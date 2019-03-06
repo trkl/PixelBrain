@@ -10,3 +10,5 @@ export const WithResources = WrappedComponent => props => (
         )}
     </ResourceManagerContextConsumer>
     );
+
+
