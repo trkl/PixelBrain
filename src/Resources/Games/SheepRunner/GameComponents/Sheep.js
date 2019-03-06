@@ -12,7 +12,6 @@ class Sheep extends GameComponent {
   constructor(props) {
     super(props);
     this.AudioManager = new AudioManager();
-    console.log(this.position);
   }
 
   CollisionHeight = 10;

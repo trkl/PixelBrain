@@ -41,8 +41,6 @@ export default class EventManager {
       PhysicsEngine.instance.processEvent(event);
       if (!event.end) {
         if (event.audio) {
-          console.log(event);
-          // @ts-ignore
           this.audioManager.playSound(event.audio.soundName);
         }
       }
