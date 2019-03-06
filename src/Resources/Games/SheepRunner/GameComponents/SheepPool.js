@@ -14,9 +14,9 @@ export default class SheepPool extends Component {
     for (const i in this.props) {
       this[i] = this.props[i];
     }
-    this.interval = () => 30
+    this.interval = () => getRandomArbitrary(30,50)
     this.sheep = [];
-    this.pipeKey = 0;
+    this.sheepKey = 0;
 
     this.prepareForRender();
     this.renderObj = React.createElement(
@@ -34,9 +34,9 @@ export default class SheepPool extends Component {
     while (this.sheep.length < 9) {
       this.sheep.push(
         React.createElement(Sheep, {
-          offset: this.pipeKey++ * this.interval(),
+          offset: this.sheepKey++ * this.interval(),
           position: this.position,
-          key: this.pipeKey
+          key: this.sheepKey
         })
       );
     }
@@ -47,7 +47,7 @@ export default class SheepPool extends Component {
       React.cloneElement(this.sheep.shift(), {
         offset: offset,
 
-        key: this.pipeKey
+        key: this.sheepKey
       })
     );
 
@@ -64,9 +64,9 @@ export default class SheepPool extends Component {
 
   beforeFrameRender = () => {
     const { position } = this.gameComponent;
-    const offset =this.interval() * this.pipeKey-3;
+    const offset =this.interval() * this.sheepKey-3;
     if (position.x + offset > 100 && position.x +offset < 150) {
-      ++this.pipeKey
+      ++this.sheepKey
       this.rotateRender(offset);
     }
   };

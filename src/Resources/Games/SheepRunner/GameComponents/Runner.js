@@ -17,8 +17,20 @@ class Runner extends Component {
 
   componentWillMount() {
     if (this.props.controller)
-      this.props.keyboardSubscribe(this, " ", {
-        physics: { force: new Vector([0, -10000]), duration: 40 },
+      this.props.keyboardSubscribe(this, "w", {
+        physics: { force: new Vector([0, -10000]), duration: 70 },
+        audio: {soundName: "sfx_wing.wav"},
+      });
+      this.props.keyboardSubscribe(this, "s", {
+        physics: { force: new Vector([0, 10000]), duration: 70 },
+        audio: {soundName: "sfx_wing.wav"},
+      });
+      this.props.keyboardSubscribe(this, "d", {
+        physics: { force: new Vector([1000, 0]), duration: 70 },
+        audio: {soundName: "sfx_wing.wav"},
+      });
+      this.props.keyboardSubscribe(this, "a", {
+        physics: { force: new Vector([-1000, 0]), duration: 70 },
         audio: {soundName: "sfx_wing.wav"},
       });
       

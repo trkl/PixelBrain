@@ -24,27 +24,27 @@ class Sheep extends React.Component {
 
   render() {
 
-    const upperPipeSize = this.upperPipeLength ? this.upperPipeLength : 20;
-    const lowerPipeSize = 100
-    const lowerPipeOffset = 71.5
+    const CollisionHeight = 10
+    const sheepSize = 100
+    const sheepOffset = 71.5
 
     return (
       <GameComponent parent={this} position={this.position}>
         {/* <PipeDown up={this.props.up} />
         <PipeUp down={this.props.down} /> */}
         <Sprite
-          offset={new Vector([this.offset, lowerPipeOffset])}
+          offset={new Vector([this.offset, sheepOffset])}
           size={new Vector([this.width, 10])}
           imagesource="sheep.png"
         />
 
         <CollisionZone
-          offset={new Vector([this.offset, lowerPipeOffset])}
-          dimensions={new Vector([3.5, lowerPipeSize])}
+          offset={new Vector([this.offset, sheepOffset])}
+          dimensions={new Vector([3.5, sheepSize])}
         />
         <CollisionZone
           name="scoreZone"
-          offset={new Vector([this.offset + this.width, upperPipeSize])}
+          offset={new Vector([this.offset + this.width, CollisionHeight])}
           dimensions={new Vector([this.width, 200])}
         />
       </GameComponent>
