@@ -20,7 +20,7 @@ class World extends React.Component {
   }
 
   registerComponent = component => {
-    if (this.camera === null && component.cameraFollows) {
+    if (this.camera === null && component.props.cameraFollows) {
       this.camera = new Camera(component.rigidBody);
       this.startCamera();
     }
@@ -28,9 +28,7 @@ class World extends React.Component {
   };
 
   unregisterComponent = component => {
-    console.log(this.components.length);
     this.components.filterInPlace(aComponent => aComponent !== component);
-    console.log(this.components.length);
   };
 
   updateWorld = () => {
@@ -48,16 +46,11 @@ class World extends React.Component {
     </WorldContextProvider>
   );
 
-  startCamera = () => {
-    Timer.instance.subscribe(dt => this.camera.moveCamera(dt, this.components));
-  };
+  startCamera = () => {};
 
   beforeFrameRender = () => {
     this.components.forEach(component => {
-      let parent;
-
-      component.props.parent && (parent = component.props.parent);
-      parent.beforeFrameRender && parent.beforeFrameRender();
+      component.beforeFrameRender && component.beforeFrameRender();
     });
   };
 
@@ -66,6 +59,7 @@ class World extends React.Component {
     Timer.instance.subscribe(PhysicsEngine.instance.processRigidBodies);
     Timer.instance.subscribe(CollisionManger.instance.handleCollisions);
     Timer.instance.subscribe(this.beforeFrameRender);
+    Timer.instance.subscribe(dt => this.camera.moveCamera(dt, this.components));
     Timer.instance.subscribe(this.updateWorld);
   }
 }

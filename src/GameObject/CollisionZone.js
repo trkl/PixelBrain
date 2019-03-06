@@ -9,10 +9,10 @@ export default class CollisionZone extends Component {
     this.position = this.props.parent.position;
     this.dimensions = this.props.dimensions;
     this.name = this.props.name;
-    this.collision = new Set();
     for (const i in this.props) {
       this[i] = this.props[i];
     }
+    this.collision = new Set();
   }
 
   componentWillReceiveProps(props) {
@@ -20,9 +20,16 @@ export default class CollisionZone extends Component {
       this[i] = props[i];
     }
   }
+  get position() {
+    return this.parent.position;
+  }
+
+  set position(position) {
+    this._position = position;
+  }
 
   componentWillMount() {
-    this.props.parent.add(this);
+    this.props.parent.addCollisionZone(this);
     this.idx = CollisionManger.instance.add(this);
   }
 
@@ -36,7 +43,7 @@ export default class CollisionZone extends Component {
   };
 
   render = () => {
-    const realPosition = this.props.position.plus(this.props.offset);
+    const realPosition = this.props.parent.position.plus(this.props.offset);
     const { dimensions } = this.props;
      return (<></>
       // <div
