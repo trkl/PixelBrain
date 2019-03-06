@@ -6,6 +6,7 @@ import CollisionManger from "../CollisionManager/CollisionManager";
 
 export default class GameComponent extends Component {
   constructor(props) {
+    console.log(props);
     super(props);
     this._position = this.props.position;
     this.components = [];
@@ -15,6 +16,7 @@ export default class GameComponent extends Component {
       this.props.world.camera = new Camera(this);
       this.props.world.startCamera();
     }
+    console.log(this.props);
   }
   _isChanged = false;
 
@@ -73,6 +75,7 @@ export default class GameComponent extends Component {
         position: this.rigidBody ? this.rigidBody.position : this.props.position
       })
     );
+    console.log(this.props.world);
     this.props.world.registerComponent(this);
   }
   componentDidMount() {

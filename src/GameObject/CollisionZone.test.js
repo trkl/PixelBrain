@@ -1,9 +1,11 @@
 import React from "react";
 import { render, cleanup, waitForElement } from "react-testing-library";
-import Vector from "../Vector/Vector";
-import CollisionZone from "./CollisionZone";
 import { constructMockHoc } from "react-mock-hoc-utils";
-import constructBuilder from "test-component-builder";
+// import Vector from "../Vector/Vector";
+// import CollisionZone from "./CollisionZone";
+// import constructBuilder from "test-component-builder";
+// import Test from "./Testy";
+// import World from "../World/World";
 
 const world = { registerComponent: jest.fn() };
 
@@ -21,19 +23,11 @@ describe("", () => {
   afterEach(cleanup);
 
   it("collisionDetection", async () => {
-    const parent = {};
     const { getByTestId } = render(
-      <GameComponent parent={parent}>
-        <CollisionZone
-          dimensions={new Vector([10, 10])}
-          position={Vector.Zero}
-        />
-        <div data-testid="divy" />
-      </GameComponent>
+      <GameComponent data-testid="shit" world={world} />
     );
-    const node = await waitForElement(() => getByTestId("divy"));
+    const node = await waitForElement(() => getByTestId("shit"));
 
-    expect(parent.gameComponent).toBeDefined();
     expect(world.registerComponent).toHaveBeenCalled();
   });
 });
