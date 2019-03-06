@@ -3,7 +3,7 @@ import Vector from "../Vector/Vector";
 import Event from "../Events/Event";
 import Timer from "../Timer/Timer";
 import EventManager from "../EventManager/EventManager";
-import GameComponent from "../GameObject/GameComponent";
+import { createSocket } from "dgram";
 
 class PhysicsEngine {
   private static _instance: PhysicsEngine;
@@ -60,7 +60,7 @@ class PhysicsEngine {
       gameObject.acceleration.multiply(deltaTime / 1000)
     );
 
-    gameObject.parent.position = gameObject.parent.position.plus(
+    gameObject.position = gameObject.position.plus(
       gameObject.velocity.multiply(deltaTime / 1000)
     );
   }
@@ -71,14 +71,12 @@ class PhysicsEngine {
     if (!event.gameObject) {
       throw "PhysicsEngine: gameObject is undefined or null";
     }
-    if (!event.gameObject.gameComponent) {
-      throw 'PhysicsEngine: event fired without "gameComponent" is undefined or null';
-    }
-    if (!event.gameObject.gameComponent.rigidBody) {
+
+    if (!event.gameObject.rigidBody) {
       throw "PhysicsEngine: physics event fired withour rigidBody";
     }
 
-    const gameObject = event.gameObject.gameComponent.rigidBody;
+    const gameObject = event.gameObject.rigidBody;
 
     if (!physics || !physics.force) return;
     const { duration } = physics;

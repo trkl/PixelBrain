@@ -4,6 +4,7 @@ import Bird from "./GameComponents/Bird";
 import PipePool from "./GameComponents/PipePool";
 import BackgorundManager from "./../../../BackgroundManager/BackgroundManager";
 import Floor from "./GameComponents/Floor";
+import Abbi from "./testy";
 
 class Game extends React.Component {
   render = () =>
@@ -20,17 +21,18 @@ Game.instance = {
 };
 
 Game.gameComponents = [
-  <BackgorundManager />,
+  // <Abbi />,
+  // <BackgorundManager />,
   <Bird
+    position={new Vector([5, 30])}
     cameraFollows={true}
     force={new Vector([30, 0])}
-    position={new Vector([5, 30])}
     gravity={3}
     weight={20}
     controller={true}
   />,
-  <PipePool position={new Vector([40, 0])} />,
-  <Floor position={new Vector([0, 80])} dimensions={new Vector([100, 20])} />
+  <PipePool position={new Vector([40, 0])} />
+  // <Floor position={new Vector([0, 80])} dimensions={new Vector([100, 20])} />
 ];
 
 export default Game;
