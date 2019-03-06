@@ -1,15 +1,10 @@
 import React, { Component } from "react";
-
 import GameComponent from '../../../../GameObject/GameComponent'
 import CollisionZone from '../../../../GameObject/CollisionZone'
 import Game from '../Game'
 import Vector from "../../../../Vector/Vector"
 import EventManager from '../../../../EventManager/EventManager'
-// import GameComponent from "../../../../GameObject/GameComponent";
-// import CollisionZone from "../../../../GameObject/CollisionZone";
-// import Game from "../Game";
-// import Vector from "../../../../Vector/Vector"
-// import EventManager from '../../../../EventManager/EventManager'
+
 
 export default class Floor extends Component {
   constructor(props) {

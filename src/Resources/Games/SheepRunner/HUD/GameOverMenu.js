@@ -26,7 +26,7 @@ class GameOverMenu extends React.Component{
                 width: '100vw',
                 maxWidth: "35%",
                 maxHeight: "35%",
-                backgroundImage: 'url('+(props.resourceManager.getImage("ScoreBoard.png")),
+                backgroundImage: 'url('+(props.resourceManager.getImage("SheepScoreBoard.png")),
                 position: 'absolute',
                 top: "40%",
                 left: "35%",
