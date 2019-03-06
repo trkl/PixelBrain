@@ -14,7 +14,7 @@ You add HUD the components by creating a HUDManager tag, and asigns its properti
 have stored in resources/font. You can create your own HUDManagers, or just copy the existing ones in the Engine from the included games. If you chose a preexisting HUDManager, then you can customise its fontFamily, font, and position by assigning its properties.
 
 ## Character
-First you create a gamecompontents folder in the same directory as your game. Then you 
+First you create a gamecompontents folder in the same directory as your game.
 
 ## Adding Sounds
 You add sounds by inserting sounds into the resources/sounds. 
