@@ -5,6 +5,7 @@
   "dependencies": {
     "@types/react": "16.8.1",
     "braces": "^2.3.2",
+    "enzyme": "^3.9.0",
     "performance-now": "2.1.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",

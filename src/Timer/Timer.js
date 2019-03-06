@@ -1,4 +1,4 @@
-import Game from "../Resources/Games/FlappyBird/Game";
+import Game from "../Resources/Games/SheepRunner/Game";
 
 export default class Timer {
   static _instance = undefined;

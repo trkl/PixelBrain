@@ -57,7 +57,19 @@ export default class CollisionManger {
           ]);
           obj1.collision.add(obj2);
         } else {
-          obj1.collision.delete(obj2);
+          if(obj1.collision.delete(obj2)){
+            const gameObj1 = obj1.props.parent.props.parent;
+            const gameObj2 = obj2.props.parent.props.parent;
+            
+            gameObj1.onCollisionEnd && gameObj1.onCollisionEnd( {
+              object: gameObj2,
+              collisionZone: obj2
+            })
+            gameObj2.onCollisionEnd && gameObj2.onCollisionEnd( {
+              object: gameObj1,
+              collisionZone: obj1
+            })
+          }
         }
       }
     }

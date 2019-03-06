@@ -8,7 +8,7 @@ export interface Physics {
 }
 
 export interface Audio {
-  soundTrack: string;
+  soundName: string;
 }
 
 export default interface Event {

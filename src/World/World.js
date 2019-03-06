@@ -9,7 +9,7 @@ import EventManager from "../EventManager/EventManager";
 import Camera from "./../Camera/Camera";
 import WorldContextProvider from "./Context/WorldContextProvider";
 
-import Game from "./../Resources/Games/FlappyBird/Game";
+import Game from "./../Resources/Games/SheepRunner/Game";
 
 class World extends React.Component {
   constructor(props) {

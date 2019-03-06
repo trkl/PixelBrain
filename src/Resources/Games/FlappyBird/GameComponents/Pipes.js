@@ -5,7 +5,11 @@ import CollisionZone from "../../../../GameObject/CollisionZone";
 import Sprite from "../../../../GameComponents/Sprite";
 import PropTypes from "prop-types";
 import Game from "../Game";
+<<<<<<< HEAD
 import Bird from "./Bird";
+=======
+import AudioManager from "../../../../AudioManager/AudioManager";
+>>>>>>> dev
 
 class Pipes extends GameComponent {
   constructor(props) {
@@ -13,6 +17,19 @@ class Pipes extends GameComponent {
     for (const i in this.props) {
       this[i] = this.props[i];
     }
+<<<<<<< HEAD
+=======
+    this.AudioManager = new AudioManager()
+  }
+
+  componentWillReceiveProps(props) {
+    for (const i in props) {
+      this[i] = props[i];
+    }
+  }
+
+  render() {
+>>>>>>> dev
     const upperPipeOffset = 0;
     const upperPipeSize = this.upperPipeLength ? this.upperPipeLength : 20;
     const gap = this.gap ? this.gap : 20;
@@ -59,10 +76,19 @@ class Pipes extends GameComponent {
 
     if (collisionZone.name === "scoreZone") {
       ++Game.instance.score;
+      this.AudioManager.playSound("sfx_point.wav")
+
     } else {
       Game.instance.gameOver = true;
+<<<<<<< HEAD
       if (Game.instance.score > Game.instance.highScore) {
         Game.instance.highScore = Game.instance.score;
+=======
+      this.AudioManager.playSound("sfx_hit.wav")
+      this.AudioManager.playSound("sfx_die.wav")
+      if(Game.instance.score > Game.instance.highScore){
+        Game.instance.highScore = Game.instance.score
+>>>>>>> dev
       }
       // document.body.innerHTML = "<h1>You Lost</h1>";
       // console.log("you lost!");
