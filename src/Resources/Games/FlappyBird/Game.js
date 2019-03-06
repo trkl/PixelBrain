@@ -2,8 +2,9 @@ import React from "react";
 import Vector from "./../../../Vector/Vector";
 import Bird from "./GameComponents/Bird";
 import PipePool from "./GameComponents/PipePool";
-import BackgorundManager from "./../../../BackgroundManager/BackgroundManager";
 import Floor from "./GameComponents/Floor";
+import HUDManager from "./HUD/HUDManager";
+import Background from '../../../BackgroundManager/Background'
 
 class Game extends React.Component {
   render = () =>
@@ -21,7 +22,17 @@ Game.instance = {
 };
 
 Game.gameComponents = [
-  <BackgorundManager />,
+  <Background imagesource="Grass.png" speed={-1} zindex={1} />,
+  <Background imagesource="kalsoy.png" speed={-0.2} zindex={-1} />,
+  <Background imagesource="Clouds.png" speed={-0.6} zindex={-2} />,
+  <Background imagesource="Background.png" speed={-0.2} zindex={-3} />,
+  <HUDManager
+  font="pixel.ttf"
+  fontFamily="Pixel"
+  textAlign="center"
+  position="absolute"
+  top="20px"
+  />, 
   <Bird
     cameraFollows={true}
     force={new Vector([30, 0])}
