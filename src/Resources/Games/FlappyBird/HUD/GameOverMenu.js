@@ -1,6 +1,5 @@
 import React from 'react'
-import WithResources from '../Resource Manager/HOC/WithResources'
-import './GameOverMenu.css'
+import {WithResources} from '../../../../Resource Manager/HOC/WithResources'
 
 
 class GameOverMenu extends React.Component{
@@ -27,7 +26,7 @@ class GameOverMenu extends React.Component{
                 width: '100vw',
                 maxWidth: "35%",
                 maxHeight: "35%",
-                backgroundImage: 'url('+(props.resourceManager.getImage("ScoreBoard.png")),
+                backgroundImage: 'url('+(props.resourceManager.getImage("FlappyScoreBoard.png")),
                 position: 'absolute',
                 top: "40%",
                 left: "35%",
@@ -42,7 +41,8 @@ class GameOverMenu extends React.Component{
                 left: "85%",
                 zIndex: 5,
                 fontSize: 60,
-                fontWeight: "bold"
+                fontWeight: "bold",
+                fontFamily: "Pixel"
             },
             highScoreStyle: {
                 position: 'absolute',
@@ -50,7 +50,8 @@ class GameOverMenu extends React.Component{
                 left: "85%",
                 zIndex: 5,
                 fontSize: 60,
-                fontWeight: "bold"
+                fontWeight: "bold",
+                fontFamily: "Pixel"
             },          
         }
     }

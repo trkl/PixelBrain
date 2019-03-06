@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import WithResources from "../Resource Manager/HOC/WithResources";
+import {WithResources} from "../Resource Manager/HOC/WithResources";
 import Timer from "./../Timer/Timer";
 class Background extends Component {
   constructor(props) {
@@ -10,8 +10,8 @@ class Background extends Component {
       imagesource: "",
       styleImg: {
         height: "100%",
-        width: "100%",
-
+        width: '100%',
+        backgroundPosition: '300px',
         backgroundImage:
           "url(" + props.resourceManager.getImage(props.imagesource),
         backgroundRepeat: "repeat-x",
@@ -37,7 +37,7 @@ class Background extends Component {
       counter: this.state.counter + this.state.speed,
       styleImg: {
         ...this.state.styleImg,
-        transform: `translateX(${this.state.counter})`
+        backgroundPosition:this.state.counter
         // backgroundPosition: this.state.counter
       }
     });
