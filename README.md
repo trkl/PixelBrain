@@ -2,7 +2,7 @@
 
 Clone this repository and run npm install.
 
-## Creating a Game
+### Creating a Game
 Create a new folder in the Games folder under the resources/Games directory, then create a new Game.js file in that folder. You then add the different game components in that file, e.g. Background, HUD, Pipes etc. 
 
 ## Creating Backgrounds
