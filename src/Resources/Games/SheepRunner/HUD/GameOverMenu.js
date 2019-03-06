@@ -1,5 +1,5 @@
 import React from 'react'
-import WithResources from '../../../../Resource Manager/HOC/WithResources'
+import {WithResources} from '../../../../Resource Manager/HOC/WithResources'
 
 
 class GameOverMenu extends React.Component{
@@ -38,7 +38,7 @@ class GameOverMenu extends React.Component{
             scoreStyle: {
                 position: 'absolute',
                 top: "28%",
-                left: "85%",
+                right: "15%",
                 zIndex: 5,
                 fontSize: 60,
                 fontWeight: "bold",
@@ -47,7 +47,7 @@ class GameOverMenu extends React.Component{
             highScoreStyle: {
                 position: 'absolute',
                 top: "64%",
-                left: "85%",
+                right: "15%",
                 zIndex: 5,
                 fontSize: 60,
                 fontWeight: "bold",

@@ -1,5 +1,5 @@
 import React from 'react'
-import WithResources from '../../../../Resource Manager/HOC/WithResources'
+import {WithResources} from '../../../../Resource Manager/HOC/WithResources'
 
 
 class GameOverMenu extends React.Component{

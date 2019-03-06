@@ -1,6 +1,6 @@
 import React from "react";
 import Menu from "./Menu";
-import WithResources from '../../../../Resource Manager/HOC/WithResources'
+import {WithResources} from '../../../../Resource Manager/HOC/WithResources'
 import Game from '../Game'
 import Timer from "../../../../Timer/Timer"
 
