@@ -2,10 +2,13 @@ import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
 import Event from "../Events/Event";
 import CollisionManger from "../CollisionManager/CollisionManager";
 import Timer from "../Timer/Timer";
+import AudioManager from "../AudioManager/AudioManager"
 
 export default class EventManager {
   eventQueue: Event[] = [];
   collisionManager: CollisionManger;
+  audioManager: AudioManager;
+
 
   private static _instance: EventManager;
   public static get instance() {
@@ -20,7 +23,7 @@ export default class EventManager {
   private constructor() {
     Timer.instance.subscribe(this.handleTick);
     this.collisionManager = new CollisionManger();
-    // this.audioManager = audioManager;
+    this.audioManager = new AudioManager();
   }
 
   public registerEvent = (event: Event) => {
@@ -32,10 +35,13 @@ export default class EventManager {
     const eventQueue = [...this.eventQueue];
     this.eventQueue = [];
     const { length } = eventQueue;
+    
     for (let i = 0; i < length; ++i) {
       const event = eventQueue[i];
-
       PhysicsEngine.instance.processEvent(event);
+      if(!event.end){
+        this.audioManager.playSound(event.audio.soundName)
+      }
       const { callback } = event;
       if (callback) callback();
     }

@@ -7,18 +7,22 @@ import WithKeyboardSubscribe from "../../../../InputManager/HOC/WithKeyboardSubs
 import PropTypes from "prop-types";
 import Game from "./../Game";
 import Sprite from "../../../../Sprite/Sprite";
+import AudioManager from "../../../../AudioManager/AudioManager"
 
 class Bird extends Component {
   constructor(props) {
     super(props);
     this.cameraFollows = this.props.cameraFollows;
+    this.AudioManager = new AudioManager();
   }
 
   componentWillMount() {
     if (this.props.controller)
       this.props.keyboardSubscribe(this, " ", {
-        physics: { force: new Vector([0, -2000]), duration: 100 }
+        physics: { force: new Vector([0, -2000]), duration: 100 },
+        audio: {soundName: "sfx_wing.wav"}
       });
+      
   }
   render = () => (
     <GameComponent
@@ -35,7 +39,7 @@ class Bird extends Component {
       />
       <CollisionZone
         offset={new Vector([0, 0])}
-        dimensions={new Vector([3.1, 7.1])}
+        dimensions={new Vector([2.6, 6.1])}
       />
       <Sprite
         scale={0.1}
@@ -53,5 +57,3 @@ Bird.propTypes = { cameraFollows: PropTypes.bool.isRequired };
 Bird.defaultProps = { cameraFollows: false };
 
 export default WithKeyboardSubscribe(Bird);
-
-export const ScoreKeep = props => <h1>{Game.instance.score}</h1>;

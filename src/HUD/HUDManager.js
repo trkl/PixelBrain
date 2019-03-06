@@ -58,7 +58,6 @@ class HUDManager extends React.Component {
   };
 
   render() {
-    console.log(Game.instance.pause);
     return (
       <div>
         <Menu
