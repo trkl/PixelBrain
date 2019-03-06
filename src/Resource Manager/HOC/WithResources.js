@@ -1,7 +1,7 @@
 import React from 'react'
 import ResourceManagerContextConsumer from '../ResourceManagerContextConsumer';
 
-const WithResources = WrappedComponent => props => (
+export const WithResources = WrappedComponent => props => (
     <ResourceManagerContextConsumer>
         {ResourceManager => (
             <WrappedComponent {...props} resourceManager={ResourceManager}>
@@ -11,4 +11,4 @@ const WithResources = WrappedComponent => props => (
     </ResourceManagerContextConsumer>
     );
 
-export default WithResources
+

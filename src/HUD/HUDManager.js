@@ -1,7 +1,7 @@
 import React from "react";
 import "./HUDManager.css";
 import Menu from "./Menu";
-import WithResources from "../Resource Manager/HOC/WithResources";
+import {WithResources} from "../Resource Manager/HOC/WithResources";
 import Game from "../Resources/Games/FlappyBird/Game";
 import Timer from "../Timer/Timer";
 

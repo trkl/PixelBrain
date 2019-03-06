@@ -1,5 +1,5 @@
 import React from "react";
-import WithResources from "../Resource Manager/HOC/WithResources";
+import {WithResources} from "../Resource Manager/HOC/WithResources";
 import "./GameOverMenu.css";
 import WithTimerSubcribe from "../Timer/HOC/WithTimerSubscribe";
 
