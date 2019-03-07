@@ -16,7 +16,7 @@ have stored in resources/font. You can create your own HUDManagers, or just copy
 ### Game Components
 Game components is a class which you will implement in order to create components such as pipes, sheeps, main character etc. First you need to create a Game Components folder in your game directory. Then you add a new class in that folder e.g. the bird class from the Flappy Bird game. Copy the code from the bird or runner class from the other games; if you want the component to be controllable, then set controller = true, when you create the GameComponent tag in Game.js. If you want to the camera to follow the character, then you assign cameraFollows to be true in the same GameComponent tag. The difference between a controllable component and a non-controllable one is the controller property. You customise the sound the character has by setting soundName to a string that refers to an audio file in resources/sounds. Physics describes the forces that surrounds the component, when they press the key that got subsribed to the components.  The first number is the x coordinate and it specifies the force the character moves along that axis. The second number is the y coordinate for the same event. Minus means the character is forced upwards while plus means he gets forced downwards. Then you add RigidBody, CollisionZone, and sprite into an array called children. 
 
-Each component that extends the GameComponent will implement its own version of HandleCollision(). This method defines for how each component behaves when they collide with an another component. This is a method that constantly runs, if it has not being specified to stop. So you cna create different scenarios for different collisions. If you want to increase the score, when the main character passes something then you will handle that by perhabs incr.
+Each component that extends the GameComponent will implement its own version of HandleCollision(). This method defines for how each component behaves when they collide with an another component. This is a method that constantly runs, if it has not being specified to stop. So you cna create different scenarios for different collisions. If you want to increase the score, when the main character passes something then you will handle that by perhabs by increasing a Game.instance.Score. Afterwards you can register that event by calling registerEvent(), and supplying that event with for example audio: { soundName: "Name of Sound file.wav" } ; the eventManager will then play that event/sound when the collision has occured. You can view what kinds of event can be supplied here in the Events.ts class.
  
 
 ## RigidBody
@@ -34,7 +34,6 @@ Sprite is the picture and the animation for the component. Scale is used to scal
 ### Floor
 If you want to have a floor for where the maincharacter or other components are abel to run, then you need to add the floor component from SheepRunner. Then you change the collider.object.name to the object name that should be able to run on the floor bed.
 
-### Obstacles
 
 ## Obstacle
 
