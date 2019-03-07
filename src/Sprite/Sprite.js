@@ -36,8 +36,8 @@ class Sprite extends React.Component {
       <div
         style={{
           ...this.state.styleSprite,
-          top: this.props.parent.rigidBody.position.y + "%",
-          left: this.props.parent.rigidBody.position.x + "%"
+          top: this.props.parent.position.y + "%",
+          left: this.props.parent.position.x + "%"
         }}
       >
         <style>{`@keyframes play {100% { background-position: ${-this.state
