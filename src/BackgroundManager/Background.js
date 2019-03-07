@@ -10,8 +10,7 @@ class Background extends Component {
       imagesource: "",
       styleImg: {
         height: "100%",
-        width: "100%",
-        backgroundPosition: "300px",
+        // width: "100%",
         backgroundImage:
           "url(" + props.resourceManager.getImage(props.imagesource),
         backgroundRepeat: "repeat-x",

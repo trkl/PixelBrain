@@ -31,9 +31,7 @@ export default class EventManager {
   };
 
   handleTick = (time: number) => {
-    // copy elements for processing and delete queue, so dublicate processing is less likely to occur
-    const eventQueue = [...this.eventQueue];
-    this.eventQueue = [];
+    const eventQueue = this.eventQueue;
     const { length } = eventQueue;
 
     for (let i = 0; i < length; ++i) {
@@ -47,5 +45,6 @@ export default class EventManager {
       const { callback } = event;
       if (callback) callback();
     }
+    this.eventQueue = [];
   };
 }

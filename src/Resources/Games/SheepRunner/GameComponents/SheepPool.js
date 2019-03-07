@@ -22,7 +22,7 @@ class SheepPool extends GameComponent {
   shouldComponentUpdate = () => true;
 
   prepareForRender = () => {
-    while (this.children.length < 9) {
+    while (this.children.length < 7) {
       this.children.push(
         React.createElement(Sheep, {
           offset: new Vector([this.sheepKey++ * this.interval(), 70]),
