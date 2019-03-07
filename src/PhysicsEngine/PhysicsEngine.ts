@@ -3,7 +3,16 @@ import Vector from "../Vector/Vector";
 import Event from "../Events/Event";
 import Timer from "../Timer/Timer";
 import EventManager from "../EventManager/EventManager";
-import { createSocket } from "dgram";
+
+// @ts-ignore
+Array.prototype.filterInPlace = function(predicate) {
+  for (let i = 0; i < this.length; ++i) {
+    if (predicate(this[i])) {
+      this[this.length - 1] = this[i];
+      this.pop();
+    }
+  }
+};
 
 class PhysicsEngine {
   private static _instance: PhysicsEngine;
@@ -44,7 +53,8 @@ class PhysicsEngine {
   };
 
   public remove(body: any) {
-    this.rigidBodies.filterInPlace(body !== body);
+    //@ts-ignore
+    this.rigidBodies = this.rigidBodies.filter(aBody => aBody !== body);
   }
 
   public processRigidBodies = (dt: number) => {

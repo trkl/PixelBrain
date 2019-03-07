@@ -1,5 +1,7 @@
 import React from "react";
 import { WithResources } from "../Resource Manager/HOC/WithResources";
+import PropTypes from "prop-types";
+import Vector from "../Vector/Vector";
 
 class Sprite extends React.Component {
   constructor(props) {
@@ -46,5 +48,13 @@ class Sprite extends React.Component {
     );
   }
 }
+
+Sprite.propTypes = {
+  position: PropTypes.instanceOf(Vector).isRequired,
+  n: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired
+  // parent: PropTypes.any.isRequired
+};
 
 export default WithResources(Sprite);

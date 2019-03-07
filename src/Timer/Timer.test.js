@@ -1,59 +1,98 @@
-import Timer from './Timer'
+import Timer from "./Timer";
+import Game from "../Resources/Games/Test/Game";
 
-describe("PhysicsEngine", () => {
-  
+describe("Timer", () => {
+  const now = require("performance-now");
+  jest.useFakeTimers();
 
   beforeEach(() => {
-    timer = new Timer();
+    Timer.instance.framerate = 1;
+    Game.instance.pause = true;
+    jest.spyOn(window, "requestAnimationFrame").mockImplementation(() => {});
   });
 
-  it("[Constructor vector init ]vector should keep internal vector in sync with x and y", () => {
-    
+  afterEach(() => {
+    Timer.instance.callbacks = [];
+    Timer.instance.oneTimeCallBacks = [];
   });
 
-//   it("[Empty constructor] vector should return [0,0]", () => {
-//     const vector = new Vector();
-//     expect(vector.vector).toEqual([0, 0]);
-//   });
+  it("Timer.instance should return instance of timer", () => {
+    jest.runAllTimers();
+    expect(Timer.instance).toBeTruthy();
+  });
+  if (
+    ("expect framerate to be set",
+    () => {
+      const framerate = 0.1;
+      Timer.instance.framerate = framerate;
+      expect(Timer.instance._interval).toEqual(1000 / framerate);
+    })
+  )
+    it("subscribing and unsubscribing to Timer should work", () => {
+      const testFunc = jest.fn();
+      Timer.instance.subscribe(testFunc);
+      expect(Timer.instance.callbacks.length).toEqual(1);
+      expect(Timer.instance.callbacks[0] === testFunc).toBeTruthy();
+      Timer.instance.unsubscribe(testFunc);
+      expect(Timer.instance.callbacks.length).toEqual(0);
+    });
 
-//   it("vector should keep internal vector in sync with x and y", () => {
-//     vector.x = 3;
-//     vector.y = 5;
-//     expect(
-//       vector.x === vector.vector[0] && vector.y === vector.vector[1]
-//     ).toBeTruthy();
-//   });
+  it("timer should run callback on step frame", () => {
+    Game.instance.pause = false;
+    const testFunc = jest.fn();
+    Timer.instance.subscribe(() => testFunc());
+    Timer.instance._interval = -1;
+    Timer.instance.step();
 
-//   it("vector should keep internal vector in sync with x and y", () => {
-//     vector.vector[0] = 1;
-//     vector.vector[1] = 3;
-//     expect(
-//       vector.x === vector.vector[0] && vector.y === vector.vector[1]
-//     ).toBeTruthy();
-//   });
+    expect(testFunc).toHaveBeenCalled();
+  });
 
-//   it("plussing two vectors", () => {
-//     expect(vector.plus(vector1).vector).toEqual([3, 5]);
-//   });
+  it("oneTimers should be called", () => {
+    Game.instance.pause = false;
+    const testFunc = jest.fn();
+    Timer.instance.subscribeToTime(() => testFunc(), -1);
+    Timer.instance._interval = -1;
+    Timer.instance.step();
+    expect(testFunc).toHaveBeenCalled();
+  });
 
-//   it("minus'ing two vectors", () => {
-//     expect(vector.minus(vector1).vector).toEqual([-1, -1]);
-//   });
+  it("Nothing should happen on Game.instance.pause", () => {
+    const testFunc = jest.fn();
+    Timer.instance.subscribeToTime(() => testFunc(), 0.1);
+    Timer.instance._interval = -1;
+    Timer.instance.step();
+    expect(testFunc).not.toHaveBeenCalled();
+  });
+  it("Nothing should happen if dt < interval", () => {
+    Game.instance.pause = false;
+    const testFunc = jest.fn();
+    Timer.instance.subscribeToTime(() => testFunc(), 1000);
+    Timer.instance._interval = 1000;
+    Timer.instance.step();
+    expect(testFunc).not.toHaveBeenCalled();
+  });
 
-//   it("multiplying vector", () => {
-//     const scale = 2;
-//     expect(vector.multiply(scale).vector).toEqual([2, 4]);
-//   });
+  it("Nothing should happen with oneTimers if !this.handleOneTimersEnter", () => {
+    Game.instance.pause = false;
+    const testFunc = jest.fn();
+    Timer.instance.subscribeToTime(() => testFunc(), -1);
+    Timer.instance._interval = -1;
+    Timer.instance.handleOneTimersEnter = false;
+    Timer.instance.step();
+    expect(testFunc).not.toHaveBeenCalled();
+  });
 
-//   it("dividing vectors", () => {
-//     expect(vector.divide(2).vector).toEqual([1 / 2, 1]);
-//   });
-
-//   it("dot'ing vectors", () => {
-//     expect(vector.dot(vector1)).toEqual(8);
-//   });
-
-//   it("Vector.Zero.vector should be [0,0]", () => {
-//     expect(Vector.Zero.vector).toEqual([0, 0]);
-//   });
-// });
+  it("unsubscribing non existing subscription should return false", () => {
+    const testFunc = jest.fn();
+    const othertestFunc = () => console.log("test");
+    Timer.instance.subscribe(testFunc);
+    expect(Timer.instance.unsubscribe(othertestFunc)).not.toBeTruthy();
+  });
+  it("unsubscribing with empty subscriptions should return false", () => {
+    const othertestFunc = () => console.log("test");
+    expect(Timer.instance.unsubscribe(othertestFunc)).not.toBeTruthy();
+  });
+  it("Constructor should work", () => {
+    expect(new Timer(0.1)).toBeTruthy();
+  });
+});

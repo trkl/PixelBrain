@@ -1,14 +1,18 @@
-import Game from "../Resources/Games/SheepRunner/Game";
+import Game from "../Resources/Games/Test/Game";
 
 export default class Timer {
   static _instance = undefined;
   static get instance() {
-    if (Timer._instance === undefined) Timer._instance = new Timer(60);
+    if (Timer._instance === undefined) Timer._instance = new Timer(0.1);
     return Timer._instance;
+  }
+
+  set framerate(framerate) {
+    this._interval = 1000 / framerate;
   }
   constructor(framerate = 30) {
     this.now = require("performance-now");
-    this.interval = 1000 / framerate; // ms
+    this.framerate = framerate;
     this.callbacks = [];
     this.oneTimeCallBacks = [];
     this.time = this.now();
@@ -26,9 +30,10 @@ export default class Timer {
 
   handleOneTimersEnter = true;
 
-  handleOneTimers = async () => {
-    if (!this.handleOneTimers) return;
-    this.handleOneTimersEnter = false;
+  handleOneTimers = () => {
+    if (this.handleOneTimersEnter) {
+      this.handleOneTimersEnter = false;
+    } else return;
     const length = this.oneTimeCallBacks.length;
     for (let i = 0; i < this.oneTimeCallBacks.length; ++i)
       if (
@@ -44,7 +49,7 @@ export default class Timer {
 
   unsubscribe = callback => {
     const { callbacks } = this;
-    if (callbacks.length) return false;
+    if (!callbacks.length) return false;
     // poor implementation, but can't think of a better way atm...
     const idx = callbacks.findIndex(
       val =>
@@ -63,7 +68,7 @@ export default class Timer {
     }
     this.handleOneTimers();
     const dt = this.now() - this.time;
-    if (dt >= this.interval) {
+    if (dt >= this._interval) {
       this.time = this.now();
       this.callbacks.forEach(val => val(dt));
     }

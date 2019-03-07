@@ -1,28 +1,19 @@
-import 'react-testing-library/cleanup-after-each'
-import React from 'react'
-import {cleanup, fireEvent, render, within} from 'react-testing-library'
-import World from './World'
-import WithResources from '../Resource Manager/HOC/WithResources';
+import "react-testing-library/cleanup-after-each";
+import React from "react";
+import { cleanup, fireEvent, render, within } from "react-testing-library";
+import World from "./World";
+import WithResources from "../Resource Manager/HOC/WithResources";
 
+// afterEach(cleanup);
 
+// it("should render the component only when the condition passes", () => {
+//   // const ConditionalComponent = WithResources(Component);
+// });
 
-afterEach(cleanup)
+// test("TodoApp should list the items in the passed order", () => {
+//   const { getByTestId } = render(<World />);
 
-it('should render the component only when the condition passes', () => {
-  const ConditionalComponent = WithResources(Component);
-  
+//   const registerComponent = jest.fn();
 
-});
-
-test('TodoApp should list the items in the passed order', () => {
-
-  const {getByTestId} = render(<World />)
-
-
-  const registerComponent = jest.fn()
-
-  expect(registerComponent).toBeCalledWith({component: component});
-
-
-})
-
+//   // expect(registerComponent).toBeCalledWith({component: component});
+// });

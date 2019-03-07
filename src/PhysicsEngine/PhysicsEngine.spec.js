@@ -1,16 +1,72 @@
 import PhysicsEngine from "./PhysicsEngine";
-import Event from '../Events/Event'
-import Vector from '../Vector/Vector'
+import Vector from "../Vector/Vector";
+import GameComponent from "../GameObject/GameComponent";
+import { render } from "react-testing-library";
+import React from "react";
+import RigidBody from "../GameObject/RigidBody";
+import CollisionZone from "../GameObject/CollisionZone";
 
 describe("PhysicsEngine", () => {
-  let event;
-  let gravityVector = new Vector([0, 9.82]);
-  let weight = 20;
+  let rigidBody;
 
   beforeEach(() => {
-    event = new Event();
-    instance = new PhysicsEngine();
+    rigidBody = {
+      weight: 10,
+      gravity: 1,
+      velocity: new Vector([20, 20]),
+      drag: 1,
+      force: new Vector([30, 30])
+    };
+    rigidBody.parent = { rigidBody };
   });
+
+  it("instance should be defined", () => {
+    expect(PhysicsEngine.instance).toBeTruthy();
+  });
+
+  it("should calculate gravity correctly", () => {
+    expect(PhysicsEngine.instance.gravityForce(rigidBody).vector).toEqual([
+      0,
+      10 * 1 * 9.82
+    ]);
+  });
+  it("should calculate dragForceCorrectly", () => {
+    expect(PhysicsEngine.instance.dragForce(rigidBody).vector).toEqual([
+      -400,
+      -400
+    ]);
+  });
+
+  it("should calculate totalForce on rigidBody correctly", () => {
+    expect(PhysicsEngine.instance.totalForce(rigidBody).vector).toEqual(
+      rigidBody.force.plus(
+        PhysicsEngine.instance
+          .gravityForce(rigidBody)
+          .plus(PhysicsEngine.instance.dragForce(rigidBody))
+      ).vector
+    );
+  });
+
+  it("rigidBody should be able to be added and removed from physicsEngine", () => {
+    PhysicsEngine.instance.add(rigidBody);
+    expect(PhysicsEngine.instance.rigidBodies.length).toEqual(1);
+    expect(PhysicsEngine.instance.rigidBodies[0] === rigidBody).toBeTruthy();
+    PhysicsEngine.instance.remove(rigidBody);
+    expect(PhysicsEngine.instance.rigidBodies.length).toEqual(0);
+  });
+
+  it("event should add force to object", () => {
+    const preForce = rigidBody.force;
+    const event = {
+      gameObject: rigidBody.parent,
+      physics: { force: new Vector([20, 20]) }
+    };
+    PhysicsEngine.instance.processEvent(event);
+    expect(preForce.plus(event.physics.force).vector).toEqual(
+      rigidBody.force.vector
+    );
+  });
+});
 
 //   it("[Constructor vector init ]vector should keep internal vector in sync with x and y", () => {
 //     expect(instance.gravityForce()).toBeTruthy();
