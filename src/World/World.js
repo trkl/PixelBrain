@@ -64,8 +64,8 @@ class World extends React.Component {
     Timer.instance.subscribe(EventManager.instance.handleTick);
     Timer.instance.subscribe(PhysicsEngine.instance.processRigidBodies);
     Timer.instance.subscribe(CollisionManger.instance.handleCollisions);
-    Timer.instance.subscribe(this.beforeFrameRender);
     Timer.instance.subscribe(dt => this.camera.moveCamera(dt, this.components));
+    Timer.instance.subscribe(this.beforeFrameRender);
     Timer.instance.subscribe(this.updateWorld);
   }
 }

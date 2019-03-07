@@ -56,7 +56,11 @@ export default class GameComponent extends Component {
   shouldComponentUpdate = () => false;
 
   componentWillMount() {
-    this.children = this.children ? this.children : [];
+    this.children = this.children
+      ? this.children
+      : this.props.children
+      ? this.props.children
+      : [];
     this.children = this.children.map((child, idx) =>
       React.cloneElement(child, {
         ...this.props,
