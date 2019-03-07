@@ -56,13 +56,15 @@ class Sprite extends React.Component {
 Sprite.propTypes = {
   size: PropTypes.instanceOf(Vector).isRequired,
   position: PropTypes.instanceOf(Vector).isRequired,
-  scale: PropTypes.number
+  scale: PropTypes.number,
+  offset: PropTypes.instanceOf(Vector).isRequired
 };
 
 Sprite.defaultProps = {
   size: Vector.Zero,
   scale: 1,
-  position: Vector.Zero
+  position: Vector.Zero,
+  offset: Vector.Zero
 };
 
 export default WithResources(Sprite);
