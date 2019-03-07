@@ -22,7 +22,7 @@ class Sprite extends React.Component {
           this.props.resourceManager.getImage(this.props.imagesource) +
           ") left center",
         backgroundSize: "cover",
-        animation: "play 0.3s steps(" + n + ") infinite"
+        animation: "play 1s steps(" + n + ") infinite"
       }
     };
   }
