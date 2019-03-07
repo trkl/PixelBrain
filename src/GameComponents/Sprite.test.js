@@ -10,17 +10,19 @@ const Sprite = constructMockHoc("Sprite.js")
                 .mock('../Resource Manager/HOC/WithResources.js')
                 .with({resourceManager })
                 .create();
+
                                
 describe("Sprite",() => {
     afterEach(cleanup);
+    let sprite;
     const parent = {
-        add: jest.fn(),
+        add: component => sprite = component,
         position: new Vector()
     }
     const vector = new Vector();
     it("getImage is called", () => {
-        render(<Sprite position={parent.position} parent={parent} vector={vector}/>);
+        render(<Sprite position={parent.position} parent={parent} vector={vector} />);
         expect(resourceManager.getImage).toHaveBeenCalled();
-        expect(parent.add).toHaveBeenCalled();
+        sprite.update();
     })
 })
