@@ -18,7 +18,7 @@ describe("GameComponent", () => {
 
     it("render", () => {
         render(<GameComponent name={"comp"} world={world} >
-            <RigidBody weightw={40}/>
+            <RigidBody weight={40}/>
             <CollisionZone dimensions={dimension} />
         </GameComponent>)
         component.update()

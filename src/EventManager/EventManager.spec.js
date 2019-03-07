@@ -8,7 +8,7 @@ import { act } from "react-dom/test-utils";
 import AudioManager from "../AudioManager/AudioManager";
 
 describe("EventManager", () => {
-  let eventManager, event, container, audiomanager;
+  let eventManager, event, container;
 
   beforeEach(() => {
     container = document.createElement("div");
@@ -18,7 +18,6 @@ describe("EventManager", () => {
       gameObject: null,
       physics: { force: new Vector([10, 20]), duration: 20 }
     };
-    audiomanager = {playsound: jest.fn()}
   });
 
   it("event should be subscribed", () => {
