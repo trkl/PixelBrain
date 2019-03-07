@@ -1,20 +1,15 @@
-import PhysicsEngine from "./PhysicsEngine";
-import Event from '../Events/Event'
-import Vector from '../Vector/Vector'
+import Timer from './Timer'
 
 describe("PhysicsEngine", () => {
-  let event;
-  let gravityVector = new Vector([0, 9.82]);
-  let weight = 20;
+  
 
   beforeEach(() => {
-    event = new Event();
-    instance = new PhysicsEngine();
+    timer = new Timer();
   });
 
-//   it("[Constructor vector init ]vector should keep internal vector in sync with x and y", () => {
-//     expect(instance.gravityForce()).toBeTruthy();
-//   });
+  it("[Constructor vector init ]vector should keep internal vector in sync with x and y", () => {
+    
+  });
 
 //   it("[Empty constructor] vector should return [0,0]", () => {
 //     const vector = new Vector();
