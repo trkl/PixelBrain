@@ -1,11 +1,11 @@
-## Guide for Engine use
+# Guide for Engine use
 
 Clone this repository and run npm install.
 
-### Creating a Game
+## Creating a Game
 Create a new folder in the Games folder under the resources/Games directory, then create a new Game.js file in that folder. You then add the different game components in that file, e.g. Background, HUD, Pipes etc. 
 
-## Creating Backgrounds
+### Creating Backgrounds
 You create Backgrounds by creating backround tags. A background component has the properties: imageSource, speed, and zIndex. You add images to the background by assignings its imageSource an imagefile e.g. Clouds.png. You need to add the desired image file into the /resources/images, so that background is able to locate the image. The speed property sets how much the background moves; a negative number makes the background move to the left while a positive does the opposite. The higher the absolute number, then the faster it moves. zIndex assigns the position of the image on the screen. i.e. the lower zIndex score then it appears further from the screen, and the opposite for a hgher score. Remember to seperate each commponents with a comma.
 
 
