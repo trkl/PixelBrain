@@ -9,15 +9,27 @@ Create a new folder in the Games folder under the resources/Games directory, the
 You create Backgrounds by creating backround tags. A background component has the properties: imageSource, speed, and zIndex. You add images to the background by assignings its imageSource an imagefile e.g. Clouds.png. You need to add the desired image file into the /resources/images, so that background is able to locate the image. The speed property sets how much the background moves; a negative number makes the background move to the left while a positive does the opposite. The higher the absolute number, then the faster it moves. zIndex assigns the position of the image on the screen. i.e. the lower zIndex score then it appears further from the screen, and the opposite for a hgher score. Remember to seperate each commponents with a comma.
 
 
-## HUD
+### HUD
 You add HUD the components by creating a HUDManager tag, and asigns its properties with whatever font you want which you
 have stored in resources/font. You can create your own HUDManagers, or just copy the existing ones in the Engine from the included games. If you chose a preexisting HUDManager, then you can customise its fontFamily, font, and position by assigning its properties.
 
-## Character
-First you create a gamecompontents folder in the same directory as your game.
+### Game Components
+Game components is a class which you will implement in order to create components such as pipes, sheeps, main character etc. First you need to create a Game Components folder in your game directory. Then you add a new class in that folder e.g. the bird class from the Flappy Bird game. Copy the code from the bird or runner class from the other games; if you want the component to be controllable, then set controller = true, when you create the GameComponent tag in Game.js. If you want to the camera to follow the character, then you assign cameraFollows to be true in the same GameComponent tag. The difference between a controllable component and a non-controllable one is the controller property. You customise the sound the character has by setting soundName to a string that refers to an audio file in resources/sounds. Physics describes the forces that surrounds the component, when they press the key that got subsribed to the components.  The first number is the x coordinate and it specifies the force the character moves along that axis. The second number is the y coordinate for the same event. Minus means the character is forced upwards while plus means he gets forced downwards. Then you add RigidBody, CollisionZone, and sprite into an array called children. 
 
-## Adding Sounds
-You add sounds by inserting sounds into the resources/sounds. 
+## RigidBody
+Weight describes the weight of the component .i.e. higher the weight the less the component is susceptible to forces, drag, and velocity.  Velocity defines how fast the component move. Force in rigidbody does the same as described above but without the key event.
+
+## CollisionZone
+
+CollisionZone defines where the component can get git. Offset sets where the collison zone for the component is placed. This can be directly on the character, or like with the pipes where  the collision zone score for them is offset a little to the right of them, so that a score increases each time the character bypasses them. Dimension describes the dimension size of the collision zone.
+
+## Sprite
+Sprite is the picture and the animation for the component. Scale is used to scale height and width on the screen. n is the number of frames that the sprite has e.g. runner has eight frames. imageSource is the sprite image, and you add the image simply by naming it after an image in that's located in the resources/images directory.
+
+
+
+
+
 
 ## React Comments
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
