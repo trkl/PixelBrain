@@ -1,6 +1,7 @@
 import {constructMockHoc} from "react-mock-hoc-utils"
 import { render, cleanup } from "react-testing-library";
 import React from 'react'
+import Vector from '../Vector/Vector'
 
 
 const resourceManager = { getImage: jest.fn()}
@@ -12,9 +13,14 @@ const Sprite = constructMockHoc("Sprite.js")
                                
 describe("Sprite",() => {
     afterEach(cleanup);
-    const vector = [0,0];
+    const parent = {
+        add: jest.fn(),
+        position: new Vector()
+    }
+    const vector = new Vector();
     it("getImage is called", () => {
-        render(<Sprite position={vector}/>);
+        render(<Sprite position={parent.position} parent={parent} vector={vector}/>);
         expect(resourceManager.getImage).toHaveBeenCalled();
+        expect(parent.add).toHaveBeenCalled();
     })
 })
