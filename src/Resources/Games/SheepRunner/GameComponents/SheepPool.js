@@ -1,40 +1,31 @@
-import React, { Component } from "react";
+import React from "react";
 import GameComponent from "../../../../GameObject/GameComponent";
-import Sheep from './Sheep'
+import Sheep from "./Sheep";
 import Vector from "../../../../Vector/Vector";
 import PropTypes from "prop-types";
+import { WithWorld } from "../../../../World/HOC/WithWorld";
 
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-export default class SheepPool extends Component {
+class SheepPool extends GameComponent {
   constructor(props) {
     super(props);
-    for (const i in this.props) {
-      this[i] = this.props[i];
-    }
-    this.interval = () => getRandomArbitrary(30,50)
-    this.sheep = [];
+    this.interval = () => getRandomArbitrary(30, 50);
+    this.children = [];
     this.sheepKey = 0;
 
     this.prepareForRender();
-    this.renderObj = React.createElement(
-      GameComponent,
-      { position: this.position, parent: this },
-      this.sheep
-    );
   }
 
-  shouldComponentUpdate() {
-    return false;
-  }
+  shouldComponentUpdate = () => true;
 
   prepareForRender = () => {
-    while (this.sheep.length < 9) {
-      this.sheep.push(
+    while (this.children.length < 9) {
+      this.children.push(
         React.createElement(Sheep, {
-          offset: this.sheepKey++ * this.interval(),
+          offset: new Vector([this.sheepKey++ * this.interval(), 70]),
           position: this.position,
           key: this.sheepKey
         })
@@ -42,16 +33,14 @@ export default class SheepPool extends Component {
     }
   };
 
-  rotateRender = (offset) => {
-    this.sheep.push(
-      React.cloneElement(this.sheep.shift(), {
-        offset: offset,
-
+  rotateRender = offset => {
+    this.children.push(
+      React.cloneElement(this.children.shift(), {
+        offset: new Vector([offset, 70]),
+        position: this.position,
         key: this.sheepKey
       })
     );
-
-    this.renderObj = React.cloneElement(this.renderObj, {}, this.sheep);
   };
 
   componentWillReceiveProps(props) {
@@ -60,17 +49,14 @@ export default class SheepPool extends Component {
     }
   }
 
-  render = () => this.renderObj;
-
   beforeFrameRender = () => {
-    const { position } = this.gameComponent;
-    const offset =this.interval() * this.sheepKey-3;
-    if (position.x + offset > 100 && position.x +offset < 150) {
-      ++this.sheepKey
+    const { position } = this;
+    const offset = this.interval() * this.sheepKey - 3;
+    if (position.x + offset > 100 && position.x + offset < 150) {
+      ++this.sheepKey;
       this.rotateRender(offset);
     }
   };
-
 }
 
 SheepPool.propTypes = {
@@ -80,3 +66,5 @@ SheepPool.propTypes = {
 SheepPool.defaultProps = {
   position: Vector.Zero
 };
+
+export default WithWorld(SheepPool);

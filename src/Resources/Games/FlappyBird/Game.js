@@ -4,7 +4,7 @@ import Bird from "./GameComponents/Bird";
 import PipePool from "./GameComponents/PipePool";
 import Floor from "./GameComponents/Floor";
 import HUDManager from "./HUD/HUDManager";
-import Background from '../../../BackgroundManager/Background'
+import Background from "../../../BackgroundManager/Background";
 
 class Game extends React.Component {
   render = () =>
@@ -27,29 +27,23 @@ Game.gameComponents = [
   <Background imagesource="Clouds.png" speed={-0.6} zindex={-2} />,
   <Background imagesource="Background.png" speed={-0.2} zindex={-3} />,
   <HUDManager
-  font="pixel.ttf"
-  fontFamily="Pixel"
-  textAlign="center"
-  position="absolute"
-  top="20px"
-  />, 
+    font="pixel.ttf"
+    fontFamily="Pixel"
+    textAlign="center"
+    position="absolute"
+    top="20px"
+  />,
   <Bird
+    name={"Bird"}
+    position={new Vector([5, 30])}
     cameraFollows={true}
     force={new Vector([30, 0])}
-    position={new Vector([5, 30])}
     gravity={3}
     weight={20}
     controller={true}
   />,
-   <HUDManager
-   font="pixel.ttf"
-   fontFamily="Pixel"
-   textAlign="center"
-   position="absolute"
-   top="20px"
- />,
-  <PipePool position={new Vector([40, 0])} />,
-  <Floor position={new Vector([0, 80])} dimensions={new Vector([100, 20])} />
+  <PipePool position={new Vector([40, 0])} />
+  // <Floor position={new Vector([0, 80])} dimensions={new Vector([100, 20])} />
 ];
 
 export default Game;

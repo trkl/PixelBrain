@@ -21,10 +21,10 @@ export default class CollisionManger {
   remove = number => (this.gameObjects[number] = undefined);
 
   collisionDetected(obj1, obj2) {
-    const position1 = obj1.props.position.plus(obj1.props.offset);
-    const position2 = obj2.props.position.plus(obj2.props.offset);
-    const bottomRight1 = position1.plus(obj1.props.dimensions);
-    const bottomRight2 = position2.plus(obj2.props.dimensions);
+    const position1 = obj1.position.plus(obj1.offset);
+    const position2 = obj2.position.plus(obj2.offset);
+    const bottomRight1 = position1.plus(obj1.dimensions);
+    const bottomRight2 = position2.plus(obj2.dimensions);
     return (
       position1.x < bottomRight2.x &&
       bottomRight1.x > position2.x &&
@@ -47,28 +47,30 @@ export default class CollisionManger {
 
           collisions.push([
             {
-              object: obj1.props.parent.props.parent,
+              object: obj1.props.parent,
               collisionZone: obj2
             },
             {
-              object: obj2.props.parent.props.parent,
+              object: obj2.props.parent,
               collisionZone: obj1
             }
           ]);
           obj1.collision.add(obj2);
         } else {
-          if(obj1.collision.delete(obj2)){
-            const gameObj1 = obj1.props.parent.props.parent;
-            const gameObj2 = obj2.props.parent.props.parent;
-            
-            gameObj1.onCollisionEnd && gameObj1.onCollisionEnd( {
-              object: gameObj2,
-              collisionZone: obj2
-            })
-            gameObj2.onCollisionEnd && gameObj2.onCollisionEnd( {
-              object: gameObj1,
-              collisionZone: obj1
-            })
+          if (obj1.collision.delete(obj2)) {
+            const gameObj1 = obj1.props.parent;
+            const gameObj2 = obj2.props.parent;
+
+            gameObj1.onCollisionEnd &&
+              gameObj1.onCollisionEnd({
+                object: gameObj2,
+                collisionZone: obj2
+              });
+            gameObj2.onCollisionEnd &&
+              gameObj2.onCollisionEnd({
+                object: gameObj1,
+                collisionZone: obj1
+              });
           }
         }
       }

@@ -35,11 +35,9 @@ describe("EventManager", () => {
     let best = { success: false };
 
     event.callback = () => (best = { success: true });
-    console.log(event);
 
     eventManager.registerEvent(event);
     eventManager.handleTick(0.2);
-    console.log(event);
 
     expect(best.success).toBeTruthy();
   });

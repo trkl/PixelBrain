@@ -1,35 +1,29 @@
 import React, { Component } from "react";
-import WithWorld from "../World/HOC/WithWorld";
 import Vector from "./../Vector/Vector";
 import PropTypes from "prop-types";
-import Camera from "../Camera/Camera";
 
-class GameComponent extends Component {
+export default class GameComponent extends Component {
   constructor(props) {
     super(props);
-    this.children = [];
-    this._position = new Vector(this.props.position.vector);
+    this._position = this.props.position;
     this.components = [];
     this.rigidBody = null;
     this.collisionZones = [];
-    this.props.parent.gameComponent = this;
-    if (this.props.cameraFollows) {
-      this.props.world.camera = new Camera(this);
-      this.props.world.startCamera();
-    }
+    this.name = this.props.name;
   }
   _isChanged = false;
 
-  add = component => {
-    this.components.push(component);
+  addRigidBody = component => {
+    this.add(component);
+    if (!this.rigidBody) {
+      this.rigidBody = component;
+    } else throw new Error("more than one rigidBody not supported");
+  };
 
-    if (component.constructor.name === "CollisionZone") {
-      this.collisionZones.push(component);
-    } else if (component.constructor.name === "RigidBody") {
-      if (!this.rigidBody) {
-        this.rigidBody = component;
-      } else throw new Error("more than one rigidBody not supported");
-    }
+  add = component => this.components.push(component);
+  addCollisionZone = component => {
+    this.add(component);
+    this.collisionZones.push(component);
   };
 
   remove = component => {
@@ -38,10 +32,12 @@ class GameComponent extends Component {
   };
 
   get position() {
+    if (this.rigidBody) return this.rigidBody.position;
     return this._position;
   }
   set position(position) {
     this._isChanged = true;
+    if (this.rigidBody) this.rigidBody.position = position;
     this._position = position;
   }
 
@@ -51,25 +47,40 @@ class GameComponent extends Component {
     this.components.forEach(component => component.update());
   };
 
-  shouldComponentUpdate() {
-    return this._isChanged;
-  }
+  // shouldComponentUpdate() {
+  //   return this._isChanged;
+  // }
 
-  render = () =>
-    React.Children.map(this.props.children, child =>
-      React.cloneElement(child, { position: this.position, parent: this })
-    );
+  render = () => this.children;
+
+  shouldComponentUpdate = () => false;
 
   componentWillMount() {
-    this.mounted = true;
+    this.children = this.children ? this.children : [];
+    this.children = this.children.map((child, idx) =>
+      React.cloneElement(child, {
+        ...this.props,
+        name: null,
+        ...child.props,
+
+        world: this.props.world,
+        parent: this,
+        key: idx,
+        position: this.rigidBody ? this.rigidBody.position : this.props.position
+      })
+    );
     this.props.world.registerComponent(this);
+  }
+  componentDidMount() {
+    this.mounted = true;
   }
 
   componentWillUnmount() {
     this.mounted = false;
     // this.props.world.unregisterComponent(this);
-    this.components = [];
+    // this.components = [];
   }
+  components = [];
 }
 
 GameComponent.defaultProps = {
@@ -77,7 +88,8 @@ GameComponent.defaultProps = {
 };
 
 GameComponent.propTypes = {
-  position: PropTypes.instanceOf(Vector).isRequired
+  position: PropTypes.instanceOf(Vector).isRequired,
+  name: PropTypes.string.isRequired
 };
 
-export default WithWorld(GameComponent);
+// export default WithWorld(GameComponent);

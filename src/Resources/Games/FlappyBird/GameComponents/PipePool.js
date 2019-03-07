@@ -1,40 +1,33 @@
-import React, { Component } from "react";
+import React from "react";
 
 import GameComponent from "../../../../GameObject/GameComponent";
 import Pipes from "./Pipes";
 import Vector from "../../../../Vector/Vector";
 import PropTypes from "prop-types";
-import Game from "../Game";
+import { WithWorld } from "../../../../World/HOC/WithWorld";
 
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-export default class PipePool extends Component {
+class PipePool extends GameComponent {
   constructor(props) {
     super(props);
     for (const i in this.props) {
       this[i] = this.props[i];
     }
+    console.log(this.position.vector);
     this.interval = 20;
-    this.pipes = [];
+    this.children = [];
     this.pipeKey = 0;
 
     this.prepareForRender();
-    this.renderObj = React.createElement(
-      GameComponent,
-      { position: this.position, parent: this },
-      this.pipes
-    );
-  }
-
-  shouldComponentUpdate() {
-    return false;
   }
 
   prepareForRender = () => {
-    while (this.pipes.length < 7) {
-      this.pipes.push(
+    console.log("preparing");
+    while (this.children.length < 7) {
+      this.children.push(
         React.createElement(Pipes, {
           offset: this.pipeKey++ * this.interval,
           position: this.position,
@@ -45,16 +38,18 @@ export default class PipePool extends Component {
     }
   };
 
+  shouldComponentUpdate = () => true;
+
   rotateRender = () => {
-    this.pipes.push(
-      React.cloneElement(this.pipes.shift(), {
+    this.children.push(
+      React.cloneElement(this.children.shift(), {
+        position: this.position,
         offset: this.pipeKey++ * this.interval,
         upperPipeLength: getRandomArbitrary(10, 50),
         key: this.pipeKey
       })
     );
-
-    this.renderObj = React.cloneElement(this.renderObj, {}, this.pipes);
+    console.log("after", this.children);
   };
 
   componentWillReceiveProps(props) {
@@ -63,21 +58,13 @@ export default class PipePool extends Component {
     }
   }
 
-  render = () => this.renderObj;
-
   beforeFrameRender = () => {
-    const { position } = this.gameComponent;
-    if (position.x + this.interval * this.pipeKey - 3 < 100) {
+    const { position } = this;
+    if (position.x + this.interval * (this.pipeKey - 1) < 100) {
+      console.log("hey");
       this.rotateRender();
     }
   };
-
-  handleCollision({ object, collisionZone }) {
-    if (object.constructor.name !== "Bird") return;
-    if (collisionZone.name === "scoreZone") {
-      Game.instance.score += 1;
-    }
-  }
 }
 
 PipePool.propTypes = {
@@ -87,3 +74,5 @@ PipePool.propTypes = {
 PipePool.defaultProps = {
   position: Vector.Zero
 };
+
+export default WithWorld(PipePool);

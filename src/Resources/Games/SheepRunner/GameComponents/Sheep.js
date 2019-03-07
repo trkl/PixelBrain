@@ -5,66 +5,52 @@ import CollisionZone from "../../../../GameObject/CollisionZone";
 import Sprite from "../../../../GameComponents/Sprite";
 import PropTypes from "prop-types";
 import Game from "../Game";
-import AudioManager from '../../../../AudioManager/AudioManager'
+import AudioManager from "../../../../AudioManager/AudioManager";
+import { WithWorld } from "../../../../World/HOC/WithWorld";
 
-class Sheep extends React.Component {
+class Sheep extends GameComponent {
   constructor(props) {
     super(props);
-    for (const i in this.props) {
-      this[i] = this.props[i];
-    }
-    this.AudioManager = new AudioManager()
+    this.AudioManager = new AudioManager();
   }
 
-  componentWillReceiveProps(props) {
-    for (const i in props) {
-      this[i] = props[i];
-    }
-  }
+  CollisionHeight = 10;
+  sheepSize = 100;
+  sheepOffset = 50;
 
-  render() {
+  children = [
+    <Sprite
+      offset={this.props.offset}
+      imagesource="sheep.png"
+      size={new Vector([this.props.width, 10])}
+    />,
+    <CollisionZone
+      offset={this.props.offset}
+      dimensions={new Vector([this.props.width, 10])}
+    />,
+    <CollisionZone
+      name={"scoreZone"}
+      offset={new Vector([this.props.offset.x + this.props.width / 4, 0])}
+      dimensions={new Vector([this.props.width / 2, this.props.offset.y])}
+    />
+  ];
 
-    const CollisionHeight = 10
-    const sheepSize = 100
-    const sheepOffset = 71.5
-
-    return (
-      <GameComponent parent={this} position={this.position}>
-        <Sprite
-          offset={new Vector([this.offset, sheepOffset])}
-          size={new Vector([this.width, 10])}
-          imagesource="sheep.png"
-        />
-
-        <CollisionZone
-          offset={new Vector([this.offset, sheepOffset])}
-          dimensions={new Vector([3.5, sheepSize])}
-        />
-        <CollisionZone
-          name="scoreZone"
-          offset={new Vector([this.offset + this.width, CollisionHeight])}
-          dimensions={new Vector([this.width, 200])}
-        />
-      </GameComponent>
-    );
-  }
   handleCollision = collider => {
     const { object, collisionZone } = collider;
     // if (object.constructor.name !== "Bird") return;
-    if (object.constructor.name !== "Runner") {
+    if (object.name !== "Runner") {
       return;
     }
 
     if (collisionZone.name === "scoreZone") {
       ++Game.instance.score;
-      this.AudioManager.playSound("sfx_point.wav")
-
+      this.AudioManager.playSound("sfx_point.wav");
     } else {
       Game.instance.gameOver = true;
-      this.AudioManager.playSound("sfx_hit.wav")
-      this.AudioManager.playSound("sfx_die.wav")
-      if(Game.instance.score > Game.instance.highScore){
-        Game.instance.highScore = Game.instance.score
+      this.AudioManager.playSound("sfx_hit.wav");
+      this.AudioManager.playSound("sfx_die.wav");
+      if (Game.instance.score > Game.instance.highScore) {
+        Game.instance.highScore = Game.instance.score;
       }
     }
   };
@@ -77,4 +63,4 @@ Sheep.defaultProps = {
   width: 4
 };
 
-export default Sheep;
+export default WithWorld(Sheep);

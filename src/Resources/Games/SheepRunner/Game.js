@@ -3,8 +3,9 @@ import Vector from "./../../../Vector/Vector";
 import Runner from "./GameComponents/Runner";
 import SheepPool from "./GameComponents/SheepPool";
 import Floor from "./GameComponents/Floor";
-import Background from '../../../BackgroundManager/Background'
+import Background from "../../../BackgroundManager/Background";
 import HUDManager from "./HUD/HUDManager";
+import Sheep from "./GameComponents/Sheep";
 
 class Game extends React.Component {
   render = () =>
@@ -24,18 +25,19 @@ Game.instance = {
 Game.gameComponents = [
   // <BackgorundManager />,
   <HUDManager
-            font="pixel.ttf"
-            fontFamily="Pixel"
-            textAlign="center"
-            position="absolute"
-            top="20px"
-          />,
+    font="pixel.ttf"
+    fontFamily="Pixel"
+    textAlign="center"
+    position="absolute"
+    top="20px"
+  />,
   <Background imagesource="SheepGrass.png" speed={-1} zindex={1} />,
   <Background imagesource="kalsoy.png" speed={-0.2} zindex={-1} />,
   <Background imagesource="Clouds.png" speed={-0.6} zindex={-2} />,
   <Background imagesource="SheepBackground.png" speed={-0.2} zindex={-3} />,
   <Background imagesource="disneyTruck.png" speed={-0.2} zindex={0} />,
   <Runner
+    name="Runner"
     cameraFollows={true}
     force={new Vector([300, 0])}
     position={new Vector([0, 60])}
@@ -44,7 +46,11 @@ Game.gameComponents = [
     controller={true}
   />,
   <SheepPool position={new Vector([60, 0])} />,
-  <Floor position={new Vector([0, 80])} dimensions={new Vector([100, 20])} />
+  <Floor
+    name="Floor"
+    position={new Vector([0, 77])}
+    dimensions={new Vector([100, 20])}
+  />
 ];
 
 export default Game;

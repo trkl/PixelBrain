@@ -2,14 +2,12 @@ import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
 import Event from "../Events/Event";
 import CollisionManger from "../CollisionManager/CollisionManager";
 import Timer from "../Timer/Timer";
-import AudioManager from "../AudioManager/AudioManager"
-import Game from "../Resources/Games/SheepRunner/Game";
+import AudioManager from "../AudioManager/AudioManager";
 
 export default class EventManager {
   eventQueue: Event[] = [];
   collisionManager: CollisionManger;
-  audioManager: AudioManager;
-
+  audioManager: any;
 
   private static _instance: EventManager;
   public static get instance() {
@@ -24,7 +22,8 @@ export default class EventManager {
   private constructor() {
     Timer.instance.subscribe(this.handleTick);
     this.collisionManager = new CollisionManger();
-    this.audioManager = new AudioManager();
+    // @ts-ignore
+    this.audioManager = new AudioManager() as any;
   }
 
   public registerEvent = (event: Event) => {
@@ -36,13 +35,13 @@ export default class EventManager {
     const eventQueue = [...this.eventQueue];
     this.eventQueue = [];
     const { length } = eventQueue;
-    
+
     for (let i = 0; i < length; ++i) {
       const event = eventQueue[i];
-      PhysicsEngine.instance.processEvent(event);      
-      if(!event.end){
-        if(event.audio) {
-          this.audioManager.playSound(event.audio.soundName)
+      PhysicsEngine.instance.processEvent(event);
+      if (!event.end) {
+        if (event.audio) {
+          this.audioManager.playSound(event.audio.soundName);
         }
       }
       const { callback } = event;
@@ -50,4 +49,3 @@ export default class EventManager {
     }
   };
 }
-

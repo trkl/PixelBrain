@@ -1,22 +1,33 @@
 import React from "react";
-import { render } from "react-testing-library";
-import CollisionZone from "./CollisionZone";
-import Vector from "../Vector/Vector";
-import GameComponent from "./GameComponent";
-import WorldContextProvider from "../World/Context/WorldContextProvider";
-import World from "../World/World";
+import { render, cleanup, waitForElement } from "react-testing-library";
+import { constructMockHoc } from "react-mock-hoc-utils";
+// import Vector from "../Vector/Vector";
+// import CollisionZone from "./CollisionZone";
+// import constructBuilder from "test-component-builder";
+// import Test from "./Testy";
+// import World from "../World/World";
 
-test("collisionDetection", () => {
-  const parent = { registerComponent: jest.fn() };
-  const world = 5;
+const world = { registerComponent: jest.fn() };
 
-  const da = render(
-    <GameComponent parent={parent} world={world}>
-      <CollisionZone dimensions={new Vector([10, 10])} position={Vector.Zero} />
-      <CollisionZone
-        dimensions={new Vector([10, 10])}
-        position={new Vector([0, 5])}
-      />
-    </GameComponent>
-  );
+const GameComponent = constructMockHoc("GameComponent.js")
+  .mock("../World/HOC/WithWorld.js")
+  .with({ world })
+  .create();
+
+let component;
+describe("", () => {
+  // beforeEach(() => {
+  //   component = constructBuilder(builder).using(render);
+  // });
+
+  afterEach(cleanup);
+
+  it("collisionDetection", async () => {
+    const { getByTestId } = render(
+      <GameComponent data-testid="shit" world={world} />
+    );
+    const node = await waitForElement(() => getByTestId("shit"));
+
+    expect(world.registerComponent).toHaveBeenCalled();
+  });
 });

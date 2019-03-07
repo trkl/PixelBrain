@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import GameComponent from "../../../../GameObject/GameComponent";
 import CollisionZone from "../../../../GameObject/CollisionZone";
 import Game from "./../Game";
+import Bird from "./Bird";
 
 export default class Floor extends Component {
   constructor(props) {
@@ -17,10 +18,8 @@ export default class Floor extends Component {
     </GameComponent>
   );
   handleCollision = collider => {
-    if (collider.object.constructor.name === "Bird") {
+    if (collider.object.constructor.name === Bird.prototype.constructor.name) {
       Game.instance.gameOver = true;
-      console.log("Game Over!");
-      console.log(collider);
     }
   };
   beforeFrameRender() {
