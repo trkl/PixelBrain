@@ -3,7 +3,6 @@ import Game from "../Resources/Games/Test/Game";
 
 describe("Timer", () => {
   const now = require("performance-now");
-  jest.useFakeTimers();
 
   beforeEach(() => {
     Timer.instance.framerate = 1;
@@ -17,7 +16,6 @@ describe("Timer", () => {
   });
 
   it("Timer.instance should return instance of timer", () => {
-    jest.runAllTimers();
     expect(Timer.instance).toBeTruthy();
   });
   if (

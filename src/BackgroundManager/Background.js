@@ -5,12 +5,6 @@ class Background extends Component {
   constructor(props) {
     super(props);
 
-    Timer.instance.subscribe(() => {
-      //   this.second = !this.second;
-      //   if (this.second)
-      this.gameLoop();
-    });
-
     this.state = {
       speed: props.speed,
       counter: 0,

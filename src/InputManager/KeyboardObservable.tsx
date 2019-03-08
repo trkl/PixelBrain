@@ -39,10 +39,6 @@ export default class KeyboardObservable {
     if (endOnKeyup) this.whileDownSubscribers.push(subscriber);
   };
 
-  subscribeWhileDown = (object: any, key: string, event: Event) => {
-    this.subscribers.push(new KeyboardSubscriber(object, key, event));
-  };
-
   unsubscribe = (object: any) => {
     const { length } = this.subscribers;
     if (length)

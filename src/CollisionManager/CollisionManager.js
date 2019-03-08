@@ -7,13 +7,15 @@ export default class CollisionManger {
     return CollisionManger._instance;
   }
 
-  gameObjects = [undefined];
+  gameObjects = [];
 
   add = collisionZone => {
     let i = -1;
-    while (this.gameObjects[++i] !== undefined) {
-      this.gameObjects[i] = collisionZone;
-      return i;
+    for (let i = 0, length = this.gameObjects.length; i < length; ++i) {
+      if (this.gameObjects[i] === undefined) {
+        this.gameObjects[i] = collisionZone;
+        return i;
+      }
     }
     return this.gameObjects.push(collisionZone) - 1;
   };
@@ -35,7 +37,6 @@ export default class CollisionManger {
 
   handleCollisions = () => {
     const collisions = [];
-
     for (let i = 0, length = this.gameObjects.length; i < length; ++i) {
       const obj1 = this.gameObjects[i];
       if (!obj1) continue;
@@ -84,13 +85,3 @@ export default class CollisionManger {
     }
   };
 }
-
-// eslint-disable-next-line no-extend-native
-Array.prototype.filterInPlace = function(predicate) {
-  for (let i = 0; i < this.length; ++i) {
-    if (predicate(this[i])) {
-      this[this.length - 1] = this[i];
-      this.pop();
-    }
-  }
-};
