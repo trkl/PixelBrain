@@ -34,11 +34,6 @@ Sprite is the picture and the animation for the component. Scale is used to scal
 ### Floor
 If you want to have a floor for where the maincharacter or other components are abel to run, then you need to add the floor component from SheepRunner. Then you change the collider.object.name to the object name that should be able to run on the floor bed.
 
-### Obstacles
-
-## Obstacle
-
-
 ##
 ## React Comments
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
