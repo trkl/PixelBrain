@@ -5,7 +5,6 @@ import Vector from "../Vector/Vector";
 import RigidBody from "../GameObject/RigidBody";
 import React from "react";
 import CollisionZone from "../GameObject/CollisionZone";
-import { isMainThread } from "worker_threads";
 
 describe("Camera", () => {
   let protagonist,

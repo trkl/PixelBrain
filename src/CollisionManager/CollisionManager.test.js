@@ -1,6 +1,5 @@
 import CollisionManager from "./CollisionManager";
 import Vector from "../Vector/Vector";
-import { isMainThread } from "worker_threads";
 
 describe("CollisionManager", () => {
   let collisionZone, collisionZone2, collisionZone3;

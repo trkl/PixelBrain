@@ -2,7 +2,6 @@ import Event from "../Events/Event";
 import EventManager from "../EventManager/EventManager";
 import PhysicsEngine from "../PhysicsEngine/PhysicsEngine";
 import CollisionManger from "../CollisionManager/CollisionManager";
-// import { isRegExp } from "util";
 
 // data-structure for subscriber
 class KeyboardSubscriber {
@@ -42,7 +41,7 @@ export default class KeyboardObservable {
   unsubscribe = (object: any) => {
     const { length } = this.subscribers;
     if (length)
-      for (let i = 0; i < length; ++i) {
+      for (let i = 0; i < this.subscribers.length; ++i) {
         const subscriber = this.subscribers[i];
         if (subscriber.event.gameObject === object) {
           this.subscribers.splice(i, 1);
